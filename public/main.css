@@ -3,6 +3,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  color: #ccc;
 }
 
 /* Remove default margin */
@@ -187,4 +188,173 @@ header .flex-main-header .btn-profile {
 }
 header .flex-main-header .btn-profile hr {
   margin: 0 10px 0 10px;
+}
+
+footer {
+  width: 100%;
+  background: #161b22;
+  padding: 24px;
+}
+footer .btn-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 12px auto 32px auto;
+}
+footer .btn-footer a div {
+  width: 200px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.2s;
+}
+footer .btn-footer a div svg {
+  width: 60px;
+  height: 60px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+footer .btn-footer a div span {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+footer .btn-footer a:hover div {
+  border-color: rgba(217, 217, 217, 0.6);
+}
+footer .btn-footer a:hover div svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+footer .btn-footer a:hover div span {
+  color: rgba(217, 217, 217, 0.6);
+}
+footer .hr-git {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 60px;
+  margin: auto;
+}
+footer .hr-git hr {
+  width: 100%;
+}
+footer .hr-git .bg-git {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 100px);
+  bottom: 0;
+  width: 200px;
+  height: 60px;
+  background: #161b22;
+}
+footer .hr-git .bg-git a svg {
+  width: 60px;
+  height: 60px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+footer .hr-git .bg-git a svg:hover {
+  fill: rgba(217, 217, 217, 0.6);
+}
+footer h3 {
+  margin-left: 5%;
+  text-align: left;
+}
+
+.wrap {
+  width: 100%;
+}
+
+.display-home {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 334px);
+  overflow: hidden;
+}
+.display-home img {
+  position: absolute;
+  height: 100vh;
+  min-width: 100%;
+  bottom: -30px;
+  z-index: 1;
+}
+.display-home .home-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(1, 1, 1, 0.5);
+  box-shadow: inset 0px 0px 100px #000;
+}
+.display-home .home-screen .home-page-line {
+  width: 50%;
+  text-align: left;
+}
+.display-home .home-screen .home-page-line .input-home-screen {
+  display: flex;
+  width: 100%;
+  background-color: rgba(217, 217, 217, 0.6);
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 12px;
+  margin: 0 auto;
+  height: 60px;
+}
+.display-home .home-screen .home-page-line .input-home-screen input {
+  width: calc(100% - 36px);
+  height: 36px;
+  color: white;
+}
+.display-home .home-screen .home-page-line .input-home-screen input::-moz-placeholder {
+  color: lightgrey;
+}
+.display-home .home-screen .home-page-line .input-home-screen input:-ms-input-placeholder {
+  color: lightgrey;
+}
+.display-home .home-screen .home-page-line .input-home-screen input::placeholder {
+  color: lightgrey;
+}
+.display-home .home-screen .home-page-line .input-home-screen button {
+  width: 36px;
+  height: 36px;
+}
+.display-home .home-screen .home-page-line .input-home-screen button svg {
+  fill: #ccc;
+  width: 36px;
+  height: 36px;
+  transition: fill 0.2s;
+}
+.display-home .home-screen .home-page-line .input-home-screen button:hover svg {
+  fill: white;
+}
+.display-home .home-screen .home-page-line h1 {
+  margin-bottom: 12px;
+  color: white;
+  text-transform: uppercase;
+}
+.display-home .home-screen .home-page-line .home-page-sign {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 50%;
+  height: 50px;
+}
+.display-home .home-screen .home-page-line .home-page-sign hr {
+  margin: 0 12px 0 12px;
+}
+.display-home .home-screen .home-page-line .home-page-sign span {
+  font-size: 20px;
+  margin-right: 12px;
+}
+.display-home .home-screen .home-page-line .home-page-sign a {
+  text-decoration: underline;
 }/*# sourceMappingURL=main.css.map */
