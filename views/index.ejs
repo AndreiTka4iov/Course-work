@@ -1,0 +1,10 @@
+<%- include('header-template', { title: locals.title, activeHeader: locals.activeHeader, headLink: locals.headLink }) %>
+
+<%
+switch(locals.page) { 
+    case 'main': %>
+    <%- include('pages/main') %>
+    <% break;
+} %>
+
+<%- include('footer-template') %>

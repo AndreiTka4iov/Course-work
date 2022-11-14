@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const cookieParser = require('cookie-parser')
-const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('./database/main.db')
 
 
 // settings
@@ -13,19 +11,7 @@ app.use(express.static(__dirname + '/public'))
 //Routes for main url
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Kill Music', page: 'main' })
-})
-
-app.get('/about', (req, res) => {
-  res.render('index', { title: 'О нас | Kill Music', page: 'about' })
-})
-
-app.get('/catalog', (req, res) => {
-  res.render('index', { title: 'Каталог | Kill Music', page: 'catalog' })
-})
-
-app.get('/contacts', (req, res) => {
-  res.render('index', { title: 'Контакты | Kill Music' , page: 'contacts'})
+  res.render('index', { title: 'Web', page: 'main' })
 })
 
 
@@ -34,9 +20,6 @@ app.get('/contacts', (req, res) => {
 
 const itemsRouter = require('./routes/items')
 app.use('/items', itemsRouter)
-
-const adminRouter = require('./routes/admin')
-app.use('/admin', adminRouter)
 
 //Server start
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <%- locals.headLink %>
+        <script src="/script.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <title>
+            <%= locals.title || 'Web' %>
+        </title>
+</head>
+
+<body>
+    <header>
+        <div class="flex-main-header">
+            <div class="flex-btn-header">
+                <a href="/">
+                    <svg class="logo-svg ">
+                        <use xlink:href="/main.svg#logo-svg"></use>
+                    </svg>
+                </a>
+                <a href="">Новости</a>
+                <a href="">Форум</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="search...">
+                <button>
+                    <svg>
+                        <use xlink:href="/main.svg#search-svg"></use>
+                    </svg>
+                </button>
+            </div> 
+            <div class="btn-profile">
+                <a href="">sign in</a>
+                <hr width="1" size="28" style="0, auto" />
+                <a href="">sign up</a>
+            </div>
+        </div>
+    </header>
