@@ -1,9 +1,18 @@
-<%- include('header-template', { title: locals.title, activeHeader: locals.activeHeader, headLink: locals.headLink }) %>
+<%- include('header-template', { title: locals.title, activeHeader: locals.activeHeader, headLink: locals.headLink, homePage: locals.homePage}) %>
 
 <%
 switch(locals.page) { 
     case 'Home': %>
     <%- include('pages/home') %>
+    <% break;
+
+    case 'News': %>
+    <%- include('pages/components/topics') %>
+    <%- include('pages/news') %>
+    <% break;
+
+    default: %>
+    <%- include('pages/error') %>
     <% break;
 } %>
 

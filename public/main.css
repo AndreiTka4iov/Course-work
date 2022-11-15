@@ -20,6 +20,14 @@ dd {
   margin: 0;
 }
 
+input:focus,
+select:focus,
+option:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role=list],
 ol[role=list] {
@@ -150,9 +158,9 @@ header .flex-main-header .flex-btn-header a:hover .logo-svg {
   fill: rgba(217, 217, 217, 0.6);
 }
 header .flex-main-header .search {
-  width: 300px;
+  width: 500px;
   height: 32px;
-  padding: 2px 2px 2px 10px;
+  padding: 2px 2px 2px 5px;
   margin: 0 auto 0 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -163,6 +171,15 @@ header .flex-main-header .search {
 header .flex-main-header .search input {
   width: calc(100% - 28px);
   height: 28px;
+}
+header .flex-main-header .search select {
+  width: 60px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  position: relative;
+  outline: none;
 }
 header .flex-main-header .search button {
   width: 28px;
@@ -188,6 +205,14 @@ header .flex-main-header .btn-profile {
 }
 header .flex-main-header .btn-profile hr {
   margin: 0 10px 0 10px;
+}
+header.home-header {
+  position: relative;
+  background: rgba(0, 0, 0, 0);
+  z-index: 3;
+}
+header.home-header .search {
+  display: none;
 }
 
 footer {
@@ -265,21 +290,33 @@ footer h3 {
 }
 
 .wrap {
+  position: relative;
+  display: flex;
   width: 100%;
+  min-height: calc(100vh - 336px);
 }
 
 .display-home {
-  position: relative;
+  position: absolute;
+  top: -60px;
   width: 100%;
-  height: calc(100vh - 334px);
+  height: calc(100vh - 275px);
   overflow: hidden;
 }
 .display-home img {
-  position: absolute;
   height: 100vh;
   min-width: 100%;
-  bottom: -30px;
+  bottom: 0;
   z-index: 1;
+}
+.display-home .logo-svg {
+  position: absolute;
+  z-index: 3;
+  fill: #ccc;
+  width: 100px;
+  height: 100px;
+  top: 10%;
+  left: calc(50% - 50px);
 }
 .display-home .home-screen {
   display: flex;
@@ -310,7 +347,7 @@ footer h3 {
   height: 60px;
 }
 .display-home .home-screen .home-page-line .input-home-screen input {
-  width: calc(100% - 36px);
+  width: calc(100% - 136px);
   height: 36px;
   color: white;
 }
@@ -322,6 +359,16 @@ footer h3 {
 }
 .display-home .home-screen .home-page-line .input-home-screen input::placeholder {
   color: lightgrey;
+}
+.display-home .home-screen .home-page-line .input-home-screen select {
+  width: 100px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  position: relative;
+  outline: none;
+  padding: 5px;
 }
 .display-home .home-screen .home-page-line .input-home-screen button {
   width: 36px;
@@ -357,4 +404,166 @@ footer h3 {
 }
 .display-home .home-screen .home-page-line .home-page-sign a {
   text-decoration: underline;
+}
+
+.news-page {
+  width: calc(100% - 340px);
+  min-height: calc(100vh - 336px);
+  margin: 20px;
+  background: #161b22;
+  border-radius: 5px;
+}
+.news-page .filter-menu {
+  width: calc(100% - 25px);
+  height: 50px;
+  margin: 12px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.news-page .filter-menu a {
+  margin: 12px;
+  font-size: 18px;
+}
+.news-page .filter-menu hr {
+  margin: 0;
+}
+.news-page .news-item {
+  position: relative;
+  display: flex;
+  width: calc(100% - 25px);
+  height: 300px;
+  margin: 12px;
+  padding: 25px;
+  border-radius: 5px;
+  transition: 0.2s;
+  overflow: hidden;
+}
+.news-page .news-item:hover {
+  box-shadow: 0 0 20px #0d1117;
+}
+.news-page .news-item .img-block {
+  position: relative;
+  width: 375px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.news-page .news-item .img-block img {
+  width: 100%;
+  height: 250px;
+  transition: 0.2s;
+}
+.news-page .news-item .img-block .dark-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: 0.2s;
+}
+.news-page .news-item .img-block h1 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  transition: 0.2s;
+}
+.news-page .news-item .img-block h3 {
+  position: absolute;
+  bottom: -30px;
+  left: 10px;
+  transition: 0.4s;
+}
+.news-page .news-item .img-block:hover img {
+  filter: blur(2px);
+}
+.news-page .news-item .img-block:hover .dark-img {
+  background: rgba(0, 0, 0, 0.8);
+}
+.news-page .news-item .img-block:hover h1 {
+  bottom: 50px;
+}
+.news-page .news-item .img-block:hover h3 {
+  bottom: 10px;
+  color: rgba(217, 217, 217, 0.6);
+}
+.news-page .news-item .text-block {
+  width: calc(100% - 415px);
+  height: 250px;
+  margin: 0 20px 0 20px;
+  text-align: left;
+}
+.news-page .news-item .text-block span {
+  color: rgba(217, 217, 217, 0.6);
+}
+
+.topics-menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: calc(100vh - 336px);
+  padding: 12px;
+  margin-top: 20px;
+  background: #161b22;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: left;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.topics-menu::-webkit-scrollbar {
+  width: 0px;
+}
+.topics-menu span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.topics-menu .toopic-block {
+  width: 100%;
+  height: 50px;
+}
+.topics-menu .toopic-block svg {
+  width: 36px;
+  height: 36px;
+  fill: #ccc;
+}
+.topics-menu .toopic-block .topic-btn {
+  margin-bottom: 12px;
+}
+.topics-menu .toopic-block .topic-btn .first-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.topics-menu .toopic-block .topic-btn .first-block span {
+  display: flex;
+  align-items: center;
+}
+.topics-menu .toopic-block .topic-btn .first-block span a {
+  margin-left: 12px;
+}
+.topics-menu .toopic-block .topic-btn .first-block .triangle {
+  width: 12px;
+  height: 12px;
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+.topics-menu .toopic-block .topic-btn .first-block.active .triangle {
+  transform: rotate(0deg);
+}
+.topics-menu .toopic-block .topic-btn .second-block {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.2s;
+  padding: 0 12px 0 12px;
+  width: 100%;
+}
+.topics-menu .toopic-block .topic-btn .second-block .btn-click {
+  height: 32px;
+}
+.topics-menu .toopic-block .topic-btn .second-block.active {
+  height: 224px;
 }/*# sourceMappingURL=main.css.map */

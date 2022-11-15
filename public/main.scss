@@ -25,6 +25,14 @@ dd {
     margin: 0;
 }
 
+input:focus,
+select:focus,
+option:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role="list"],
 ol[role="list"] {
@@ -168,9 +176,9 @@ header{
         }
 
         .search{
-            width: 300px;
+            width: 500px;
             height: 32px;
-            padding: 2px 2px 2px 10px;
+            padding: 2px 2px 2px 5px;
             margin: 0 auto 0 20px;
             border: 1px solid $color-text;
             border-radius: 5px;
@@ -181,6 +189,17 @@ header{
             input{
                 width: calc(100% - 28px);
                 height: 28px;
+            }
+
+            select{
+                width: 60px;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                background: none;
+                border: none;
+                position: relative;
+                outline: none;
+                                    
             }
 
            button{
@@ -215,6 +234,16 @@ header{
             hr{
                 margin: 0 10px 0 10px;
             }
+        }
+    }
+
+    &.home-header{
+        position: relative;
+        background: rgba(0,0,0,0);
+        z-index: 3;
+
+        .search{
+            display: none;
         }
     }
 }
@@ -315,24 +344,39 @@ footer {
     }
 }
 
-//wrap 
+//wrap
 
-.wrap {
+.wrap{
+    position: relative;
+    display: flex;
     width: 100%;
+    min-height: calc(100vh - 336px);
 }
 
+//home page
+
 .display-home{
-    position: relative;
+    position: absolute;
+    top: -60px;
     width: 100%;
-    height: calc(100vh - 334px);
+    height: calc(100vh - 275px);
     overflow: hidden;
 
     img{
-        position: absolute;
-        height: calc(100vh);
+        height: 100vh;
         min-width: 100%;
-        bottom: -30px;
+        bottom: 0;
         z-index: 1;
+    }
+
+    .logo-svg{
+        position: absolute;
+        z-index: 3;
+        fill: $color-text;  
+        width: 100px;
+        height: 100px;
+        top: 10%;
+        left: calc(50% - 50px);
     }
     
     .home-screen{
@@ -364,13 +408,24 @@ footer {
                 height: 60px;
     
                 input{
-                    width: calc(100% - 36px);
+                    width: calc(100% - 136px);
                     height: 36px;
                     color: white;
     
                     &::placeholder{
                         color: lightgrey;
                     }
+                }
+
+                select{
+                    width: 100px;
+                    -moz-appearance: none;
+                    -webkit-appearance: none;
+                    background: none;
+                    border: none;
+                    position: relative;
+                    outline: none;
+                    padding: 5px;                    
                 }
     
                 button{
@@ -418,5 +473,203 @@ footer {
                 }
             }
         } 
+    }
+}
+
+//news page
+
+.news-page{
+    width: calc(100% - 340px);
+    min-height: calc(100vh - 336px);
+    margin: 20px;
+    background: $color-header-bg;
+    border-radius: 5px;
+
+    .filter-menu{
+        width: calc(100% - 25px);
+        height: 50px;
+        margin: 12px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+
+        a{
+            margin: 12px;
+            font-size: 18px;
+        }
+
+        hr{
+            margin: 0;
+        }
+    }
+
+    .news-item {
+        position: relative;
+        display: flex;
+        width: calc(100% - 25px);
+        height: 300px;
+        margin: 12px;
+        padding: 25px;
+        border-radius: 5px;
+        transition: .2s;
+        overflow: hidden;
+        
+        &:hover{
+            box-shadow: 0 0 20px $background;
+        }
+
+        .img-block{
+            position: relative;
+            width: 375px;
+            height: 250px;
+            overflow: hidden;  
+            border-radius: 5px;         
+
+            img{  
+                width: 100%;
+                height: 250px;
+                transition: .2s; 
+            }
+
+            .dark-img{
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0,0,0,.7);
+                transition: .2s;
+            }
+
+            h1{
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                transition: .2s;
+            }
+
+            h3{
+                position: absolute;
+                bottom: -30px;
+                left: 10px; 
+                transition: .4s;
+            }
+
+            &:hover{
+                img{
+                    filter: blur(2px);
+                }
+
+                .dark-img{
+                    background: rgba(0,0,0,.8);
+                }
+
+                h1{
+                    bottom: 50px;
+                }
+    
+                h3{
+                    bottom: 10px; 
+                    color: $color-text-hover;
+                }
+            }
+        }
+
+        .text-block{
+            width: calc(100% - 415px);
+            height: 250px;
+            margin: 0 20px 0 20px;
+            text-align: left;
+
+            span{
+                color: $color-text-hover;
+            }
+        }
+    }
+}
+
+//topics
+
+.topics-menu{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: calc(100vh - 336px);
+    padding: 12px;
+    margin-top: 20px;
+    background: $color-header-bg;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: left;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    span{
+        color: $color-text-hover;
+    }
+
+    .toopic-block{
+        width: 100%;
+        height: 50px;
+        
+
+        svg{
+            width: 36px;
+            height: 36px;
+            fill: $color-text;
+        }
+
+        .topic-btn{
+            margin-bottom: 12px;
+
+            .first-block{
+                display: flex;
+                align-items: center;
+                justify-content: space-between; 
+                cursor: pointer;
+
+                span{
+                    display: flex;
+                    align-items: center;
+
+                    a{
+                        margin-left: 12px;
+                    }
+                }
+
+                .triangle{
+                    width: 12px;
+                    height: 12px;
+                    transform: rotate(180deg);
+                    transition: transform .2s;
+                }
+
+                &.active{
+                    .triangle{
+                        transform: rotate(0deg);
+                    } 
+                }
+            }
+            .second-block{
+                height: 0;
+                overflow: hidden;
+                transition: height .2s;
+                padding: 0 12px 0 12px;
+                width: 100%;
+
+                .btn-click{
+                    height: 32px;
+                }
+
+                &.active{
+                    height: 224px; 
+                }
+            }
+        }
     }
 }

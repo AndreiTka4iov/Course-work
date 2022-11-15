@@ -11,7 +11,11 @@ app.use(express.static(__dirname + '/public'))
 //Routes for main url
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Web', page: 'Home' })
+  res.render('index', { title: 'Web', page: 'Home', homePage: 'home-header'})
+})
+
+app.get('/news', (req, res) => {
+  res.render('index', { title: 'Web', page: 'News' })
 })
 
 

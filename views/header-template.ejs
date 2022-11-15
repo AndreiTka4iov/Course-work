@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="<%- locals.homePage %>">
         <div class="flex-main-header">
             <div class="flex-btn-header">
                 <a href="/">
@@ -27,11 +27,16 @@
                         <use xlink:href="/main.svg#logo-svg"></use>
                     </svg>
                 </a>
-                <a href="">News</a>
+                <a href="/news">News</a>
                 <a href="">Forum</a>
             </div>
             <div class="search">
-                <input type="text" placeholder="search...">
+                <input type="text" placeholder="Search...">
+                <select name="" id="">
+                    <option value="" disabled>Select type</option>
+                    <option value="">News</option>
+                    <option value="">Forum</option>
+                </select>
                 <button>
                     <svg>
                         <use xlink:href="/main.svg#search-svg"></use>
@@ -45,6 +50,4 @@
             </div>
         </div>
     </header>
-    <div class="wrap">
-
-    
+<div class="wrap">
