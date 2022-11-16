@@ -11,11 +11,27 @@ app.use(express.static(__dirname + '/public'))
 //Routes for main url
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Web', page: 'Home', homePage: 'home-header'})
+  res.render('index', { title: 'Forum | Home', page: 'Home', homePage: 'home-header'})
 })
 
 app.get('/news', (req, res) => {
-  res.render('index', { title: 'Web', page: 'News' })
+  res.render('index', { title: 'Forum | News', page: 'News' })
+})
+
+app.get('/news/item', (req, res) => {
+  res.render('index', { title: 'Forum | News', page: 'NewsItem' })
+})
+
+app.get('/forum', (req, res) => {
+  res.render('index', { title: 'Forum | Forum', page: 'Forum' })
+})
+
+app.get('/forum/item', (req, res) => {
+  res.render('index', { title: 'Forum | Forum', page: 'ForumItem' })
+})
+
+app.get('/:any', (req, res) => {
+  res.render('index', { title: 'Forum | Error', page: 'Error', homePage: 'home-header'})
 })
 
 

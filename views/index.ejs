@@ -11,6 +11,23 @@ switch(locals.page) {
     <%- include('pages/news') %>
     <% break;
 
+    case 'NewsItem': %>
+    <%- include('pages/newsItem') %>
+    <% break;
+
+    case 'Forum': %>
+    <%- include('pages/components/topics') %>
+    <%- include('pages/forum') %>
+    <% break;
+
+    case 'ForumItem': %>
+    <%- include('pages/forumItem') %>
+    <% break;
+
+    case 'Error': %>
+    <%- include('pages/error') %>
+    <% break;
+
     default: %>
     <%- include('pages/error') %>
     <% break;
