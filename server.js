@@ -22,24 +22,26 @@ app.get('/news/item', (req, res) => {
   res.render('index', { title: 'Forum | News', page: 'NewsItem' })
 })
 
-app.get('/forum', (req, res) => {
-  res.render('index', { title: 'Forum | Forum', page: 'Forum' })
-})
 
-app.get('/forum/item', (req, res) => {
-  res.render('index', { title: 'Forum | Forum', page: 'ForumItem' })
-})
+
+//Routers for server
+
+const forumRouter = require('./routes/forum')
+app.use('/forum', forumRouter)
+
+//page 404
 
 app.get('/:any', (req, res) => {
   res.render('index', { title: 'Forum | Error', page: 'Error', homePage: 'home-header'})
 })
 
+app.get('/news/:any', (req, res) => {
+  res.render('index', { title: 'Forum | Error', page: 'Error', homePage: 'home-header'})
+})
 
-
-//Routers for server
-
-const itemsRouter = require('./routes/items')
-app.use('/items', itemsRouter)
+app.get('/news/item/:any', (req, res) => {
+  res.render('index', { title: 'Forum | Error', page: 'Error', homePage: 'home-header'})
+})
 
 //Server start
 

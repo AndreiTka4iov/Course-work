@@ -66,6 +66,10 @@ select {
   font: inherit;
 }
 
+textarea {
+  overflow-y: hidden;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -198,8 +202,8 @@ header .flex-main-header .search button {
 }
 header .flex-main-header .search button svg {
   margin: 0;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   fill: #ccc;
   transition: fill 0.2s;
 }
@@ -233,17 +237,14 @@ footer {
 }
 footer .btn-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 90%;
   margin: 12px auto 32px auto;
 }
 footer .btn-footer a div {
   width: 200px;
   height: 100px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   padding: 5px;
-  transition: border-color 0.2s;
 }
 footer .btn-footer a div svg {
   width: 60px;
@@ -257,14 +258,14 @@ footer .btn-footer a div span {
   text-transform: uppercase;
   transition: color 0.2s;
 }
-footer .btn-footer a:hover div {
-  border-color: rgba(217, 217, 217, 0.6);
-}
 footer .btn-footer a:hover div svg {
   fill: rgba(217, 217, 217, 0.6);
 }
 footer .btn-footer a:hover div span {
   color: rgba(217, 217, 217, 0.6);
+}
+footer .btn-footer .white-space {
+  width: 100px;
 }
 footer .hr-git {
   position: relative;
@@ -298,6 +299,23 @@ footer .hr-git .bg-git a svg:hover {
 footer h3 {
   margin-left: 5%;
   text-align: left;
+}
+
+.blure {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(1, 1, 1, 0.8);
+  transition: 0.2s;
+}
+.blure.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .wrap {
@@ -880,30 +898,34 @@ footer h3 {
 .page-news-item .header-news .info-block h2 {
   color: rgb(0, 116, 204);
 }
-.page-news-item .header-news .info-block .info {
-  width: 100%;
+.page-news-item .header-news .info-block .stats {
+  display: flex;
+}
+.page-news-item .header-news .info-block .stats .info {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: 25px;
+  margin: 0 12px;
   display: flex;
   align-items: center;
   justify-content: left;
 }
-.page-news-item .header-news .info-block .info svg {
+.page-news-item .header-news .info-block .stats .info svg {
   width: 25px;
   height: 25px;
   margin-right: 12px;
   fill: rgba(217, 217, 217, 0.6);
 }
-.page-news-item .header-news .info-block .info svg.favorite {
+.page-news-item .header-news .info-block .stats .info svg.favorite {
   fill: none;
   stroke: rgba(217, 217, 217, 0.6);
 }
-.page-news-item .header-news .info-block .info span {
+.page-news-item .header-news .info-block .stats .info span {
   color: rgba(217, 217, 217, 0.6);
 }
 .page-news-item .header-news .info-block .favorite-div {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin-top: auto;
   width: 50px;
   height: 50px;
   cursor: pointer;
@@ -1005,4 +1027,421 @@ footer h3 {
   width: calc(100% - 50px);
   margin-left: 62px;
   margin-top: -6px;
+}
+
+.page-forum-item {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-height: calc(100vh - 376px);
+  background: #161b22;
+  margin: 12px auto;
+  padding: 12px;
+  border-radius: 5px;
+}
+.page-forum-item .body-question-block {
+  width: 100%;
+  text-align: left;
+}
+.page-forum-item .body-question-block .user-block {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.page-forum-item .body-question-block .user-block .user-link {
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50px;
+}
+.page-forum-item .body-question-block .user-block .user-link img {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+}
+.page-forum-item .body-question-block .user-block .user-link a {
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+}
+.page-forum-item .body-question-block .user-block .user-link a:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .body-question-block .user-block .date-favorite {
+  display: flex;
+  height: 50px;
+}
+.page-forum-item .body-question-block .user-block .date-favorite span {
+  margin-top: 6px;
+  color: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .body-question-block .user-block .date-favorite a svg {
+  width: 50px;
+  height: 50px;
+  fill: none;
+  stroke: rgb(0, 116, 204);
+  transition: stroke 0.2s;
+}
+.page-forum-item .body-question-block .user-block .date-favorite a:hover svg {
+  stroke: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .body-question-block .question-element {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.page-forum-item .body-question-block .question-element .question {
+  width: calc(100% - 100px);
+  min-height: 158px;
+  margin-left: 62px;
+}
+.page-forum-item .body-question-block .question-element .question .info-block {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+.page-forum-item .body-question-block .question-element .question .info-block .report {
+  width: 37px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.page-forum-item .body-question-block .question-element .question .info-block .report svg {
+  width: 25px;
+  height: 25px;
+  fill: rgb(0, 116, 204);
+  transition: fill 0.2s;
+}
+.page-forum-item .body-question-block .question-element .question .info-block .report svg:hover {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .body-question-block .question-element .question .info-block .info {
+  min-width: 50px;
+  height: 25px;
+  margin: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page-forum-item .body-question-block .question-element .question .info-block .info svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 12px;
+  fill: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .body-question-block .question-element .question .info-block .info svg.favorite {
+  fill: none;
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .body-question-block .question-element .question .info-block .info span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .body-question-block .question-element .question .topic-block {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.page-forum-item .body-question-block .question-element .question .topic-block a {
+  display: inline-block;
+}
+.page-forum-item .body-question-block .question-element .question .topic-block a .btn {
+  padding: 6px 12px;
+  background: rgb(0, 116, 204);
+  border-radius: 20px;
+  transition: 0.2s;
+}
+.page-forum-item .body-question-block .question-element .question .topic-block a:hover .btn {
+  background-color: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .body-question-block .question-element .rating-block {
+  width: 50px;
+  height: 158px;
+}
+.page-forum-item .body-question-block .question-element .rating-block a {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
+.page-forum-item .body-question-block .question-element .rating-block a svg {
+  width: 50px;
+  height: 50px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.page-forum-item .body-question-block .question-element .rating-block a .down-arrow {
+  transform: rotate(180deg);
+}
+.page-forum-item .body-question-block .question-element .rating-block a:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .body-question-block .question-element .rating-block .rating-text {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+.page-forum-item hr {
+  border-color: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .comments-user {
+  width: 100%;
+}
+.page-forum-item .comments-user .answer-user {
+  position: relative;
+  margin: 12px 0;
+  width: 100%;
+}
+.page-forum-item .comments-user .answer-user .user {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.page-forum-item .comments-user .answer-user .user span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .comments-user .answer-user .user span svg {
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  fill: #ccc;
+  transform: rotate(90deg);
+  cursor: pointer;
+  transition: fill 0.2s;
+}
+.page-forum-item .comments-user .answer-user .user span svg:hover {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .comments-user .answer-user .user span.active svg {
+  fill: rgb(0, 116, 204);
+}
+.page-forum-item .comments-user .answer-user .user span.active svg:hover {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .comments-user .answer-user .user .user-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50px;
+  display: flex;
+}
+.page-forum-item .comments-user .answer-user .user .user-link img {
+  width: 50px;
+  height: 50px;
+}
+.page-forum-item .comments-user .answer-user .user .user-link .user-date {
+  margin-left: 12px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.page-forum-item .comments-user .answer-user .user .user-link .user-date span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.page-forum-item .comments-user .answer-user .user .user-link .user-date a {
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+}
+.page-forum-item .comments-user .answer-user .user .user-link .user-date a:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .comments-user .answer-user .answer {
+  margin-left: 62px;
+  width: calc(100% - 62px);
+  text-align: left;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions {
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin-right: 12px;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions span {
+  margin-left: 6px;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg {
+  margin: 0;
+  cursor: pointer;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg svg {
+  width: 24px;
+  height: 24px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .comments-user .answer-user .more-menu {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  top: 50px;
+  right: 0;
+  width: 150px;
+  background: #161b22;
+  box-shadow: 0 0 10px #0d1117;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+.page-forum-item .comments-user .answer-user .more-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.page-forum-item .comments-user .answer-user .more-menu .btn {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.page-forum-item .comments-user .answer-user .more-menu .btn svg {
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.page-forum-item .comments-user .answer-user .more-menu .btn span {
+  font-size: 18px;
+  transition: color 0.2s;
+}
+.page-forum-item .comments-user .answer-user .more-menu .btn:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .comments-user .answer-user .more-menu .btn:hover span {
+  color: rgba(0, 116, 204, 0.7);
+}
+.page-forum-item .send-comment {
+  width: 100%;
+  padding-bottom: 4px;
+  margin-top: auto;
+}
+.page-forum-item .send-comment form {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.page-forum-item .send-comment form textarea {
+  width: calc(100% - 50px);
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+}
+.page-forum-item .send-comment form button {
+  width: 50px;
+  height: 50px;
+  padding: 9px;
+}
+.page-forum-item .send-comment form button svg {
+  width: 32px;
+  height: 32px;
+  fill: rgb(0, 116, 204);
+  transition: fill 0.2s;
+}
+.page-forum-item .send-comment form button:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+
+.report-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+  left: calc(50% - 200px);
+  padding: 6px;
+  opacity: 0;
+  pointer-events: none;
+  background: #161b22;
+  border-radius: 5px;
+  z-index: 11;
+  transition: 0.2s;
+}
+.report-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.report-menu .close-line {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+}
+.report-menu .close-line span {
+  cursor: pointer;
+}
+.report-menu .close-line span svg {
+  width: 50px;
+  height: 50px;
+  stroke: #ccc;
+  transition: stroke 0.2s;
+}
+.report-menu .close-line span:hover svg {
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.report-menu .logo-block {
+  width: 100%;
+  height: 100px;
+}
+.report-menu .logo-block a {
+  display: inline-block;
+}
+.report-menu .logo-block a svg {
+  width: 100px;
+  height: 100px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.report-menu .logo-block a:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.report-menu .description {
+  width: 100%;
+  margin-top: 50px;
+  text-align: left;
+}
+.report-menu .description input {
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.report-menu .description textarea {
+  width: 100%;
+  border-color: rgba(217, 217, 217, 0.6);
+  padding: 6px;
+  margin-top: 6px;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+.report-menu .description textarea::-webkit-scrollbar {
+  width: 0;
+}
+.report-menu .accept {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+  margin-top: auto;
+}
+.report-menu .accept:hover {
+  color: rgba(0, 116, 204, 0.7);
 }/*# sourceMappingURL=main.css.map */

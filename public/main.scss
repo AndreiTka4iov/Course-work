@@ -4,6 +4,7 @@ $color-text: #ccc;
 $color-text-hover: rgba(217, 217, 217, .6);
 $a-color: rgba(0, 116, 204, 1);
 $a-color-hover: rgba(0, 116, 204, .7);
+$blure: rgba(1, 1, 1, 0.8);
 
 /* Box sizing rules */
 *,
@@ -70,6 +71,10 @@ button,
 textarea,
 select {
     font: inherit;
+}
+
+textarea{
+    overflow-y: hidden;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
@@ -222,8 +227,8 @@ header{
 
                 svg{
                     margin: 0;
-                    width: 28px;
-                    height: 28px;
+                    width: 24px;
+                    height: 24px;
                     fill: $color-text;
                     transition: fill .2s;
                 }
@@ -271,7 +276,7 @@ footer {
 
     .btn-footer{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         width: 90%;
         margin: 12px auto 32px auto;
 
@@ -279,10 +284,7 @@ footer {
             div{
                 width: 200px;
                 height: 100px;
-                border: 1px solid $color-text;
-                border-radius: 5px;
                 padding: 5px;
-                transition: border-color .2s;
 
                 svg{
                     width: 60px;
@@ -301,7 +303,6 @@ footer {
 
             &:hover{
                 div{
-                    border-color: $color-text-hover;
     
                     svg{
                         fill: $color-text-hover;
@@ -312,6 +313,10 @@ footer {
                     }
                 }
             }
+        }
+
+        .white-space{
+            width: 100px;
         }
     }
 
@@ -358,6 +363,25 @@ footer {
     }
 }
 
+//blure
+
+.blure{
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background: $blure; 
+    transition: .2s;  
+    
+    &.active{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
 
 //wrap
 
@@ -1051,35 +1075,37 @@ footer {
             h2{
                 color: $a-color;
             }
-    
-            .info{
-                width: 100%;
-                height: 25px;
+
+            .stats{
                 display: flex;
-                align-items: center;
-                justify-content: left;
-
-                svg{
-                    width: 25px;
+                .info{
+                    width: fit-content;
                     height: 25px;
-                    margin-right: 12px;
-                    fill: $color-text-hover;
-
-                    &.favorite{
-                        fill: none;
-                        stroke: $color-text-hover;
+                    margin: 0 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: left;
+    
+                    svg{
+                        width: 25px;
+                        height: 25px;
+                        margin-right: 12px;
+                        fill: $color-text-hover;
+    
+                        &.favorite{
+                            fill: none;
+                            stroke: $color-text-hover;
+                        }
+                    }
+    
+                    span{
+                        color: $color-text-hover;
                     }
                 }
-
-                span{
-                    color: $color-text-hover;
-                }
-            } 
+            }             
             
             .favorite-div{
-                position: absolute;
-                bottom: 0;
-                left: 0;
+                margin-top: auto;
                 width: 50px;
                 height: 50px;
                 cursor: pointer;
@@ -1105,9 +1131,7 @@ footer {
                 text-align: left;
                 margin: 12px 0;
             }
-        }
-
-        
+        }  
     }
 
     .text-block{
@@ -1211,3 +1235,523 @@ footer {
         }
     }
 }
+
+// page forum item
+
+.page-forum-item{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-height: calc(100vh - 376px);
+    background: $color-header-bg;
+    margin: 12px auto;
+    padding: 12px;
+    border-radius: 5px;
+
+    .body-question-block{
+        width: 100%;
+        text-align: left;
+
+        .user-block{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+
+            .user-link{
+                display: flex;
+                width: fit-content;
+                height: 50px;
+
+                img{
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 12px;
+                }
+
+                a{
+                    font-weight: bold;
+                    color: $a-color;
+                    transition: color .2s;
+
+                    &:hover{
+                        color: $a-color-hover;
+                    }
+                }
+            }
+
+            .date-favorite{
+                display: flex;
+                height: 50px;
+
+                span{
+                    margin-top: 6px;
+                    color: $color-text-hover;
+                }
+
+                a{
+                    svg{
+                        width: 50px;
+                        height: 50px;
+                        fill: none;
+                        stroke: $a-color;
+                        transition: stroke .2s;
+                    }
+    
+                    &:hover{
+                        svg{
+                            stroke: $a-color-hover;
+                        }
+                    }
+                }
+            }
+        }
+
+        .question-element{
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .question{
+                width: calc(100% - 100px);
+                min-height: 158px;
+                margin-left: 62px;
+        
+                .info-block{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: 50px;
+
+                    .report{
+                        width: 37px;
+                        margin-left: auto;
+                        cursor: pointer;
+
+                        svg{
+                            width: 25px;
+                            height: 25px;
+                            fill: $a-color;
+                            transition: fill .2s;
+                            
+                            &:hover{
+                                fill: $a-color-hover;
+                            }
+                        }
+                    }
+            
+                    .info{
+                        min-width: 50px;
+                        height: 25px;
+                        margin: 0 6px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+            
+                        svg{
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 12px;
+                            fill: $color-text-hover;
+            
+                            &.favorite{
+                                fill: none;
+                                stroke: $color-text-hover;
+                            }
+                        }
+            
+                        span{
+                            color: $color-text-hover;
+                        }
+                    }    
+                }
+        
+                .topic-block{
+                    width: 100%;
+                    height: 50px;
+                    display: flex;
+                    flex-wrap: wrap;
+            
+                    a{
+                        display: inline-block;
+                        .btn{
+                            padding: 6px 12px;
+                            background: $a-color;
+                            border-radius: 20px;
+                            transition: .2s;
+                        }
+            
+                        &:hover{
+                            .btn{
+                                background-color: $a-color-hover;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .rating-block{
+                width: 50px;
+                height: 158px;
+    
+                a{
+                    width: 50px;
+                    height: 50px;
+                    display: inline-block;
+                    svg{
+                        width: 50px;
+                        height: 50px;
+                        fill: $color-text;
+                        transition: fill .2s;
+                    }
+    
+                    .down-arrow{
+                        transform: rotate(180deg);
+                    }
+
+                    &:hover{
+                        svg{
+                            fill: $color-text-hover;
+                        }
+                    }
+                }
+    
+                .rating-text{
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    hr{
+        border-color: $color-text-hover;
+    }
+
+    .comments-user{
+        width: 100%;
+
+        .answer-user{
+            position: relative;
+            margin: 12px 0;
+            width: 100%;
+            
+            .user{
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: space-between;
+
+                span{
+                    color: $color-text-hover;
+
+                    svg{
+                        width: 32px;
+                        height: 32px;
+                        margin: 9px;
+                        fill: $color-text;
+                        transform: rotate(90deg);
+                        cursor: pointer;
+                        transition: fill .2s;
+
+                        &:hover{
+                            fill: $color-text-hover;
+                        }
+                    }
+
+                    &.active{
+                        svg{
+                            fill: $a-color;
+
+                            &:hover{
+                                fill: $a-color-hover;
+                            }
+                        }
+                    }
+                }
+
+                .user-link{
+                    width: fit-content;
+                    height: 50px;
+                    display: flex;
+
+                    img{
+                        width: 50px;
+                        height: 50px;
+                    }
+
+                    .user-date{
+                        margin-left: 12px;
+                        height: 50px;
+                        display: flex;
+                        flex-direction: column;
+                        text-align: left;
+
+                        span{
+                            color: $color-text-hover;
+                        }
+
+                        a{
+                            font-weight: bold;
+                            color: $a-color;
+                            transition: color .2s;
+
+                            &:hover{
+                                color: $a-color-hover;
+                            }
+                        }
+                    }   
+                }
+
+            }
+
+            .answer{
+                margin-left: 62px;
+                width: calc(100% - 62px);
+                text-align: left;
+
+                .reactions{
+                    width: 100%;
+                    margin-top: 12px;
+                    display: flex;
+
+                    .one-reactions{
+                        display: flex;
+                        align-items: center;
+                        height: 24px;
+                        margin-right: 12px;
+
+                        span{
+                            margin-left: 6px;
+
+                        }
+
+                        .svg{
+                            margin: 0;
+                            cursor: pointer;
+
+                            svg{
+                                width: 24px;
+                                height: 24px;
+                                fill: $color-text;
+                                transition: fill .2s;
+                            }
+
+                            &:hover{
+                                svg{
+                                    fill: $a-color-hover;
+                                }
+                            }
+                        }
+
+                        
+                    }
+                }
+            }
+
+            .more-menu{
+                position: absolute;
+                z-index: 2;
+                opacity: 0;
+                pointer-events: none;
+                top: 50px;
+                right: 0;
+                width: 150px;
+                background: $color-header-bg;
+                box-shadow: 0 0 10px $background;
+                border-radius: 5px;
+                transition: .2s;
+
+                &.active{
+                    opacity: 1;
+                    pointer-events: all;
+                }
+                
+                .btn{
+                    width: 100%;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    svg{
+                        width: 32px;
+                        height: 32px;
+                        margin: 9px;
+                        fill: $color-text;
+                        transition: fill .2s;
+                    }
+
+                    span{
+                        font-size: 18px;
+                        transition: color .2s;
+                    }
+
+                    &:hover{
+                        svg{
+                            fill: $a-color-hover;
+                        }
+
+                        span{
+                            color: $a-color-hover;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .send-comment{
+        width: 100%;
+        padding-bottom: 4px;
+        margin-top: auto;
+
+        form{
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+
+            textarea{
+                width: calc(100% - 50px);
+                height: 50px;
+                border: 1px solid $color-text;
+                border-radius: 10px;
+                padding: 12px;
+            }
+
+            button{
+                width: 50px;
+                height: 50px;
+                padding: 9px;
+
+                svg{
+                    width: 32px;
+                    height: 32px;
+                    fill: $a-color;
+                    transition: fill .2s;
+                }
+
+                &:hover{
+                    svg{
+                        fill: $a-color-hover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//report menu
+
+.report-menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 600px;
+    left: calc(50% - 200px);
+    padding: 6px;
+    opacity: 0;
+    pointer-events: none;
+    background: $color-header-bg;
+    border-radius: 5px;
+    z-index: 11;
+    transition: .2s;
+
+    &.active{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .close-line{
+        width: 100%;
+        height: 50px;
+        text-align: right;
+
+        span{
+            cursor: pointer;
+
+            svg{
+                width: 50px;
+                height: 50px;
+                stroke: $color-text;
+                transition: stroke .2s;
+            }
+
+            &:hover{
+                svg{
+                    stroke: $color-text-hover;
+                }
+            }
+        }
+
+        
+    }
+
+    .logo-block{
+        width: 100%;
+        height: 100px;
+
+        a{
+            display: inline-block;
+            svg{
+                width: 100px;
+                height: 100px;
+                fill: $color-text;
+                transition: fill .2s;
+            }
+
+            &:hover{
+                svg{
+                    fill: $color-text-hover;
+                }
+            }
+        }
+    }
+
+    .description{
+        width: 100%;
+        margin-top: 50px;
+        text-align: left;
+
+        input{
+            width: 100%;
+            height: 50px;
+            padding: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+        }
+
+        textarea{
+            width: 100%;
+            border-color: $color-text-hover;
+            padding: 6px;
+            margin-top: 6px;
+            max-height: 200px;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+    }
+
+    .accept{
+        width: 100%;
+        height: 50px;
+        border-top: 1px solid $color-text-hover;
+        font-size: 20px;
+        font-weight: bold;
+        color: $a-color;
+        transition: color .2s;
+        margin-top: auto;
+
+        &:hover{
+            color: $a-color-hover;
+        }
+    }
+}   
