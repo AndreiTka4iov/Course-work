@@ -218,8 +218,25 @@ header .flex-main-header .btn-profile {
   display: flex;
   align-items: center;
 }
-header .flex-main-header .btn-profile hr {
-  margin: 0 10px 0 10px;
+header .flex-main-header .btn-profile div {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 12px;
+}
+header .flex-main-header .btn-profile span {
+  font-size: 20px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+header .flex-main-header .btn-profile span:hover {
+  color: rgba(217, 217, 217, 0.6);
+}
+header .flex-main-header .btn-profile span.sign-up-header {
+  color: rgb(0, 116, 204);
+}
+header .flex-main-header .btn-profile span.sign-up-header:hover {
+  color: rgba(0, 116, 204, 0.7);
 }
 header.home-header {
   position: relative;
@@ -475,8 +492,13 @@ footer h3 {
   font-size: 20px;
   margin-right: 12px;
 }
-.display-home .home-screen .home-page-line .home-page-sign a {
+.display-home .home-screen .home-page-line .home-page-sign .underline {
   text-decoration: underline;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.display-home .home-screen .home-page-line .home-page-sign .underline:hover {
+  color: rgba(217, 217, 217, 0.6);
 }
 
 .news-page {
@@ -1443,5 +1465,239 @@ footer h3 {
   margin-top: auto;
 }
 .report-menu .accept:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+
+.sign-in {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 400px;
+  height: 600px;
+  left: calc(50% - 200px);
+  top: calc(50% - 300px);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-radius: 5px;
+  z-index: 11;
+  transition: 0.2s;
+}
+.sign-in.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.sign-in .close-line {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+}
+.sign-in .close-line span {
+  cursor: pointer;
+}
+.sign-in .close-line span svg {
+  width: 50px;
+  height: 50px;
+  stroke: #ccc;
+  transition: stroke 0.2s;
+}
+.sign-in .close-line span:hover svg {
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.sign-in .logo-block {
+  width: 100%;
+  height: 100px;
+}
+.sign-in .logo-block a {
+  display: inline-block;
+}
+.sign-in .logo-block a svg {
+  width: 100px;
+  height: 100px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.sign-in .logo-block a:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.sign-in .description {
+  width: 100%;
+  margin-top: 50px;
+  text-align: left;
+}
+.sign-in .description input {
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.sign-in .description .pass {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.sign-in .description .pass input {
+  width: calc(100% - 50px);
+  height: 38px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.sign-in .description .pass span svg {
+  fill: #ccc;
+  width: 32px;
+  height: 32px;
+  margin: 4px 0 4px 8px;
+  transition: fill 0.2s;
+}
+.sign-in .description .pass span:hover {
+  cursor: pointer;
+}
+.sign-in .description .pass span:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.sign-in .description .pass span.active svg {
+  fill: rgb(0, 116, 204);
+}
+.sign-in .description .pass span.active:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.sign-in .accept {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+  margin-top: auto;
+}
+.sign-in .accept:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+
+.sign-up {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 400px;
+  height: 650px;
+  left: calc(50% - 200px);
+  top: calc(50% - 325px);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-radius: 5px;
+  z-index: 11;
+  transition: 0.2s;
+}
+.sign-up.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.sign-up .close-line {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+}
+.sign-up .close-line span {
+  cursor: pointer;
+}
+.sign-up .close-line span svg {
+  width: 50px;
+  height: 50px;
+  stroke: #ccc;
+  transition: stroke 0.2s;
+}
+.sign-up .close-line span:hover svg {
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.sign-up .logo-block {
+  width: 100%;
+  height: 100px;
+}
+.sign-up .logo-block a {
+  display: inline-block;
+}
+.sign-up .logo-block a svg {
+  width: 100px;
+  height: 100px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.sign-up .logo-block a:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.sign-up .description {
+  width: 100%;
+  margin-top: 50px;
+  text-align: left;
+}
+.sign-up .description input {
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.sign-up .description .pass {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.sign-up .description .pass input {
+  width: calc(100% - 50px);
+  height: 38px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.sign-up .description .pass span svg {
+  fill: #ccc;
+  width: 32px;
+  height: 32px;
+  margin: 4px 0 4px 8px;
+  transition: fill 0.2s;
+}
+.sign-up .description .pass span:hover {
+  cursor: pointer;
+}
+.sign-up .description .pass span:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.sign-up .description .pass span.active svg {
+  fill: rgb(0, 116, 204);
+}
+.sign-up .description .pass span.active:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.sign-up .accept {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+  margin-top: auto;
+}
+.sign-up .accept:hover {
   color: rgba(0, 116, 204, 0.7);
 }/*# sourceMappingURL=main.css.map */

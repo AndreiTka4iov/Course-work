@@ -250,8 +250,29 @@ header{
             display: flex;
             align-items: center;
 
-            hr{
-                margin: 0 10px 0 10px;
+            div{
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0 12px;
+            }
+
+            span{
+                font-size: 20px;
+                text-decoration: underline;
+                cursor: pointer;
+                transition: color .2s;
+
+                &:hover{
+                    color: $color-text-hover;
+                }
+
+                &.sign-up-header{
+                    color: $a-color;
+
+                    &:hover{
+                        color: $a-color-hover;
+                    }
+                }
             }
         }
     }
@@ -562,8 +583,14 @@ footer {
                     margin-right: 12px;
                 }
     
-                a{
+                .underline{
                     text-decoration: underline;
+                    transition: color .2s;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: $color-text-hover;
+                    }
                 }
             }
         } 
@@ -1755,3 +1782,297 @@ footer {
         }
     }
 }   
+
+// sign in
+
+.sign-in{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 400px;
+    height: 600px;
+    left: calc(50% - 200px);
+    top: calc(50% - 300px);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    background: $color-header-bg;
+    border-radius: 5px;
+    z-index: 11;
+    transition: .2s;
+
+    &.active{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .close-line{
+        width: 100%;
+        height: 50px;
+        text-align: right;
+
+        span{
+            cursor: pointer;
+
+            svg{
+                width: 50px;
+                height: 50px;
+                stroke: $color-text;
+                transition: stroke .2s;
+            }
+
+            &:hover{
+                svg{
+                    stroke: $color-text-hover;
+                }
+            }
+        }
+    }
+
+    .logo-block{
+        width: 100%;
+        height: 100px;
+
+        a{
+            display: inline-block;
+            svg{
+                width: 100px;
+                height: 100px;
+                fill: $color-text;
+                transition: fill .2s;
+            }
+
+            &:hover{
+                svg{
+                    fill: $color-text-hover;
+                }
+            }
+        }
+    }
+
+    .description{
+        width: 100%;
+        margin-top: 50px;
+        text-align: left;
+
+        input{
+            width: 100%;
+            height: 50px;
+            padding: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+        }
+
+        .pass{
+            display: flex;
+            width: 100%;
+            height: 50px;
+            padding: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+
+            input{
+                width: calc(100% - 50px);
+                height: 38px;
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
+            span{
+                svg{
+                    fill: $color-text;
+                    width: 32px;
+                    height: 32px;
+                    margin: 4px 0 4px 8px;
+                    transition: fill .2s;
+                }
+
+                &:hover{
+                    cursor: pointer;
+
+                    svg{
+                        fill: $color-text-hover;
+                    }
+                }
+
+                &.active{
+                    svg{
+                        fill: $a-color;
+                    }
+
+                    &:hover{
+                        svg{
+                            fill: $a-color-hover;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .accept{
+        width: 100%;
+        height: 50px;
+        border-top: 1px solid $color-text-hover;
+        font-size: 20px;
+        font-weight: bold;
+        color: $a-color;
+        transition: color .2s;
+        margin-top: auto;
+
+        &:hover{
+            color: $a-color-hover;
+        }
+    }
+}
+
+//sign up
+
+.sign-up{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 400px;
+    height: 650px;
+    left: calc(50% - 200px);
+    top: calc(50% - 325px);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    background: $color-header-bg;
+    border-radius: 5px;
+    z-index: 11;
+    transition: .2s;
+
+    &.active{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .close-line{
+        width: 100%;
+        height: 50px;
+        text-align: right;
+
+        span{
+            cursor: pointer;
+
+            svg{
+                width: 50px;
+                height: 50px;
+                stroke: $color-text;
+                transition: stroke .2s;
+            }
+
+            &:hover{
+                svg{
+                    stroke: $color-text-hover;
+                }
+            }
+        }
+    }
+
+    .logo-block{
+        width: 100%;
+        height: 100px;
+
+        a{
+            display: inline-block;
+            svg{
+                width: 100px;
+                height: 100px;
+                fill: $color-text;
+                transition: fill .2s;
+            }
+
+            &:hover{
+                svg{
+                    fill: $color-text-hover;
+                }
+            }
+        }
+    }
+
+    .description{
+        width: 100%;
+        margin-top: 50px;
+        text-align: left;
+
+        input{
+            width: 100%;
+            height: 50px;
+            padding: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+        }
+
+        .pass{
+            display: flex;
+            width: 100%;
+            height: 50px;
+            padding: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+
+            input{
+                width: calc(100% - 50px);
+                height: 38px;
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
+            span{
+                svg{
+                    fill: $color-text;
+                    width: 32px;
+                    height: 32px;
+                    margin: 4px 0 4px 8px;
+                    transition: fill .2s;
+                }
+
+                &:hover{
+                    cursor: pointer;
+
+                    svg{
+                        fill: $color-text-hover;
+                    }
+                }
+
+                &.active{
+                    svg{
+                        fill: $a-color;
+                    }
+
+                    &:hover{
+                        svg{
+                            fill: $a-color-hover;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .accept{
+        width: 100%;
+        height: 50px;
+        border-top: 1px solid $color-text-hover;
+        font-size: 20px;
+        font-weight: bold;
+        color: $a-color;
+        transition: color .2s;
+        margin-top: auto;
+
+        &:hover{
+            color: $a-color-hover;
+        }
+    }
+}
