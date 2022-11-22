@@ -1,2 +1,2 @@
 -- SQLite
-DROP TABLE test
+SELECT * FROM users

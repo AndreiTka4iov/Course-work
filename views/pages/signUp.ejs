@@ -1,0 +1,51 @@
+<form action="" class="sign-up" method="post">
+    <div class="logo-block">
+        <a href="/">
+            <svg>
+                <use xlink:href="/main.svg#logo-svg"></use>
+            </svg>
+        </a>
+    </div>
+    <div class="flex-block">
+        <div class="first-page">
+            <h3>Your first name:</h3>
+            <input type="text" name="firstName" placeholder="Enter your first name..." required onfocusout="fucusOut(this)">
+            <h3>Your last name:</h3>
+            <input type="text" name="lastName" placeholder="Enter your last name..." required onfocusout="fucusOut(this)">
+            <h3>Your email:</h3>
+            <input type="email" name="email" placeholder="Enter your email..." required onfocusout="fucusOut(this)">
+            <div class="next" style="color: rgba(217, 217, 217, .6);" onclick="nextPageScroll(this)">Next</div>
+        </div>
+        <div class="second-page">
+            <h3>Your login:</h3>
+            <input type="text" name="login" placeholder="Enter login..." required onfocusout="fucusOut(this)">
+            <h3>Your password:</h3>
+            <div class="pass">
+                <input type="password" name="password" class="pass first" placeholder="Enter password..." required onfocusout="fucusOut(this)">
+                <span onclick="showPassword(this)">
+                    <svg>
+                        <use xlink:href="/main.svg#yey-svg"></use>
+                    </svg>
+                </span>
+            </div>
+            <h3>Your password again:</h3>
+            <div class="pass">
+                <input type="password" name="passwordAgain" class="pass" placeholder="Enter password again..." required onfocusout="fucusOutPass(this)">
+                <span onclick="showPassword(this)">
+                    <svg>
+                        <use xlink:href="/main.svg#yey-svg"></use>
+                    </svg>
+                </span>
+            </div>
+            <div class="btn-form">
+                <div class="back" onclick="backPageScroll(this)">
+                    <svg>
+                        <use xlink:href="/main.svg#arrow-svg"></use>
+                    </svg>
+                    <span>Back</span>
+                </div>
+                <button class="accept">Sign up</button>
+            </div>
+        </div>
+    </div>
+</form>

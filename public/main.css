@@ -1586,45 +1586,20 @@ footer h3 {
 }
 
 .sign-up {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  width: 400px;
-  height: 650px;
-  left: calc(50% - 200px);
-  top: calc(50% - 325px);
-  padding: 12px;
   display: flex;
   flex-direction: column;
+  width: 400px;
+  min-height: calc(100vh - 376px);
+  margin: 12px auto;
   background: #161b22;
   border-radius: 5px;
-  z-index: 11;
+  overflow: hidden;
   transition: 0.2s;
-}
-.sign-up.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.sign-up .close-line {
-  width: 100%;
-  height: 50px;
-  text-align: right;
-}
-.sign-up .close-line span {
-  cursor: pointer;
-}
-.sign-up .close-line span svg {
-  width: 50px;
-  height: 50px;
-  stroke: #ccc;
-  transition: stroke 0.2s;
-}
-.sign-up .close-line span:hover svg {
-  stroke: rgba(217, 217, 217, 0.6);
 }
 .sign-up .logo-block {
   width: 100%;
   height: 100px;
+  padding: 12px 0;
 }
 .sign-up .logo-block a {
   display: inline-block;
@@ -1638,12 +1613,25 @@ footer h3 {
 .sign-up .logo-block a:hover svg {
   fill: rgba(217, 217, 217, 0.6);
 }
-.sign-up .description {
-  width: 100%;
+.sign-up .flex-block {
+  display: flex;
   margin-top: 50px;
+  margin-left: 0;
+  width: 200%;
+  height: -webkit-fill-available;
+  transition: margin-left 0.4s;
+}
+.sign-up .flex-block.active {
+  margin-left: -100%;
+}
+.sign-up .flex-block .first-page {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 12px;
   text-align: left;
 }
-.sign-up .description input {
+.sign-up .flex-block .first-page input {
   width: 100%;
   height: 50px;
   padding: 6px;
@@ -1652,7 +1640,44 @@ footer h3 {
   border: 1px solid rgba(217, 217, 217, 0.6);
   border-radius: 10px;
 }
-.sign-up .description .pass {
+.sign-up .flex-block .first-page .next {
+  width: 100%;
+  height: 50px;
+  margin-top: auto;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.sign-up .flex-block .first-page .next:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+.sign-up .flex-block .second-page {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 12px;
+  text-align: left;
+}
+.sign-up .flex-block .second-page input {
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.sign-up .flex-block .second-page .pass {
   display: flex;
   width: 100%;
   height: 50px;
@@ -1662,42 +1687,78 @@ footer h3 {
   border: 1px solid rgba(217, 217, 217, 0.6);
   border-radius: 10px;
 }
-.sign-up .description .pass input {
+.sign-up .flex-block .second-page .pass input {
   width: calc(100% - 50px);
   height: 38px;
   border: 0;
   margin: 0;
   padding: 0;
 }
-.sign-up .description .pass span svg {
+.sign-up .flex-block .second-page .pass span svg {
   fill: #ccc;
   width: 32px;
   height: 32px;
   margin: 4px 0 4px 8px;
   transition: fill 0.2s;
 }
-.sign-up .description .pass span:hover {
+.sign-up .flex-block .second-page .pass span:hover {
   cursor: pointer;
 }
-.sign-up .description .pass span:hover svg {
+.sign-up .flex-block .second-page .pass span:hover svg {
   fill: rgba(217, 217, 217, 0.6);
 }
-.sign-up .description .pass span.active svg {
+.sign-up .flex-block .second-page .pass span.active svg {
   fill: rgb(0, 116, 204);
 }
-.sign-up .description .pass span.active:hover svg {
+.sign-up .flex-block .second-page .pass span.active:hover svg {
   fill: rgba(0, 116, 204, 0.7);
 }
-.sign-up .accept {
+.sign-up .flex-block .second-page .btn-form {
+  display: flex;
   width: 100%;
   height: 50px;
+  margin-top: auto;
   border-top: 1px solid rgba(217, 217, 217, 0.6);
   font-size: 20px;
   font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.sign-up .flex-block .second-page .btn-form .accept {
+  width: 50%;
+  height: 50px;
   color: rgb(0, 116, 204);
   transition: color 0.2s;
-  margin-top: auto;
 }
-.sign-up .accept:hover {
+.sign-up .flex-block .second-page .btn-form .accept:hover {
   color: rgba(0, 116, 204, 0.7);
+}
+.sign-up .flex-block .second-page .btn-form .back {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+}
+.sign-up .flex-block .second-page .btn-form .back span {
+  transition: color 0.2s;
+}
+.sign-up .flex-block .second-page .btn-form .back svg {
+  width: 26px;
+  height: 26px;
+  margin: 12px 0;
+  margin-right: 12px;
+  transform: rotate(-90deg);
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.sign-up .flex-block .second-page .btn-form .back:hover span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.sign-up .flex-block .second-page .btn-form .back:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
 }/*# sourceMappingURL=main.css.map */

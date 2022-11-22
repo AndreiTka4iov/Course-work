@@ -1,3 +1,10 @@
+let firstNameValue = false
+let lastNamevalue = false
+let emailValue = false
+let passValue = false
+let secondPassValue = false
+let nextAllowed = false
+
 var tx = document.getElementsByTagName('textarea');
 
 for (var i = 0; i < tx.length; i++) {
@@ -54,22 +61,93 @@ function showPassword(btnShow){
     }
 }
 
-function closeSigIn(close){
-    close.parentNode.parentNode.classList.remove('active')
-    blureMenu()
+function fucusOut(input){
+    if (input.value.length === 0){
+        input.style = "border-color: #a81e1e;"
+    } else {
+        input.style = ""
+    }
+
+    if (input.name == 'firstName'){
+        if (input.value.length != 0){
+            firstNameValue = true
+        } else{
+            firstNameValue = false
+        }
+    }
+
+    if (input.name == 'password'){
+        if (input.value.length >= 8){
+            input.parentNode.style = ""
+            passValue = true
+        } else{
+            input.parentNode.style = "border-color: #a81e1e;"
+            passValue = false
+        }
+    }
+
+    if (input.name == 'lastName'){
+        if (input.value.length != 0){
+            lastNamevalue = true
+        } else{
+            lastNamevalue = false
+        }
+    }
+
+    if ((input.name == 'email')){
+        if (input.value.length != 0){
+            if (input.value.indexOf('@') > -1){
+                input.style = ""
+                emailValue = true
+            } else{
+                input.style = "border-color: #a81e1e;"
+                emailValue = false
+            }
+        }
+    }
+
+    btnToNextPage()
+    acceptSugnUp()
 }
 
-function openSignIn(){
-    blureMenu()
-    document.querySelector('.sign-in')?.classList.toggle('active')
+function fucusOutPass(input){
+    if (input.closest('.second-page').querySelector('.first').value == input.value){
+        input.parentNode.style = "";
+        secondPassValue = true
+    } else {
+        input.parentNode.style = "border-color: #a81e1e;"
+        secondPassValue = false
+    }
+    acceptSugnUp()
 }
 
-function openSignUp(){
-    blureMenu()
-    document.querySelector('.sign-up')?.classList.toggle('active')
+function btnToNextPage(){
+    if (firstNameValue && lastNamevalue && emailValue){
+        nextAllowed = true
+        document.querySelector('.next').style = ""
+    } else {
+        nextAllowed = false
+        document.querySelector('.next').style = "color: rgba(217, 217, 217, .6);"
+    }
+    
 }
 
-function closeSigUp(close){
-    close.parentNode.parentNode.classList.remove('active')
-    blureMenu()
+function nextPageScroll(next){
+    if (nextAllowed) {
+        next.closest('.flex-block').classList.toggle('active')
+    }
+}
+
+function acceptSugnUp(){
+    if (nextAllowed && passValue && secondPassValue){
+        document.querySelector('.accept').disabled = false;
+        document.querySelector('.accept').style = ""
+    } else {
+        document.querySelector('.accept').disabled = true;
+        document.querySelector('.accept').style = "color: rgba(217, 217, 217, .6);"
+    }
+}
+
+function backPageScroll(btn){
+    btn.closest('.flex-block').classList.remove('active')
 }

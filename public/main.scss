@@ -411,7 +411,7 @@ footer {
     display: flex;
     width: 100%;
     min-height: calc(100vh - 336px);
-}
+} 
 
 //error page 
 
@@ -1933,52 +1933,20 @@ footer {
 //sign up
 
 .sign-up{
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    width: 400px;
-    height: 650px;
-    left: calc(50% - 200px);
-    top: calc(50% - 325px);
-    padding: 12px;
     display: flex;
     flex-direction: column;
+    width: 400px;
+    min-height: calc(100vh - 376px);
+    margin: 12px auto;
     background: $color-header-bg;
     border-radius: 5px;
-    z-index: 11;
+    overflow: hidden;
     transition: .2s;
-
-    &.active{
-        opacity: 1;
-        pointer-events: all;
-    }
-
-    .close-line{
-        width: 100%;
-        height: 50px;
-        text-align: right;
-
-        span{
-            cursor: pointer;
-
-            svg{
-                width: 50px;
-                height: 50px;
-                stroke: $color-text;
-                transition: stroke .2s;
-            }
-
-            &:hover{
-                svg{
-                    stroke: $color-text-hover;
-                }
-            }
-        }
-    }
 
     .logo-block{
         width: 100%;
         height: 100px;
+        padding: 12px 0;
 
         a{
             display: inline-block;
@@ -1997,82 +1965,185 @@ footer {
         }
     }
 
-    .description{
-        width: 100%;
+    .flex-block{
+        display: flex;
         margin-top: 50px;
-        text-align: left;
+        margin-left: 0;
+        width: 200%;
+        height: -webkit-fill-available;
+        transition:  margin-left .4s ;
 
-        input{
-            width: 100%;
-            height: 50px;
-            padding: 6px;
-            margin-top: 6px;
-            margin-bottom: 12px;
-            border: 1px solid $color-text-hover;
-            border-radius: 10px;
+        &.active {
+            margin-left: -100%;
         }
 
-        .pass{
+        .first-page{
             display: flex;
-            width: 100%;
-            height: 50px;
-            padding: 6px;
-            margin-top: 6px;
-            margin-bottom: 12px;
-            border: 1px solid $color-text-hover;
-            border-radius: 10px;
-
+            flex-direction: column;
+            width: 50%;
+            padding: 12px;
+            text-align: left;
+    
             input{
-                width: calc(100% - 50px);
-                height: 38px;
-                border: 0;
-                margin: 0;
-                padding: 0;
+                width: 100%;
+                height: 50px;
+                padding: 6px;
+                margin-top: 6px;
+                margin-bottom: 12px;
+                border: 1px solid $color-text-hover;
+                border-radius: 10px;
             }
-            span{
-                svg{
-                    fill: $color-text;
-                    width: 32px;
-                    height: 32px;
-                    margin: 4px 0 4px 8px;
-                    transition: fill .2s;
-                }
 
+            .next{
+                width: 100%;
+                height: 50px;
+                margin-top: auto;
+                border-top: 1px solid $color-text-hover;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 50px;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                color: $a-color;
+                transition: color .2s;
+                cursor: pointer;
+        
                 &:hover{
-                    cursor: pointer;
-
-                    svg{
-                        fill: $color-text-hover;
-                    }
+                    color: $a-color-hover;
                 }
+            }
+        }
 
-                &.active{
+        .second-page{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            padding: 12px;
+            text-align: left;
+    
+            input{
+                width: 100%;
+                height: 50px;
+                padding: 6px;
+                margin-top: 6px;
+                margin-bottom: 12px;
+                border: 1px solid $color-text-hover;
+                border-radius: 10px;
+            }
+    
+            .pass{
+                display: flex;
+                width: 100%;
+                height: 50px;
+                padding: 6px;
+                margin-top: 6px;
+                margin-bottom: 12px;
+                border: 1px solid $color-text-hover;
+                border-radius: 10px;
+    
+                input{
+                    width: calc(100% - 50px);
+                    height: 38px;
+                    border: 0;
+                    margin: 0;
+                    padding: 0;
+                }
+                span{
                     svg{
-                        fill: $a-color;
+                        fill: $color-text;
+                        width: 32px;
+                        height: 32px;
+                        margin: 4px 0 4px 8px;
+                        transition: fill .2s;
                     }
-
+    
                     &:hover{
+                        cursor: pointer;
+    
                         svg{
-                            fill: $a-color-hover;
+                            fill: $color-text-hover;
+                        }
+                    }
+    
+                    &.active{
+                        svg{
+                            fill: $a-color;
+                        }
+    
+                        &:hover{
+                            svg{
+                                fill: $a-color-hover;
+                            }
                         }
                     }
                 }
             }
-        }
-    }
+            
+            .btn-form{
+                display: flex;
+                width: 100%;
+                height: 50px;
+                margin-top: auto;
+                border-top: 1px solid $color-text-hover;
+                font-size: 20px;
+                font-weight: bold;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
 
-    .accept{
-        width: 100%;
-        height: 50px;
-        border-top: 1px solid $color-text-hover;
-        font-size: 20px;
-        font-weight: bold;
-        color: $a-color;
-        transition: color .2s;
-        margin-top: auto;
+                .accept{
+                    width: 50%;
+                    height: 50px;
+                    color: $a-color;
+                    transition: color .2s;
+                    
+            
+                    &:hover{
+                        color: $a-color-hover;
+                    }
+                }
 
-        &:hover{
-            color: $a-color-hover;
+                .back{
+                    display: flex;
+                    justify-content: center;
+                    width: 50%;
+                    height: 50px;
+                    line-height: 50px;
+                    cursor: pointer;
+
+                    span{
+                        transition: color .2s;
+                    }
+
+                    svg{
+                        width: 26px;
+                        height: 26px;
+                        margin: 12px 0;
+                        margin-right: 12px;
+                        transform: rotate(-90deg);
+                        fill: $color-text;
+                        transition: fill .2s;
+                    }
+
+                    &:hover{
+                        span{
+                            color: $color-text-hover;
+                        }
+
+                        svg{
+                            fill: $color-text-hover;
+                        }
+                    }
+                }
+            }  
         }
     }
 }

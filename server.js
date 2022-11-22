@@ -31,6 +31,13 @@ app.get('/news/item', (req, res) => {
 const forumRouter = require('./routes/forum')
 app.use('/forum', forumRouter)
 
+const signUpRouter = require('./routes/signUp')
+app.use('/sign-up', signUpRouter)
+app.use('/sign-up/confirm', signUpRouter)
+
+//const signInRouter = require('./routes/signIn')
+//app.use('/sign-in', signInRouter)
+
 //page 404
 
 app.get('/:any', (req, res) => {

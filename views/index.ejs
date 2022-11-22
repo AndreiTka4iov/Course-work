@@ -24,6 +24,10 @@ switch(locals.page) {
     <%- include('pages/forumItem') %>
     <% break;
 
+    case 'signUp': %>
+    <%- include('pages/signUp') %>
+    <% break;
+
     case 'Error': %>
     <%- include('pages/error') %>
     <% break;
@@ -35,5 +39,3 @@ switch(locals.page) {
 
 <%- include('footer-template') %>
 <%- include('pages/components/blure-screen') %>
-<%- include('pages/components/sign-in') %>
-<%- include('pages/components/sign-up') %>
