@@ -35,8 +35,8 @@ const signUpRouter = require('./routes/signUp')
 app.use('/sign-up', signUpRouter)
 app.use('/sign-up/confirm', signUpRouter)
 
-//const signInRouter = require('./routes/signIn')
-//app.use('/sign-in', signInRouter)
+const signInRouter = require('./routes/signIn')
+app.use('/sign-in', signInRouter)
 
 //page 404
 

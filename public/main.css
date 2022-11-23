@@ -1469,24 +1469,16 @@ footer h3 {
 }
 
 .sign-in {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
   width: 400px;
   height: 600px;
-  left: calc(50% - 200px);
-  top: calc(50% - 300px);
   padding: 12px;
+  margin: 12px auto;
   display: flex;
   flex-direction: column;
   background: #161b22;
   border-radius: 5px;
   z-index: 11;
   transition: 0.2s;
-}
-.sign-in.active {
-  opacity: 1;
-  pointer-events: all;
 }
 .sign-in .close-line {
   width: 100%;

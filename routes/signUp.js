@@ -12,9 +12,10 @@ router.use(express.urlencoded({ extended: false}))
 router.post('/', (req, res) =>{
     const {password, login, email, firstName, lastName} = req.body
     const passwordMd5 = md5(password)
-    sqlReq = 'INSERT INTO `users` (`id`, `login`, `email`, `password`, `first_name`, `last_name`) VALUES (?,?,?,?,?)'
+    const loginLoverCase = login.toLowerCase()
+    sqlReq = 'INSERT INTO `users` (`login`, `email`, `password`, `first_name`, `last_name`) VALUES (?,?,?,?,?)'
     db.run(sqlReq, 
-        ['NULL', login, email, passwordMd5, firstName, lastName],
+        [loginLoverCase, email, passwordMd5, firstName, lastName],
         (err) => {
             if (err) return console.error(err.message)
         })

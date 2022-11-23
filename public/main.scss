@@ -1786,25 +1786,16 @@ footer {
 // sign in
 
 .sign-in{
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
     width: 400px;
     height: 600px;
-    left: calc(50% - 200px);
-    top: calc(50% - 300px);
     padding: 12px;
+    margin: 12px auto;
     display: flex;
     flex-direction: column;
     background: $color-header-bg;
     border-radius: 5px;
     z-index: 11;
     transition: .2s;
-
-    &.active{
-        opacity: 1;
-        pointer-events: all;
-    }
 
     .close-line{
         width: 100%;
