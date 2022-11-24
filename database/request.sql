@@ -1,0 +1,1 @@
+ALTER TABLE users ADD user_level INT NOT NULL AFTER token

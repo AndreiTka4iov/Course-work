@@ -1,53 +1,60 @@
-const express = require('express')
-const router = express.Router()
-const url = require('url')
-const sqlite3 = require('sqlite3').verbose()
-const md5 = require('md5')
-const db = new sqlite3.Database('./database/main.db', sqlite3.OPEN_READWRITE, (err) => {
-    if (err) return console.error(err.message)
-})
+const express = require('express'),
+      router = express.Router(),
+      cookieParser = require('cookie-parser'),
+      sqlite3 = require('sqlite3').verbose(),
+      md5 = require('md5'),
+      db = new sqlite3.Database('./database/main.db', sqlite3.OPEN_READWRITE, (err) => {
+        if (err) return console.error(err.message)
+      })
 
 router.use(express.urlencoded({ extended: false}))
+router.use(cookieParser('secret ecdc0f6bb1a12b909faf9ec54262f3a5'))
 
 router.get('/', (req, res) => {
+  if (req.signedCookies.token_user){
+    return res.redirect('/')
+  }
   res.render('index', { title: 'Sign in' , page: 'signIn' })
 })
 
 router.post('/', (req, res) =>{
   let sqlReq
-  let newToken
-  const {password, login} = req.body
-  const passwordMd5 = md5(password) 
-  const loginLoverCase = login.toLowerCase()
+  const {password, login} = req.body,
+        passwordMd5 = md5(password)
 
-  sqlReq = "SELECT * FROM users WHERE password='" + passwordMd5 + "' AND (email='" + loginLoverCase + "' OR login='" + loginLoverCase + "')"
+  sqlReq = "SELECT * FROM users WHERE password='" + passwordMd5 + "' AND (email='" + login + "' OR login='" + login + "')"
   db.all(sqlReq, (err, resultQuery) => {
     if (err) return console.error(err.message)
-    
-    if (resultQuery[0].token !== null){
-      newToken = resultQuery[0].token
-    } else {
-      newToken = md5(newTokenFunction(10) + resultQuery[0].id)
-    }
-    
-    if (resultQuery[0].login == loginLoverCase || resultQuery[0].email == loginLoverCase){
-      sqlReq = "UPDATE users SET token='" + newToken + "' WHERE id='" + resultQuery[0].id + "'"
-      db.all(sqlReq, (err) => {if (err) return console.error(err.message)})
 
+    if (typeof resultQuery[0].login !== 'undefined'){
+      res.cookie('login_user', resultQuery[0].login, {
+        httpOnly: true,
+        signed: true
+      })
+  
+      res.cookie('id_user', resultQuery[0].id, {
+        httpOnly: true,
+        signed: true
+      })
+  
+      res.cookie('token_user', resultQuery[0].token, {
+        httpOnly: true,
+        signed: true
+      })
+  
+      res.cookie('level_user', resultQuery[0].user_level, {
+        httpOnly: true,
+        signed: true
+      })
+  
       return res.redirect('/')
-    } else{return res.redirect('/sign-in')}
+      
+    } else {
+      return res.redirect('/sign-in')
+    }  
   })
+  
+ 
 })
-
-
-function newTokenFunction(length) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
   
 module.exports = router

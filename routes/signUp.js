@@ -10,15 +10,28 @@ const db = new sqlite3.Database('./database/main.db', sqlite3.OPEN_READWRITE, (e
 router.use(express.urlencoded({ extended: false}))
 
 router.post('/', (req, res) =>{
-    const {password, login, email, firstName, lastName} = req.body
-    const passwordMd5 = md5(password)
-    const loginLoverCase = login.toLowerCase()
-    sqlReq = 'INSERT INTO `users` (`login`, `email`, `password`, `first_name`, `last_name`) VALUES (?,?,?,?,?)'
-    db.run(sqlReq, 
-        [loginLoverCase, email, passwordMd5, firstName, lastName],
-        (err) => {
-            if (err) return console.error(err.message)
-        })
+    const {password, login, email, firstName, lastName} = req.body,
+            passwordMd5 = md5(password)
+
+    sqlReq = 'INSERT INTO `users` (`login`, `email`, `password`, `first_name`, `last_name`, `token`) VALUES (?,?,?,?,?,?)'
+    db.run(sqlReq, [login, email, passwordMd5, firstName, lastName, md5(login)], (err) => 
+    { if (err) return console.error(err.message) })
+
+    res.cookie('login_user', login, {
+        httpOnly: true,
+        signed: true
+    })
+    
+    res.cookie('token_user', md5(login), {
+    httpOnly: true,
+    signed: true
+    })
+    
+    res.cookie('level_user', 0, {
+    httpOnly: true,
+    signed: true
+    })
+
     res.redirect('/')
 })
 

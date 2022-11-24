@@ -45,9 +45,13 @@
                 </button>
             </div> 
             <div class="btn-profile">
-                <a href="/sign-in">Sign in</a>
-                <hr width="1" size="28" style="margin: 0 12px;"/>
-                <a href="/sign-up">Sign up</a>
+                <% if (locals.token != 0){ %>
+                    
+                <% } else{%>
+                    <a href="/sign-in">Sign in</a>
+                    <hr width="1" size="28" style="margin: 0 12px;"/>
+                    <a href="/sign-up">Sign up</a>
+                <% } %>
             </div>
         </div>
     </header>
