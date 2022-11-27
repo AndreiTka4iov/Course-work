@@ -15,14 +15,36 @@ app.use(cookieParser('secret ecdc0f6bb1a12b909faf9ec54262f3a5'))
 //Routes for main url
 
 app.use((req,res, next) => {
+  if(typeof req.signedCookies.level_user !== 'undefined'){
+    tempLevel = req.signedCookies.level_user
+  }else{
+    tempLevel = 0
+  }
+
+  if(typeof req.signedCookies.login_user !== 'undefined'){
+    tempLogin = req.signedCookies.login_user
+  }else{
+    tempLogin = 0
+  }
+
+  if(typeof req.signedCookies.id_user !== 'undefined'){
+    tempId = req.signedCookies.id_user
+  }else{
+    tempId = 0
+  }
+
   if(typeof req.signedCookies.token_user !== 'undefined'){
     tempToken = req.signedCookies.token_user
   }else{
     tempToken = 0
   }
+
   res.locals = {
     title: 'Forum',
-    token: tempToken
+    token: tempToken,
+    level: tempLevel,
+    login: tempLogin,
+    id: tempId
   }
   next()
 })
@@ -52,6 +74,12 @@ app.use('/sign-up/confirm', signUpRouter)
 
 const signInRouter = require('./routes/signIn')
 app.use('/sign-in', signInRouter)
+
+const createRouter = require('./routes/makeNew')
+app.use('/create', createRouter)
+
+const userRouter = require('./routes/profile')
+app.use('/profile', userRouter)
 
 //page 404
 

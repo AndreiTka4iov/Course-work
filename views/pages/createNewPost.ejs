@@ -1,0 +1,63 @@
+<div class="create-menu">
+    <a href="/profile">
+        <img src="/images/user.svg" alt="">
+    </a>
+    <h2><%=locals.login%></h2>
+    <div class="inp-menu">
+        <div class="select_create">
+            <h3>What do you want to publish:</h3>
+            <select name="" id="" class="select" onchange="select(this)">
+                <option value="" selected disabled>What do you want?</option>
+                <option value="news">Create a news</option>
+                <option value="discussion">Create a discussion</option>
+            </select>
+        </div>
+        <form action="" method="POST" class="news-form">
+
+        </form>
+        <form action="/create/discussion" method="POST" class="discussion-form active">
+            <h3>Create a discussion title:</h3>
+            <input type="text" name="title" id="" placeholder="Discussion title..." required>
+            <h3>Describe the essence of the discussion:</h3>
+            <textarea name="discussion" id="" cols="30" rows="1" placeholder="Enter a discussion..." required></textarea>
+            <div class="topics">
+                <h3>Choose the topic of discussion:</h3>
+                <select name="category" id="" class="category" required onchange="selectCategory(this)">
+                    <option value="" selected disabled>Category...</option>
+                    <option value="news">Games</option>
+                    <option value="discussion">Sports</option>
+                    <option value="discussion">Business</option>
+                    <option value="discussion">Cripto</option>
+                    <option value="discussion">Other</option>
+                </select>
+                <select name="subcategory" id="" class="subcategory" disabled required>
+                    <option value="" selected disabled>Subcategory...</option>
+                    <option value="news">Games</option>
+                    <option value="discussion">Sports</option>
+                    <option value="discussion">Business</option>
+                    <option value="discussion">Cripto</option>
+                    <option value="discussion">Other</option>
+                </select>
+            </div>
+            <button>Create</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function select(selectOpt){
+        if (selectOpt.value == 'news'){
+            document.querySelector('.discussion-form').classList.remove('active')
+            document.querySelector('.news-form').classList.add('active')
+        } else if (selectOpt.value == 'discussion'){
+            document.querySelector('.news-form').classList.remove('active')
+            document.querySelector('.discussion-form').classList.add('active')
+        }
+    }
+</script>
+
+<script>
+    function selectCategory(selectCat){
+        selectCat.closest('.topics').querySelector('.subcategory').disabled = false
+    }
+</script>

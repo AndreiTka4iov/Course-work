@@ -46,7 +46,51 @@
             </div> 
             <div class="btn-profile">
                 <% if (locals.token != 0){ %>
-                    
+                    <div class="profile" onclick="openDropDoownUser(this)">
+                        <img src="/images/user.svg" alt="">
+                    </div>
+                    <div class="drop-down-menu">
+                        <a href="/profile">
+                            <div class="flex-btn-drop">
+                                <svg>
+                                    <use xlink:href="/main.svg#profile-svg"></use>
+                                </svg>
+                                <span>Your profile</span>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex-btn-drop">
+                                <svg>
+                                    <use xlink:href="/main.svg#news-svg"></use>
+                                </svg>
+                                <span>Your news</span>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex-btn-drop">
+                                <svg>
+                                    <use xlink:href="/main.svg#forum-svg"></use>
+                                </svg>
+                                <span>Your forum</span>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex-btn-drop">
+                                <svg>
+                                    <use xlink:href="/main.svg#device-svg"></use>
+                                </svg>
+                                <span>Your devices</span>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex-btn-drop out">
+                                <svg>
+                                    <use xlink:href="/main.svg#sign-out-svg"></use>
+                                </svg>
+                                <span>Sign out</span>
+                            </div>
+                        </a>
+                    </div>
                 <% } else{%>
                     <a href="/sign-in">Sign in</a>
                     <hr width="1" size="28" style="margin: 0 12px;"/>

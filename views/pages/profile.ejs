@@ -1,0 +1,168 @@
+<div class="page-user">
+    <div class="user-info">
+        <div class="nav-page">
+            <div class="href-page">
+                <a href="/profile" class="news-a">
+                    <svg>
+                        <use xlink:href="/main.svg#news-svg"></use>
+                    </svg>
+                    <div class="a-page">Your news</div>
+                </a>
+                <a href="/profile/questions" class="forum-a">
+                    <svg>
+                        <use xlink:href="/main.svg#forum-svg"></use>
+                    </svg>
+                    <div class="a-page">Your questions</div>
+                </a>
+                <a href="/" class="settings-a">
+                    <svg>
+                        <use xlink:href="/main.svg#settings-svg"></use>
+                    </svg>
+                    <div class="a-page">Your settings</div>
+                </a>
+                <% if (locals.level != 0){ %>
+                    <a href="/" class="">
+                        <svg>
+                            <use xlink:href="/main.svg#report-svg"></use>
+                        </svg>
+                        <div class="a-page">Reports</div>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+        <div class="user-data">
+            <div class="avatar">
+                <img src="/images/user.svg" alt="">
+            </div>
+            <span><%= locals.login %></span>
+        </div>
+        <div class="user-activity">
+            <% if (locals.href == 'news') {%>
+                <div class="activity-screen news">
+                    <% /* %>
+                    <div class="clear">
+                        <svg>
+                            <use xlink:href="/main.svg#news-svg"></use>
+                        </svg>
+                        <span>The list is empty</span>
+                    </div>
+                    <% */ %>
+                    <div class="news-item">
+                        <div class="img-block">
+                            <img src="/images/news/major.jpg" alt="">
+                            <div class="dark-img"></div>
+                            <a href="">CS:GO</a>
+                            <h3>IEM Rio Major 2022</h3>
+                        </div>  
+                        <div class="text-block">
+                            <a href="/news/item?">OUTSIDERS QUALIFY FOR BLAST PREMIER WORLD FINAL</a><br><br>
+                            <div>The newly crowned Major champions will head to Abu Dhabi in December. <br> <br>
+                
+                                Following their underdog run all the way to the trophy at the IEM Rio Major, Outsiders have qualified for the $1,000,000, eight-team BLAST Premier World Final. They will head out to Abu Dhabi for the season-ending spectacle, which takes place December 14-18.</div>
+                        </div>  
+                        <div class="info-block">
+                            <div class="date">17.11.2022</div>
+                            <div class="info">
+                                <svg>
+                                    <use xlink:href="/main.svg#yey-svg"></use>
+                                </svg>
+                                <span>0</span>
+                            </div>
+                            <div class="info">
+                                <svg>
+                                    <use xlink:href="/main.svg#forum-svg"></use>
+                                </svg>
+                                <span>1</span>
+                            </div>
+                            <div class="info">
+                                <svg class="favorite">
+                                    <use xlink:href="/main.svg#favorite-svg"></use>
+                                </svg>
+                                <span>10</span>
+                            </div>
+                            <a href="/news/item?">Delete</a>
+                        </div>
+                    </div>
+                    <a href="/create" class="add">Add news</a>
+                </div>
+                
+            <%} else if ((locals.href == 'questions')){%>
+                <div class="activity-screen questions">
+                    <% /* %>
+                    <div class="clear">
+                        <svg>
+                            <use xlink:href="/main.svg#forum-svg"></use>
+                        </svg>
+                        <span>The list is empty</span>
+                    </div>
+                    <% */ %>
+                    <div class="block-discussion">
+                        <div class="upper-block">
+                            <div class="info-block">
+                                <div class="info">
+                                    <svg>
+                                        <use xlink:href="/main.svg#yey-svg"></use>
+                                    </svg>
+                                    <span>0</span>
+                                </div>
+                                <div class="info">
+                                    <svg>
+                                        <use xlink:href="/main.svg#forum-svg"></use>
+                                    </svg>
+                                    <span>1</span>
+                                </div>
+                                <div class="info">
+                                    <svg class="favorite">
+                                        <use xlink:href="/main.svg#favorite-svg"></use>
+                                    </svg>
+                                    <span>10</span>
+                                </div>
+                            </div>
+                            <div class="text-block">
+                                <a href="/forum/item">Href on discussion. What do you want?</a><br><br>
+                                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium temporibus facilis eligendi doloribus nulla? In, nesciunt rem esse minus nemo beatae sunt accusamus repellendus ratione vero corporis dolores reprehenderit ipsum?</div>
+                            </div> 
+                            <a href="" class="del">
+                                <svg>
+                                    <use xlink:href="/main.svg#delete-svg"></use>
+                                </svg>
+                            </a>
+                        </div>
+                         <div class="topic-block">
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            <a href="?">
+                                <div class="topic">Test</div>
+                            </a>
+                            
+                         </div>
+                    </div>
+                    <a href="/create" class="add">Add questions</a>
+                </div>
+            <%}%>
+        </div>
+    </div>
+</div>
+<script>
+    if (document.querySelector('.news')) {
+        document.querySelector('.news-a').classList.add('active')
+    } else if (document.querySelector('.questions')){
+        document.querySelector('.forum-a').classList.add('active')
+    }
+</script>

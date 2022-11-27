@@ -32,6 +32,14 @@ switch(locals.page) {
     <%- include('pages/signIn') %>
     <% break;
 
+    case 'Profile': %>
+    <%- include('pages/profile') %>
+    <% break;
+
+    case 'Create': %>
+    <%- include('pages/createNewPost') %>
+    <% break;
+
     case 'Error': %>
     <%- include('pages/error') %>
     <% break;

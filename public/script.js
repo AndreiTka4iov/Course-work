@@ -36,9 +36,12 @@ function openMoreMenu(span){
 
 function blureMenu(){
     document.querySelector('.blure')?.classList.toggle('active')
-    document.querySelector('.sign-in')?.classList.remove('active')
-    document.querySelector('.sign-up')?.classList.remove('active')
     document.querySelector('.report-menu')?.classList.remove('active')
+}
+
+function blureMenuTransparency(){
+    document.querySelector('.blure-transparency')?.classList.toggle('active')
+    document.querySelector('.drop-down-menu.active')?.classList.remove('active')
 }
 
 function reportMenu(report){
@@ -150,4 +153,9 @@ function acceptSugnUp(){
 
 function backPageScroll(btn){
     btn.closest('.flex-block').classList.remove('active')
+}
+
+function openDropDoownUser(dropDown){
+    blureMenuTransparency()
+    dropDown.parentNode.querySelector('.drop-down-menu')?.classList.toggle('active')
 }
