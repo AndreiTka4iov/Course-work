@@ -1,0 +1,33 @@
+<div class="confirmation-del">
+    <div class="close">
+        <span onclick="closeBtn(this)">
+            <svg>
+                <use xlink:href="/main.svg#close-svg"></use>
+            </svg>
+        </span>
+    </div>
+    <a href="/">
+        <svg>
+            <use xlink:href="/main.svg#logo-svg"></use>
+        </svg>
+    </a>
+    <h2>Are you sure?</h2>
+    <div class="btn">
+        <a href="" class="confirmation">Confirm</a>
+        <hr width="1" height="50px">
+        <span onclick="closeBtn(this)">Cancle</span>
+    </div>
+</div>
+<script>
+    function deleteBlock(btn) {
+        const confirmation = document.querySelector('.confirmation-del')
+        confirmation.classList.add('active')
+        document.querySelector('.blure').classList.add('active')
+        confirmation.querySelector('.confirmation')?.setAttribute ('href', '/profile/confirmation?del=true&forum=true&id=' + btn.id)
+    }
+
+    function closeBtn(btn) {
+        btn.closest('.confirmation-del').classList.remove('active')
+        document.querySelector('.blure').classList.remove('active')
+    }
+</script>

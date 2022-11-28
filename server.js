@@ -81,6 +81,9 @@ app.use('/create', createRouter)
 const userRouter = require('./routes/profile')
 app.use('/profile', userRouter)
 
+const confirmationRouter = require('./routes/confirmation')
+app.use('/profile/confirmation', confirmationRouter)
+
 //page 404
 
 app.get('/:any', (req, res) => {

@@ -37,6 +37,7 @@ function openMoreMenu(span){
 function blureMenu(){
     document.querySelector('.blure')?.classList.toggle('active')
     document.querySelector('.report-menu')?.classList.remove('active')
+    document.querySelector('.confirmation-del')?.classList.remove('active')
 }
 
 function blureMenuTransparency(){

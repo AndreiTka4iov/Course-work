@@ -70,6 +70,11 @@ textarea {
   overflow-y: hidden;
 }
 
+pre {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -233,6 +238,22 @@ header .flex-main-header .btn-profile span.sign-up-header {
 }
 header .flex-main-header .btn-profile span.sign-up-header:hover {
   color: rgba(0, 116, 204, 0.7);
+}
+header .flex-main-header .btn-profile .create-new {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+}
+header .flex-main-header .btn-profile .create-new svg {
+  width: 28px;
+  height: 28px;
+  fill: #ccc;
+  margin: 0;
+  transition: fill 0.2s;
+}
+header .flex-main-header .btn-profile .create-new:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
 }
 header .flex-main-header .btn-profile .profile {
   width: 36px;
@@ -813,7 +834,7 @@ footer h3 {
   color: rgba(217, 217, 217, 0.6);
 }
 .forum-page .block-discussion .upper-block .text-block {
-  width: calc(100% - 112px);
+  width: calc(100% - 190px);
   min-height: 75px;
   text-align: left;
   margin-left: 12px;
@@ -825,11 +846,19 @@ footer h3 {
 .forum-page .block-discussion .upper-block .text-block a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
-.forum-page .block-discussion .upper-block .text-block div {
+.forum-page .block-discussion .upper-block .text-block pre {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.forum-page .block-discussion .upper-block .date {
+  display: inline-block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: auto;
+  color: rgba(217, 217, 217, 0.6);
 }
 .forum-page .block-discussion .topic-block {
   width: 100%;
@@ -2102,7 +2131,7 @@ footer h3 {
   transition: 0.2s;
 }
 .page-user .user-info .user-activity .activity-screen .news-item .info-block a:hover {
-  background: rgba(201, 24, 24, 0.3);
+  background: rgba(201, 24, 24, 0.4);
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion {
   width: 80%;
@@ -2154,13 +2183,14 @@ footer h3 {
 .page-user .user-info .user-activity .activity-screen .block-discussion .upper-block .text-block a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
-.page-user .user-info .user-activity .activity-screen .block-discussion .upper-block .text-block div {
+.page-user .user-info .user-activity .activity-screen .block-discussion .upper-block .text-block pre {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion .upper-block .del {
+  cursor: pointer;
   display: inline-block;
   margin-bottom: auto;
 }
@@ -2171,7 +2201,7 @@ footer h3 {
   transition: fill 0.2s;
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion .upper-block .del:hover svg {
-  fill: rgba(201, 24, 24, 0.3);
+  fill: rgba(201, 24, 24, 0.4);
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion .topic-block {
   width: 100%;
@@ -2210,6 +2240,98 @@ footer h3 {
   transition: color 0.2s;
 }
 .page-user .user-info .user-activity .activity-screen .add:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+
+.confirmation-del {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 200px);
+  width: 400px;
+  background: #161b22;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 11;
+}
+.confirmation-del.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.confirmation-del .close {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  padding: 6px;
+}
+.confirmation-del .close span {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.confirmation-del .close span svg {
+  width: 38px;
+  height: 38px;
+  stroke: #ccc;
+  transition: stroke 0.2s;
+}
+.confirmation-del .close span:hover svg {
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.confirmation-del a {
+  display: inline-block;
+}
+.confirmation-del a svg {
+  width: 100px;
+  height: 100px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.confirmation-del a:hover svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.confirmation-del h2 {
+  margin: 24px auto;
+}
+.confirmation-del .btn {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  line-height: 50px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.confirmation-del .btn a {
+  display: inline-block;
+  width: 50%;
+  height: 50px;
+  color: rgba(201, 24, 24, 0.6);
+  transition: color 0.2s;
+}
+.confirmation-del .btn a:hover {
+  color: rgba(201, 24, 24, 0.4);
+}
+.confirmation-del .btn hr {
+  margin: 0;
+  border-color: rgba(217, 217, 217, 0.6);
+}
+.confirmation-del .btn span {
+  display: inline-block;
+  width: 50%;
+  height: 50px;
+  color: rgb(0, 116, 204);
+  font-size: 20px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.confirmation-del .btn span:hover {
   color: rgba(0, 116, 204, 0.7);
 }
 

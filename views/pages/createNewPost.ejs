@@ -15,7 +15,7 @@
         <form action="" method="POST" class="news-form">
 
         </form>
-        <form action="/create/discussion" method="POST" class="discussion-form active">
+        <form action="/create/discussion" method="POST" class="discussion-form">
             <h3>Create a discussion title:</h3>
             <input type="text" name="title" id="" placeholder="Discussion title..." required>
             <h3>Describe the essence of the discussion:</h3>
@@ -24,25 +24,25 @@
                 <h3>Choose the topic of discussion:</h3>
                 <select name="category" id="" class="category" required onchange="selectCategory(this)">
                     <option value="" selected disabled>Category...</option>
-                    <option value="news">Games</option>
-                    <option value="discussion">Sports</option>
-                    <option value="discussion">Business</option>
-                    <option value="discussion">Cripto</option>
-                    <option value="discussion">Other</option>
+                    <% for(var i=0; i<locals.topic.length; i++) {%>
+                        <option value="<%= locals.topic[i].id%>"><%= locals.topic[i].topic%></option>
+                    <% } %>
                 </select>
                 <select name="subcategory" id="" class="subcategory" disabled required>
-                    <option value="" selected disabled>Subcategory...</option>
-                    <option value="news">Games</option>
-                    <option value="discussion">Sports</option>
-                    <option value="discussion">Business</option>
-                    <option value="discussion">Cripto</option>
-                    <option value="discussion">Other</option>
+                    <option value="" class="selected" selected disabled>Subcategory...</option>
+                    <% for(var i=0; i<locals.category.length; i++) {%>
+                        <option value="<%= locals.category[i].id%>" class="option <%= locals.category[i].topic_id%>" style="display: none;" disabled><%= locals.category[i].category%></option>
+                    <% } %>
                 </select>
             </div>
             <button>Create</button>
         </form>
     </div>
 </div>
+
+<% for(var i=0; i<locals.topic.length; i++) {%>
+            
+<% } %>
 
 <script>
     function select(selectOpt){
@@ -58,6 +58,22 @@
 
 <script>
     function selectCategory(selectCat){
-        selectCat.closest('.topics').querySelector('.subcategory').disabled = false
+        const subcategory = selectCat.closest('.topics').querySelector('.subcategory')
+        subcategory.disabled = false
+
+        dispNone = subcategory.getElementsByClassName('option')
+        for(var i = 0; i < dispNone.length; i++) {
+            subcategory.getElementsByClassName('selected').selected = true
+            dispNone[i].style = 'display: none;';
+            dispNone[i].disabled = true;
+        }
+
+        
+
+        elements = subcategory.getElementsByClassName(selectCat.value)
+        for(var i = 0; i < elements.length; i++) {
+            elements[i].style = '';
+            elements[i].disabled = false;
+        }
     }
 </script>

@@ -46,19 +46,16 @@
             </div> 
             <div class="btn-profile">
                 <% if (locals.token != 0){ %>
+                    <a href="/create" class="create-new">
+                        <svg>
+                            <use xlink:href="/main.svg#add-svg"></use>
+                        </svg>
+                    </a>
                     <div class="profile" onclick="openDropDoownUser(this)">
                         <img src="/images/user.svg" alt="">
                     </div>
                     <div class="drop-down-menu">
-                        <a href="/profile">
-                            <div class="flex-btn-drop">
-                                <svg>
-                                    <use xlink:href="/main.svg#profile-svg"></use>
-                                </svg>
-                                <span>Your profile</span>
-                            </div>
-                        </a>
-                        <a href="">
+                        <a href="/profile/news">
                             <div class="flex-btn-drop">
                                 <svg>
                                     <use xlink:href="/main.svg#news-svg"></use>
@@ -66,7 +63,7 @@
                                 <span>Your news</span>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/profile/questions">
                             <div class="flex-btn-drop">
                                 <svg>
                                     <use xlink:href="/main.svg#forum-svg"></use>
@@ -74,12 +71,12 @@
                                 <span>Your forum</span>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/profile/settings">
                             <div class="flex-btn-drop">
                                 <svg>
-                                    <use xlink:href="/main.svg#device-svg"></use>
+                                    <use xlink:href="/main.svg#settings-svg"></use>
                                 </svg>
-                                <span>Your devices</span>
+                                <span>Settings</span>
                             </div>
                         </a>
                         <a href="">

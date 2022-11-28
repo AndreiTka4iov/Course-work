@@ -2,7 +2,7 @@
     <div class="user-info">
         <div class="nav-page">
             <div class="href-page">
-                <a href="/profile" class="news-a">
+                <a href="/profile/news" class="news-a">
                     <svg>
                         <use xlink:href="/main.svg#news-svg"></use>
                     </svg>
@@ -88,71 +88,56 @@
                 
             <%} else if ((locals.href == 'questions')){%>
                 <div class="activity-screen questions">
-                    <% /* %>
+                    <% if (locals.userPosts.length == 0) {%>
                     <div class="clear">
                         <svg>
                             <use xlink:href="/main.svg#forum-svg"></use>
                         </svg>
                         <span>The list is empty</span>
                     </div>
-                    <% */ %>
-                    <div class="block-discussion">
-                        <div class="upper-block">
-                            <div class="info-block">
-                                <div class="info">
+                    <%} else {
+                        for(var i=0; i<locals.userPosts.length; i++) {
+                            let categoryName = locals.category.find(item => item.id == locals.userPosts[i].subcategory);
+                            %>
+                        <div class="block-discussion">
+                            <div class="upper-block">
+                                <div class="info-block">
+                                    <div class="info">
+                                        <svg>
+                                            <use xlink:href="/main.svg#yey-svg"></use>
+                                        </svg>
+                                        <span><%= locals.userPosts[i].watching%></span>
+                                    </div>
+                                    <div class="info">
+                                        <svg>
+                                            <use xlink:href="/main.svg#forum-svg"></use>
+                                        </svg>
+                                        <span><%= locals.userPosts[i].coments%></span>
+                                    </div>
+                                    <div class="info">
+                                        <svg class="favorite">
+                                            <use xlink:href="/main.svg#favorite-svg"></use>
+                                        </svg>
+                                        <span><%= locals.userPosts[i].favorite%></span>
+                                    </div>
+                                </div>
+                                <div class="text-block">
+                                    <a href="/forum/item?id=<%= locals.userPosts[i].id%>"><%= locals.userPosts[i].title%></a><br>
+                                    <pre><%= locals.userPosts[i].discussion%></pre>
+                                </div> 
+                                <span class="del" id="<%= locals.userPosts[i].id%>" onclick="deleteBlock(this)">
                                     <svg>
-                                        <use xlink:href="/main.svg#yey-svg"></use>
+                                        <use xlink:href="/main.svg#delete-svg"></use>
                                     </svg>
-                                    <span>0</span>
-                                </div>
-                                <div class="info">
-                                    <svg>
-                                        <use xlink:href="/main.svg#forum-svg"></use>
-                                    </svg>
-                                    <span>1</span>
-                                </div>
-                                <div class="info">
-                                    <svg class="favorite">
-                                        <use xlink:href="/main.svg#favorite-svg"></use>
-                                    </svg>
-                                    <span>10</span>
-                                </div>
+                                </span>
                             </div>
-                            <div class="text-block">
-                                <a href="/forum/item">Href on discussion. What do you want?</a><br><br>
-                                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium temporibus facilis eligendi doloribus nulla? In, nesciunt rem esse minus nemo beatae sunt accusamus repellendus ratione vero corporis dolores reprehenderit ipsum?</div>
-                            </div> 
-                            <a href="" class="del">
-                                <svg>
-                                    <use xlink:href="/main.svg#delete-svg"></use>
-                                </svg>
-                            </a>
+                            <div class="topic-block">
+                                <a href="/forum/?<%= locals.userPosts[i].subcategory%>">
+                                    <div class="topic"><%= categoryName.category%></div>
+                                </a>                                
+                            </div>
                         </div>
-                         <div class="topic-block">
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            <a href="?">
-                                <div class="topic">Test</div>
-                            </a>
-                            
-                         </div>
-                    </div>
+                    <%}}%>
                     <a href="/create" class="add">Add questions</a>
                 </div>
             <%}%>

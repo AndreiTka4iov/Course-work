@@ -1,12 +1,16 @@
 <div class="page-forum-item">   
+    <%for(var i=0; i<locals.reqForum.length; i++) {
+        let categoryName = locals.category.find(item => item.id == locals.reqForum[i].subcategory);
+        let userName = locals.user.find(item => item.id == locals.reqForum[i].id_user);
+    %>
     <div class="body-question-block">
         <div class="user-block">
             <div class="user-link">
                 <img src="/images/user.svg" alt="">
-                <a href="">User</a>
+                <a href=""><%= userName.login%></a>
             </div>
             <div class="date-favorite">
-                <span>20.11.2022</span> 
+                <span><%= locals.reqForum[i].date%></span> 
                 <a href="">
                     <svg>
                         <use xlink:href="/main.svg#favorite-svg"></use>
@@ -16,26 +20,26 @@
         </div>
         <div class="question-element">
             <div class="question">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit?</h3><br>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas repellendus non unde. Et architecto animi aut autem similique corporis ducimus velit voluptas labore. Provident consequuntur, beatae fugit culpa est molestias.</span>
+                <h3><%= locals.reqForum[i].title%></h3><br>
+                <span><%= locals.reqForum[i].discussion%></span>
                 <div class="info-block">
                     <div class="info">
                         <svg>
                             <use xlink:href="/main.svg#yey-svg"></use>
                         </svg>
-                        <span>0</span>
+                        <span><%= locals.reqForum[i].watching%></span>
                     </div>
                     <div class="info">
                         <svg>
                             <use xlink:href="/main.svg#forum-svg"></use>
                         </svg> 
-                        <span>1</span>
+                        <span><%= locals.reqForum[i].coments%></span>
                     </div>
                     <div class="info">
                         <svg class="favorite">
                             <use xlink:href="/main.svg#favorite-svg"></use>
                         </svg>
-                        <span>10</span>
+                        <span><%= locals.reqForum[i].favorite%></span>
                     </div> 
                     <div class="report">
                         <span onclick="reportMenu(this)">
@@ -46,9 +50,9 @@
                     </div>           
                 </div>
                 <div class="topic-block">
-                    <a href="/forum?">
+                    <a href="/forum?subcategory=<%= locals.reqForum[i].subcategory%>">
                         <div class="btn">
-                            Test
+                            <%= categoryName.category%>
                         </div>
                     </a>
                 </div>
@@ -60,7 +64,7 @@
                     </svg>
                 </a>
                 <div class="rating-text">
-                    +20
+                    <%= locals.reqForum[i].rating%>
                 </div>
                 <a href="">
                     <svg class="down-arrow">
@@ -70,6 +74,7 @@
             </div>
         </div>
     </div>
+    <%}%>
     <div class="comments-user">
         <hr>
         <div class="answer-user">
@@ -222,3 +227,4 @@
         <button class="accept">Report</button>
     </form>
 </div>
+
