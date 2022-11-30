@@ -1,5 +1,6 @@
 const express = require('express'),
     router = express.Router(),
+    fileUpload = require('express-fileupload'),
     cookieParser = require('cookie-parser'),
     sqlite3 = require('sqlite3').verbose(),
     db = new sqlite3.Database('./database/main.db')
@@ -7,6 +8,7 @@ const express = require('express'),
 
 router.use(express.urlencoded({ extended: false}))
 router.use(cookieParser('secret ecdc0f6bb1a12b909faf9ec54262f3a5'))
+router.use(fileUpload());
 
 
 async function db_all(query){
@@ -59,11 +61,20 @@ router.post('/news', async (req, res) => {
     const {img, event, title, news, category, subcategory} = req.body,
         sqlReq = "INSERT INTO `news` (`event`, `title`, `news`, `category`, `subcategory`, `id_user`, `date`) VALUES ('"+ event +"', '" + title + "','" + news + "','" + category + "','" + subcategory + "','" + req.signedCookies.id_user + "','" + today + "')",
         sqlReq2 = "SELECT * FROM news WHERE id_user='" + req.signedCookies.id_user + "' AND img IS NULL",
-        queryDb = await db_all(sqlReq2)
-        console.log(img)
-    
-    //await db_all(sqlReq)
+        sqlReq3 = "UPDATE news SET img = '"+ req.files.imgUpload.name +" WHERE id_user = '" + req.signedCookies.id_user + "' AND img IS NULL",
+        queryDb2 = await db_all(sqlReq2)     
 
+        await db_all(sqlReq)
+        
+        let test = queryDb2[0].id + "dasdasd"
+        console.log(test)
+        const splitStr = req.files.imgUpload.name.split('.')
+        req.files.imgUpload.name = queryDb2[0].id + '.' + splitStr[1]
+        
+       await db_all(sqlReq3)
+       req.files.imgUpload.mv('./public/images/news/' + req.files.imgUpload.name, function (err) {
+          if (err) { console.log(err)}
+       })
    return res.redirect('/profile/news')
 })
   
