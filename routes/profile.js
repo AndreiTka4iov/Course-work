@@ -18,7 +18,7 @@ router.get('/news', (req, res) => {
   typeof req.signedCookies.login_user !== 'undefined' &&
   typeof req.signedCookies.id_user !== 'undefined' &&
   typeof req.signedCookies.token_user !== 'undefined'){
-    res.render('index', { title: 'Profile' , page: 'Profile' , href: 'news'})
+    res.render('index', { title: 'News' , page: 'Profile' , href: 'news'})
   } else{
     res.redirect('/sign-in')
   }
@@ -33,10 +33,24 @@ router.get('/questions', async (req, res) => {
   typeof req.signedCookies.login_user !== 'undefined' &&
   typeof req.signedCookies.id_user !== 'undefined' &&
   typeof req.signedCookies.token_user !== 'undefined'){
-    res.render('index', { title: 'Profile' , page: 'Profile' , href: 'questions', userPosts: queryDb, category: queryDb2})
+    res.render('index', { title: 'Questions' , page: 'Profile' , href: 'questions', userPosts: queryDb, category: queryDb2})
   } else{
     res.redirect('/sign-in')
   }
+  
+})
+
+router.get('/settings', async (req, res) => {
+    res.render('index', { title: 'Settings' , page: 'Profile' , href: 'settings'})
+})
+
+router.get('/admin', async (req, res) => {
+  if (req.signedCookies.level_user > 0){
+    res.render('index', { title: 'Admin' , page: 'Profile' , href: 'admin'})
+  } else {
+    res.render('index', { title: 'Forum | Error', page: 'Error', homePage: 'home-header'})
+  }
+  
   
 })
   

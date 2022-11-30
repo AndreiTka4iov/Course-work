@@ -24,9 +24,14 @@ this.style.height = (this.scrollHeight) + 'px';//////console.log(this.scrollHeig
 }
 
 function openTopic(div){
-    console.log()
+    const secondBlock =div.parentNode.querySelector('.second-block'),
+        countBtn = 32 * secondBlock?.querySelectorAll('.btn-click').length +'px;'
     div.classList.toggle('active')
-    div.parentNode.querySelector('.second-block')?.classList.toggle('active')
+    if (secondBlock.style.cssText != ''){
+        secondBlock.style.cssText = ''
+    }else{
+        secondBlock.style.cssText = 'height:'+countBtn
+    }   
 }
 
 function openMoreMenu(span){

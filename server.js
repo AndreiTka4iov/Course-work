@@ -53,20 +53,14 @@ app.get('/', (req, res) => {
   res.render('index', {title: 'Forum || Home', page: 'Home', homePage: 'home-header'})
 })
 
-app.get('/news', (req, res) => {
-  res.render('index', {title: 'Forum || News', page: 'News' })
-})
-
-app.get('/news/item', (req, res) => {
-  res.render('index', {page: 'NewsItem' })
-})
-
-
 
 //Routers for server
 
 const forumRouter = require('./routes/forum')
 app.use('/forum', forumRouter)
+
+const newsRouter = require('./routes/news')
+app.use('/news', newsRouter)
 
 const signUpRouter = require('./routes/signUp')
 app.use('/sign-up', signUpRouter)

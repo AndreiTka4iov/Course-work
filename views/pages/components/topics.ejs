@@ -1,114 +1,31 @@
 <div class="topics-menu">
     <span>TOPICS:</span>
     <div class="toopic-block">
-        <div class="topic-btn">
-            <div class="first-block" onclick="openTopic(this)">
-                <span>
-                    <svg>
-                        <use xlink:href="/main.svg#game-svg"></use>
+        <%for(var i=0; i<locals.topics.length; i++) {%>
+            <div class="topic-btn">
+                <div class="first-block" onclick="openTopic(this)">
+                    <span>
+                        <svg>
+                            <use xlink:href="/main.svg#<%=locals.topics[i].icon%>-svg"></use>
+                        </svg>
+                        <a href="?topic=<%=locals.topics[i].id%>"><%=locals.topics[i].topic%></a>
+                    </span>
+                    <svg class="triangle">
+                        <use xlink:href="/main.svg#triangle-svg"></use>
                     </svg>
-                    <a href="?games">Games</a>
-                </span>
-                <svg class="triangle">
-                    <use xlink:href="/main.svg#triangle-svg"></use>
-                </svg>
-            </div>
-            <div class="second-block">
-                <div class="btn-click">
-                    <a href="">CS:GO</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Minecraft</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">World of Warcraft</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Farming Simulator 22</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Valheim</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">SnowRunner</a>
-                </div> <div class="btn-click">
-                    <a href="">OUTRIDERS</a>
-                </div> 
-            </div>
-        </div>
-        <div class="topic-btn">
-            <div class="first-block" onclick="openTopic(this)">
-                <span>
-                    <svg>
-                        <use xlink:href="/main.svg#sport-svg"></use>
-                    </svg>
-                    <a href="?games">Sports</a>
-                </span>
-                <svg class="triangle">
-                    <use xlink:href="/main.svg#triangle-svg"></use>
-                </svg>
-            </div>
-            <div class="second-block">
-                <div class="btn-click">
-                    <a href="">Football</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Volleyball</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Basketball</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Box</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">UFC</a>
-                </div> 
-                <div class="btn-click">
-                    <a href="">Swimming</a>
-                </div> <div class="btn-click">
-                    <a href="">Running</a>
-                </div> 
-            </div>
-        </div>
-        <div class="topic-btn">
-            <div class="first-block" onclick="openTopic(this)">
-                <span>
-                    <svg>
-                        <use xlink:href="/main.svg#Business-svg"></use>
-                    </svg>
-                    <a href="?games">Business</a>
-                </span>
-                <svg class="triangle">
-                    <use xlink:href="/main.svg#triangle-svg"></use>
-                </svg>
-            </div>
-        </div>  
-        <div class="topic-btn"> 
-            <div class="first-block" onclick="openTopic(this)">
-                <span>
-                    <svg>
-                        <use xlink:href="/main.svg#cripto-svg"></use>
-                    </svg>
-                    <a href="?games">Cripto</a>
-                </span>
-                <svg class="triangle">
-                    <use xlink:href="/main.svg#triangle-svg"></use>
-                </svg>
-            </div>
-        </div> 
-        <div class="topic-btn">
-            <div class="first-block" onclick="openTopic(this)">
-                <span>
-                    <svg>
-                        <use xlink:href="/main.svg#more-svg"></use>
-                    </svg>
-                    <a href="?games">Other</a>
-                </span>
-                <svg class="triangle">
-                    <use xlink:href="/main.svg#triangle-svg"></use>
-                </svg>
-            </div>
-        </div>
+                </div>
+                <div class="second-block">
+                    <%for(var inner=0; inner<locals.category.length; inner++) {
+                        if (locals.category[inner].topic_id == locals.topics[i].id){
+                    %>
+                        
+                        <div class="btn-click">
+                            <a href="?category=<%=locals.category[inner].id%>"><%=locals.category[inner].category%></a>
+                        </div> 
+                    <%}}%>
+                </div>
+            </div>            
+        <%}%>
+        
     </div>
 </div>

@@ -14,18 +14,18 @@
                     </svg>
                     <div class="a-page">Your questions</div>
                 </a>
-                <a href="/" class="settings-a">
+                <a href="/profile/settings" class="settings-a">
                     <svg>
                         <use xlink:href="/main.svg#settings-svg"></use>
                     </svg>
                     <div class="a-page">Your settings</div>
                 </a>
-                <% if (locals.level != 0){ %>
-                    <a href="/" class="">
+                <% if (locals.level > 0){ %>
+                    <a href="/profile/admin" class="admin-a">
                         <svg>
-                            <use xlink:href="/main.svg#report-svg"></use>
+                            <use xlink:href="/main.svg#admin-svg"></use>
                         </svg>
-                        <div class="a-page">Reports</div>
+                        <div class="a-page">Admin</div>
                     </a>
                 <% } %>
             </div>
@@ -86,7 +86,7 @@
                     <a href="/create" class="add">Add news</a>
                 </div>
                 
-            <%} else if ((locals.href == 'questions')){%>
+            <%} else if (locals.href == 'questions') {%>
                 <div class="activity-screen questions">
                     <% if (locals.userPosts.length == 0) {%>
                     <div class="clear">
@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="text-block">
-                                    <a href="/forum/item?id=<%= locals.userPosts[i].id%>"><%= locals.userPosts[i].title%></a><br>
+                                    <a href="/forum/item?id=<%= locals.userPosts[i].id%>&id_user=<%= locals.userPosts[i].id_user%>"><%= locals.userPosts[i].title%></a><br>
                                     <pre><%= locals.userPosts[i].discussion%></pre>
                                 </div> 
                                 <span class="del" id="<%= locals.userPosts[i].id%>" onclick="deleteBlock(this)">
@@ -140,6 +140,26 @@
                     <%}}%>
                     <a href="/create" class="add">Add questions</a>
                 </div>
+            <%} else if (locals.href == 'settings') {%>
+                <div class="activity-screen settings"></div>
+            <%} else if (locals.href == 'admin') {%>
+                <div class="activity-screen admin">
+                    <div class="nav-bar">
+                        <span>Navigation:</span>
+                        <div class="btn topic">
+                            <svg class="stroke">
+                                <use xlink:href="/main.svg#topic-svg"></use>
+                            </svg>
+                            Topics
+                        </div>
+                        <div class="btn category">
+                            <svg>
+                                <use xlink:href="/main.svg#category-svg"></use>
+                            </svg>
+                            Category
+                        </div>
+                    </div>
+                </div>
             <%}%>
         </div>
     </div>
@@ -149,5 +169,9 @@
         document.querySelector('.news-a').classList.add('active')
     } else if (document.querySelector('.questions')){
         document.querySelector('.forum-a').classList.add('active')
+    } else if (document.querySelector('.settings')){
+        document.querySelector('.settings-a').classList.add('active')
+    } else if (document.querySelector('.admin')){
+        document.querySelector('.admin-a').classList.add('active')
     }
 </script>

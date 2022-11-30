@@ -84,6 +84,11 @@ textarea{
 pre{
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;  
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
@@ -1119,6 +1124,7 @@ footer {
                     } 
                 }
             }
+
             .second-block{
                 height: 0;
                 overflow: hidden;
@@ -1128,10 +1134,6 @@ footer {
 
                 .btn-click{
                     height: 32px;
-                }
-
-                &.active{
-                    height: 224px; 
                 }
             }
         }
@@ -1472,12 +1474,11 @@ footer {
         .question-element{
             width: 100%;
             display: flex;
-            align-items: center;
 
             .question{
-                width: calc(100% - 100px);
+                width: calc(100% - 50px);
                 min-height: 158px;
-                margin-left: 62px;
+                padding: 0 12px;
         
                 .info-block{
                     display: flex;
@@ -1527,6 +1528,10 @@ footer {
                         }
                     }    
                 }
+
+                h3{
+                    font-size: 22px;
+                }
         
                 .topic-block{
                     width: 100%;
@@ -1555,11 +1560,13 @@ footer {
             .rating-block{
                 width: 50px;
                 height: 158px;
+                margin-top: 12px;
     
                 a{
                     width: 50px;
                     height: 50px;
                     display: inline-block;
+                    
                     svg{
                         width: 50px;
                         height: 50px;
@@ -2716,6 +2723,50 @@ footer {
                 }
             }
         }
+
+        .admin{
+            flex-direction: row !important;
+
+            .nav-bar{
+                width: 150px;
+                text-align: left;
+
+                span{
+                    display: inline-block;
+                    color: $color-text-hover;
+                    margin: 6px 10px;
+                }
+
+                .btn{
+                    display: flex;
+                    width: 100%;
+                    height: 30px;
+                    padding: 0 10px;
+                    font-size: 18px;
+                    line-height: 30px;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    transition: .2s;
+
+                    svg{
+                        fill: $color-text;
+                        width: 18px;
+                        height: 18px;
+                        margin: 6px 2px;
+                        margin-right: 12px;
+                    }
+
+                    .stroke{
+                        fill: none;
+                        stroke: $color-text;
+                    }
+
+                    &:hover{
+                        background-color: $btn-hover;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -2879,7 +2930,7 @@ footer {
             background: none;
             margin: 12px 0;
             padding: 6px;
-            color: $color-text-hover;
+            color: $color-text;
             border-radius: 10px;
             
             option{
@@ -2896,6 +2947,87 @@ footer {
         
         &.active{
             display: block;
+        }        
+
+        .input-file-news{
+            width: 100%;
+            height: 100px;
+            border: 2px dashed $color-text-hover;
+            line-height: 100px;
+            font-size: 22px;
+            font-weight: bold;
+            color: $color-text-hover;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+
+            &.done{
+                color: $a-color;
+                border-color: $a-color;
+            }
+
+            &.cancle{
+                color: $color-red;
+                border-color: $color-red;
+            }
+        }
+
+        h3{
+            text-align: left;
+            margin: 12px 0;
+        }
+
+        input{
+            width: 100%;
+            height: 50px;
+            border: 1px solid $color-text-hover;
+            border-radius: 10px;
+            padding: 0 6px;
+        }
+
+        textarea{
+            width: 100%;
+            min-height: 50px;
+            padding: 12px 6px;
+            margin: 12px 0;
+            border-color: $color-text-hover;
+            border-radius: 10px;
+        }
+
+        select{
+            width: 100%;
+            height: 50px;
+            background: none;
+            margin: 12px 0;
+            padding: 6px;
+            color: $color-text;
+            border-radius: 10px;
+            
+            option{
+                color: black;
+            }
+        }
+
+        .file{
+            display: none;
+        }
+
+        button{
+            width: 100%;
+            height: 50px;
+            border-top: 1px solid $color-text-hover;
+            color: $a-color;
+            font-size: 20px;
+            font-weight: bold;
+            transition: color .2s;
+
+            &:hover{
+                color: $a-color-hover;
+            }
         }
     }
 
@@ -2933,7 +3065,7 @@ footer {
             background: none;
             margin: 12px 0;
             padding: 6px;
-            color: $color-text-hover;
+            color: $color-text;
             border-radius: 10px;
             
             option{

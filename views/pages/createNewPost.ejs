@@ -12,8 +12,33 @@
                 <option value="discussion">Create a discussion</option>
             </select>
         </div>
-        <form action="" method="POST" class="news-form">
-
+        <form action="/create/news" method="POST" class="news-form active" enctype="multipart/form-data">
+            <input type="file" accept="image/*" name="fileUploaded" class="file" required onchange="uploadDone(this)">
+            <div class="input-file-news" onclick="uploadImg(this)">
+               Upload a photo
+            </div>
+            <h3>Write an event:</h3>
+            <input type="text" name="event"  maxlength="22" required placeholder="Event...">
+            <h3>Create a discussion title:</h3>
+            <input type="text" name="title" required placeholder="News headline...">
+            <h3>Describe the essence of the news:</h3>
+            <textarea name="news" id="" cols="30" rows="1" placeholder="Enter a news..." required></textarea>
+            <div class="topics">
+                <h3>Choose the topic of news:</h3>
+                <select name="category" id="" class="category" required onchange="selectCategory(this)">
+                    <option value="" selected disabled>Category...</option>
+                    <% for(var i=0; i<locals.topic.length; i++) {%>
+                        <option value="<%= locals.topic[i].id%>"><%= locals.topic[i].topic%></option>
+                    <% } %>
+                </select>
+                <select name="subcategory" id="" class="subcategory" disabled required>
+                    <option value="" class="selected" selected disabled>Subcategory...</option>
+                    <% for(var i=0; i<locals.category.length; i++) {%>
+                        <option value="<%= locals.category[i].id%>" class="option <%= locals.category[i].topic_id%>" style="display: none;" disabled><%= locals.category[i].category%></option>
+                    <% } %>
+                </select>
+            </div>
+            <button>Create</button>
         </form>
         <form action="/create/discussion" method="POST" class="discussion-form">
             <h3>Create a discussion title:</h3>
@@ -75,5 +100,24 @@
             elements[i].style = '';
             elements[i].disabled = false;
         }
+    }
+</script>
+
+<script>
+    function uploadImg(div) {
+        div.closest('.news-form').querySelector('.file').click()
+    }
+
+    function uploadDone(inp) {
+        if (inp.files[0].type.indexOf('image/') == 0){
+            document.querySelector('.input-file-news').classList.remove('cancle')
+            document.querySelector('.input-file-news').classList.add('done')
+            document.querySelector('.input-file-news').textContent = 'Done'
+        } else{
+            document.querySelector('.input-file-news').classList.remove('done')
+            document.querySelector('.input-file-news').classList.add('cancle')
+            document.querySelector('.input-file-news').textContent = 'Upload a photo'
+        }
+        
     }
 </script>

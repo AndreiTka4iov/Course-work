@@ -73,6 +73,11 @@ textarea {
 pre {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
@@ -947,9 +952,6 @@ footer h3 {
 .topics-menu .toopic-block .topic-btn .second-block .btn-click {
   height: 32px;
 }
-.topics-menu .toopic-block .topic-btn .second-block.active {
-  height: 224px;
-}
 
 .page-news-item {
   width: 50%;
@@ -1227,12 +1229,11 @@ footer h3 {
 .page-forum-item .body-question-block .question-element {
   width: 100%;
   display: flex;
-  align-items: center;
 }
 .page-forum-item .body-question-block .question-element .question {
-  width: calc(100% - 100px);
+  width: calc(100% - 50px);
   min-height: 158px;
-  margin-left: 62px;
+  padding: 0 12px;
 }
 .page-forum-item .body-question-block .question-element .question .info-block {
   display: flex;
@@ -1275,6 +1276,9 @@ footer h3 {
 .page-forum-item .body-question-block .question-element .question .info-block .info span {
   color: rgba(217, 217, 217, 0.6);
 }
+.page-forum-item .body-question-block .question-element .question h3 {
+  font-size: 22px;
+}
 .page-forum-item .body-question-block .question-element .question .topic-block {
   width: 100%;
   height: 50px;
@@ -1296,6 +1300,7 @@ footer h3 {
 .page-forum-item .body-question-block .question-element .rating-block {
   width: 50px;
   height: 158px;
+  margin-top: 12px;
 }
 .page-forum-item .body-question-block .question-element .rating-block a {
   width: 50px;
@@ -2242,6 +2247,43 @@ footer h3 {
 .page-user .user-info .user-activity .activity-screen .add:hover {
   color: rgba(0, 116, 204, 0.7);
 }
+.page-user .user-info .admin {
+  flex-direction: row !important;
+}
+.page-user .user-info .admin .nav-bar {
+  width: 150px;
+  text-align: left;
+}
+.page-user .user-info .admin .nav-bar span {
+  display: inline-block;
+  color: rgba(217, 217, 217, 0.6);
+  margin: 6px 10px;
+}
+.page-user .user-info .admin .nav-bar .btn {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 18px;
+  line-height: 30px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.page-user .user-info .admin .nav-bar .btn svg {
+  fill: #ccc;
+  width: 18px;
+  height: 18px;
+  margin: 6px 2px;
+  margin-right: 12px;
+}
+.page-user .user-info .admin .nav-bar .btn .stroke {
+  fill: none;
+  stroke: #ccc;
+}
+.page-user .user-info .admin .nav-bar .btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
 .confirmation-del {
   position: absolute;
@@ -2374,7 +2416,7 @@ footer h3 {
   background: none;
   margin: 12px 0;
   padding: 6px;
-  color: rgba(217, 217, 217, 0.6);
+  color: #ccc;
   border-radius: 10px;
 }
 .create-menu .select_create select option {
@@ -2387,6 +2429,75 @@ footer h3 {
 }
 .create-menu .news-form.active {
   display: block;
+}
+.create-menu .news-form .input-file-news {
+  width: 100%;
+  height: 100px;
+  border: 2px dashed rgba(217, 217, 217, 0.6);
+  line-height: 100px;
+  font-size: 22px;
+  font-weight: bold;
+  color: rgba(217, 217, 217, 0.6);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.create-menu .news-form .input-file-news.done {
+  color: rgb(0, 116, 204);
+  border-color: rgb(0, 116, 204);
+}
+.create-menu .news-form .input-file-news.cancle {
+  color: rgba(201, 24, 24, 0.6);
+  border-color: rgba(201, 24, 24, 0.6);
+}
+.create-menu .news-form h3 {
+  text-align: left;
+  margin: 12px 0;
+}
+.create-menu .news-form input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+  padding: 0 6px;
+}
+.create-menu .news-form textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 6px;
+  margin: 12px 0;
+  border-color: rgba(217, 217, 217, 0.6);
+  border-radius: 10px;
+}
+.create-menu .news-form select {
+  width: 100%;
+  height: 50px;
+  background: none;
+  margin: 12px 0;
+  padding: 6px;
+  color: #ccc;
+  border-radius: 10px;
+}
+.create-menu .news-form select option {
+  color: black;
+}
+.create-menu .news-form .file {
+  display: none;
+}
+.create-menu .news-form button {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  color: rgb(0, 116, 204);
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.create-menu .news-form button:hover {
+  color: rgba(0, 116, 204, 0.7);
 }
 .create-menu .discussion-form {
   display: none;
@@ -2419,7 +2530,7 @@ footer h3 {
   background: none;
   margin: 12px 0;
   padding: 6px;
-  color: rgba(217, 217, 217, 0.6);
+  color: #ccc;
   border-radius: 10px;
 }
 .create-menu .discussion-form select option {

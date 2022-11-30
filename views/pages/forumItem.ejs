@@ -19,9 +19,24 @@
             </div>
         </div>
         <div class="question-element">
+            <div class="rating-block">
+                <a href="?rating=+1">
+                    <svg>
+                        <use xlink:href="/main.svg#arrow-svg"></use>
+                    </svg>
+                </a>
+                <div class="rating-text">
+                    <%= locals.reqForum[i].rating%>
+                </div>
+                <a href="">
+                    <svg class="down-arrow">
+                        <use xlink:href="/main.svg#arrow-svg"></use>
+                    </svg>
+                </a>
+            </div>
             <div class="question">
                 <h3><%= locals.reqForum[i].title%></h3><br>
-                <span><%= locals.reqForum[i].discussion%></span>
+                <pre><%= locals.reqForum[i].discussion%></pre>
                 <div class="info-block">
                     <div class="info">
                         <svg>
@@ -56,21 +71,6 @@
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="rating-block">
-                <a href="">
-                    <svg>
-                        <use xlink:href="/main.svg#arrow-svg"></use>
-                    </svg>
-                </a>
-                <div class="rating-text">
-                    <%= locals.reqForum[i].rating%>
-                </div>
-                <a href="">
-                    <svg class="down-arrow">
-                        <use xlink:href="/main.svg#arrow-svg"></use>
-                    </svg>
-                </a>
             </div>
         </div>
     </div>

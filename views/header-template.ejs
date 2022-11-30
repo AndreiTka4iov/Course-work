@@ -45,7 +45,7 @@
                 </button>
             </div> 
             <div class="btn-profile">
-                <% if (locals.token != 0){ %>
+                <% if (locals.token != 0){%>
                     <a href="/create" class="create-new">
                         <svg>
                             <use xlink:href="/main.svg#add-svg"></use>
@@ -79,6 +79,16 @@
                                 <span>Settings</span>
                             </div>
                         </a>
+                        <% if (locals.level > 0){%>
+                            <a href="/profile/admin">
+                                <div class="flex-btn-drop">
+                                    <svg>
+                                        <use xlink:href="/main.svg#admin-svg"></use>
+                                    </svg>
+                                    <span>Admin</span>
+                                </div>
+                            </a>
+                        <% } %>    
                         <a href="">
                             <div class="flex-btn-drop out">
                                 <svg>
