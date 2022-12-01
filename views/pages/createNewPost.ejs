@@ -1,5 +1,5 @@
 <div class="create-menu">
-    <a href="/profile">
+    <a href="/profile/news">
         <img src="/images/user.svg" alt="">
     </a>
     <h2><%=locals.login%></h2>
@@ -12,7 +12,7 @@
                 <option value="discussion">Create a discussion</option>
             </select>
         </div>
-        <form action="/create/news" method="POST" class="news-form active" enctype="multipart/form-data">
+        <form action="/create/news" method="POST" class="news-form" enctype="multipart/form-data">
             <input type="file" accept="image/*" name="imgUpload" class="file" required onchange="uploadDone(this)">
             <div class="input-file-news" onclick="uploadImg(this)">
                Upload a photo
@@ -64,10 +64,6 @@
         </form>
     </div>
 </div>
-
-<% for(var i=0; i<locals.topic.length; i++) {%>
-            
-<% } %>
 
 <script>
     function select(selectOpt){

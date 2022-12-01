@@ -722,9 +722,9 @@ footer h3 {
 .news-page .news-item .text-block a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
-.news-page .news-item .text-block div {
+.news-page .news-item .text-block pre {
   display: -webkit-box;
-  -webkit-line-clamp: 10;
+  -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2084,9 +2084,9 @@ footer h3 {
 .page-user .user-info .user-activity .activity-screen .news-item .text-block a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
-.page-user .user-info .user-activity .activity-screen .news-item .text-block div {
+.page-user .user-info .user-activity .activity-screen .news-item .text-block pre {
   display: -webkit-box;
-  -webkit-line-clamp: 10;
+  -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

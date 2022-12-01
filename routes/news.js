@@ -1,7 +1,5 @@
 const express = require('express'),
     router = express.Router(),
-    url = require('url'),
-    cookieParser = require('cookie-parser'),
     sqlite3 = require('sqlite3').verbose(),
     db = new sqlite3.Database('./database/main.db')
 
@@ -15,12 +13,15 @@ async function db_all(query){
 }
 
 router.get('/', async (req, res) => {
-    const sqlReq2 = "SELECT * FROM category",
+    const 
+        sqlReq = "SELECT * FROM news",
+        sqlReq2 = "SELECT * FROM category",
         sqlReq3 = "SELECT * FROM topics",
-        queryDb = await db_all(sqlReq2),
-        queryDb2 = await db_all(sqlReq3)
+        queryDb = await db_all(sqlReq),
+        queryDb2 = await db_all(sqlReq2),
+        queryDb3 = await db_all(sqlReq3)
 
-    res.render('index', {title: 'Forum || News', page: 'News', category: queryDb, topics: queryDb2})
+    res.render('index', {title: 'Forum || News', page: 'News', category: queryDb2, topics: queryDb3, news: queryDb})
 })
   
 router.get('/item', (req, res) => {

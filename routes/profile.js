@@ -13,12 +13,16 @@ async function db_all(query){
   });
 }
 
-router.get('/news', (req, res) => {
+router.get('/news', async (req, res) => {
+  const sqlReq = "SELECT * FROM news WHERE id_user = '" + req.signedCookies.id_user + "'"
+  const sqlReq2 = "SELECT * FROM category"
+  const queryDb = await db_all(sqlReq)
+  const queryDb2 = await db_all(sqlReq2)
   if(typeof req.signedCookies.level_user !== 'undefined' &&
   typeof req.signedCookies.login_user !== 'undefined' &&
   typeof req.signedCookies.id_user !== 'undefined' &&
   typeof req.signedCookies.token_user !== 'undefined'){
-    res.render('index', { title: 'News' , page: 'Profile' , href: 'news'})
+    res.render('index', { title: 'News' , page: 'Profile' , href: 'news', userPosts: queryDb, category: queryDb2})
   } else{
     res.redirect('/sign-in')
   }

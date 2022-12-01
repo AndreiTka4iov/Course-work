@@ -58,23 +58,24 @@ router.post('/news', async (req, res) => {
     var yyyy = today.getFullYear();
     today = dd + '.' + mm + '.' + yyyy;
 
-    const {img, event, title, news, category, subcategory} = req.body,
-        sqlReq = "INSERT INTO `news` (`event`, `title`, `news`, `category`, `subcategory`, `id_user`, `date`) VALUES ('"+ event +"', '" + title + "','" + news + "','" + category + "','" + subcategory + "','" + req.signedCookies.id_user + "','" + today + "')",
-        sqlReq2 = "SELECT * FROM news WHERE id_user='" + req.signedCookies.id_user + "' AND img IS NULL",
-        sqlReq3 = "UPDATE news SET img = '"+ req.files.imgUpload.name +" WHERE id_user = '" + req.signedCookies.id_user + "' AND img IS NULL",
-        queryDb2 = await db_all(sqlReq2)     
+    const {img, event, title, news, category, subcategory} = req.body
 
-        await db_all(sqlReq)
+    const sqlReq = "INSERT INTO news (`event`, `title`, `news`, `category`, `subcategory`, `id_user`, `date`) VALUES ('"+ event +"', '" + title + "', '" + news + "', '" + category + "', '" + subcategory + "', '" + req.signedCookies.id_user + "', '" + today + "')";
+    await db_all(sqlReq)
+
+    const sqlReq2 = "SELECT * FROM news WHERE id_user='" + req.signedCookies.id_user + "' AND img IS NULL"
+    const queryDb2 = await db_all(sqlReq2)
+
+    const splitStr = req.files.imgUpload.name.split('.')
+    req.files.imgUpload.name = queryDb2[0].id + '.' + splitStr[1]
+
+    const sqlReq3 = "UPDATE news SET img = '"+ queryDb2[0].id + '.' + splitStr[1] +"' WHERE id_user = '" + req.signedCookies.id_user + "' AND img IS NULL"
+    await db_all(sqlReq3)
         
-        let test = queryDb2[0].id + "dasdasd"
-        console.log(test)
-        const splitStr = req.files.imgUpload.name.split('.')
-        req.files.imgUpload.name = queryDb2[0].id + '.' + splitStr[1]
-        
-       await db_all(sqlReq3)
-       req.files.imgUpload.mv('./public/images/news/' + req.files.imgUpload.name, function (err) {
-          if (err) { console.log(err)}
-       })
+    req.files.imgUpload.mv('./public/images/news/' + req.files.imgUpload.name, function (err) {
+        if (err) { console.log(err)}
+    })
+
    return res.redirect('/profile/news')
 })
   
