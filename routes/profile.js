@@ -14,7 +14,7 @@ async function db_all(query){
 }
 
 router.get('/news', async (req, res) => {
-  const sqlReq = "SELECT * FROM news WHERE id_user = '" + req.signedCookies.id_user + "'"
+  const sqlReq = "SELECT * FROM news WHERE id_user = '" + req.signedCookies.id_user + "' ORDER BY id DESC"
   const sqlReq2 = "SELECT * FROM category"
   const queryDb = await db_all(sqlReq)
   const queryDb2 = await db_all(sqlReq2)
@@ -29,7 +29,7 @@ router.get('/news', async (req, res) => {
 })
 
 router.get('/questions', async (req, res) => {
-  const sqlReq = "SELECT * FROM forum WHERE id_user = '" + req.signedCookies.id_user + "'",
+  const sqlReq = "SELECT * FROM forum WHERE id_user = '" + req.signedCookies.id_user + "' ORDER BY id DESC",
     sqlReq2 = "SELECT * FROM category",
     queryDb = await db_all(sqlReq),
     queryDb2 = await db_all(sqlReq2)

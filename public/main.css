@@ -102,6 +102,7 @@ html {
 }
 
 body {
+  position: relative;
   width: 100%;
   background: #0d1117;
   text-align: center;
@@ -150,10 +151,12 @@ button {
 }
 
 header {
+  position: relative;
   width: 100%;
   height: 60px;
   background: #161b22;
   padding: 16px;
+  z-index: 1000;
 }
 header svg {
   width: 32px;
@@ -180,6 +183,23 @@ header .flex-main-header .flex-btn-header a .logo-svg {
   transition: fill 0.2s;
 }
 header .flex-main-header .flex-btn-header a:hover .logo-svg {
+  fill: rgba(217, 217, 217, 0.6);
+}
+header .flex-main-header .menu-btn {
+  pointer-events: none;
+  display: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+header .flex-main-header .menu-btn svg {
+  width: 32px;
+  height: 32px;
+  fill: #ccc;
+  margin: 0;
+  transition: fill 0.2s;
+}
+header .flex-main-header .menu-btn:hover svg {
   fill: rgba(217, 217, 217, 0.6);
 }
 header .flex-main-header .search {
@@ -341,6 +361,31 @@ header.home-header .search {
   display: none;
 }
 
+@media screen and (max-width: 960px) {
+  header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+  header .flex-main-header .flex-btn-header {
+    display: none;
+  }
+  header .flex-main-header .menu-btn {
+    pointer-events: all;
+    display: inline-block;
+  }
+  header .flex-main-header .search {
+    width: calc(100% - 120px);
+    margin: 0 20px;
+  }
+  header.home-header {
+    position: relative;
+    background: #161b22;
+  }
+  header.home-header .search {
+    display: flex;
+  }
+}
 footer {
   width: 100%;
   background: #161b22;
@@ -412,6 +457,46 @@ footer h3 {
   text-align: left;
 }
 
+@media screen and (max-width: 960px) {
+  footer {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+  }
+  footer .btn-footer {
+    width: 100%;
+    margin: 0;
+  }
+  footer .btn-footer a {
+    display: inline-block;
+  }
+  footer .btn-footer a div {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+  }
+  footer .btn-footer a div svg {
+    width: 24px;
+    height: 24px;
+  }
+  footer .btn-footer a div span {
+    font-weight: inherit;
+    text-transform: capitalize;
+    font-size: 18px;
+  }
+  footer .btn-footer .white-space {
+    display: none;
+  }
+  footer .hr-git {
+    display: none;
+  }
+  footer h3 {
+    display: none;
+  }
+}
 .blure {
   opacity: 0;
   pointer-events: none;
@@ -453,6 +538,11 @@ footer h3 {
   min-height: calc(100vh - 336px);
 }
 
+@media screen and (max-width: 960px) {
+  .wrap {
+    min-height: calc(100vh - 120px);
+  }
+}
 .display-error {
   position: absolute;
   top: -60px;
@@ -503,13 +593,14 @@ footer h3 {
   width: 100%;
   height: calc(100vh - 275px);
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
 }
 .display-home img {
   height: 100vh;
   min-width: 100%;
   bottom: 0;
   z-index: 1;
+  max-width: inherit;
 }
 .display-home .logo-svg {
   position: absolute;
@@ -539,6 +630,7 @@ footer h3 {
   text-align: left;
 }
 .display-home .home-screen .home-page-line .input-home-screen {
+  position: relative;
   display: flex;
   width: 100%;
   background-color: rgba(217, 217, 217, 0.6);
@@ -585,6 +677,38 @@ footer h3 {
 .display-home .home-screen .home-page-line .input-home-screen button:hover svg {
   fill: white;
 }
+.display-home .home-screen .home-page-line .input-home-screen .result-search-home {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(217, 217, 217, 0.6);
+  border-radius: 5px;
+  border: 1px solid grey;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.display-home .home-screen .home-page-line .input-home-screen .result-search-home::-webkit-scrollbar {
+  width: 0;
+}
+.display-home .home-screen .home-page-line .input-home-screen .result-search-home.show {
+  display: block;
+  pointer-events: all;
+}
+.display-home .home-screen .home-page-line .input-home-screen .result-search-home a {
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+  color: white;
+  transition: 0.2s;
+}
+.display-home .home-screen .home-page-line .input-home-screen .result-search-home a:hover {
+  background-color: rgba(0, 116, 204, 0.7);
+}
 .display-home .home-screen .home-page-line h1 {
   margin-bottom: 12px;
   color: white;
@@ -594,7 +718,7 @@ footer h3 {
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 50%;
+  width: 100%;
   height: 50px;
 }
 .display-home .home-screen .home-page-line .home-page-sign hr {
@@ -613,6 +737,75 @@ footer h3 {
   color: rgba(217, 217, 217, 0.6);
 }
 
+@media screen and (max-width: 960px) {
+  .display-home {
+    position: relative;
+    top: 0;
+    width: auto;
+    height: calc(100vh - 120px);
+  }
+  .display-home img {
+    height: calc(100vh - 120px);
+    width: auto;
+    max-width: inherit;
+  }
+  .display-home .home-screen .home-page-line {
+    width: 90%;
+    text-align: left;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen {
+    display: flex;
+    width: 100%;
+    background-color: rgba(217, 217, 217, 0.6);
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 12px;
+    margin: 0 auto;
+    height: 60px;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen input {
+    width: calc(100% - 136px);
+    height: 36px;
+    color: white;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen input::-moz-placeholder {
+    color: lightgrey;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen input:-ms-input-placeholder {
+    color: lightgrey;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen input::placeholder {
+    color: lightgrey;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen select {
+    width: 100px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    position: relative;
+    outline: none;
+    padding: 5px;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen button {
+    width: 36px;
+    height: 36px;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen button svg {
+    fill: #ccc;
+    width: 36px;
+    height: 36px;
+    transition: fill 0.2s;
+  }
+  .display-home .home-screen .home-page-line .input-home-screen button:hover svg {
+    fill: white;
+  }
+  .display-home .home-screen .home-page-line h1 {
+    margin-bottom: 12px;
+    color: white;
+    text-transform: uppercase;
+  }
+}
 .news-page {
   width: calc(100% - 340px);
   min-height: calc(100vh - 376px);
@@ -718,13 +911,19 @@ footer h3 {
   font-size: 24px;
   font-weight: bold;
   color: rgb(0, 116, 204);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .news-page .news-item .text-block a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
 .news-page .news-item .text-block pre {
   display: -webkit-box;
-  -webkit-line-clamp: 9;
+  -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -775,7 +974,136 @@ footer h3 {
 .news-page .news-item .info-block .more:hover {
   background: rgba(0, 116, 204, 0.7);
 }
+.news-page .clear {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+.news-page .clear svg {
+  width: 150px;
+  height: 150px;
+  margin: 0 25px;
+  fill: #ccc;
+}
+.news-page .clear span {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 12px 0;
+}
 
+@media screen and (max-width: 960px) {
+  .news-page {
+    width: calc(100% - 40px);
+    min-height: calc(100vh - 160px);
+    margin: 20px;
+  }
+  .news-page .filter-menu span {
+    font-size: 12px;
+  }
+  .news-page .filter-menu a {
+    margin: 6px;
+    font-size: 14px;
+  }
+  .news-page .news-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 25px);
+    height: 300px;
+    margin: 12px;
+    padding: 25px;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.6);
+    transition: 0.2s;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 830px) {
+  .news-page {
+    width: 100%;
+    margin: 20px 0;
+  }
+  .news-page .news-item {
+    flex-wrap: wrap;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 12px;
+  }
+  .news-page .news-item .img-block {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  .news-page .news-item .img-block img {
+    width: 100%;
+    height: 250px;
+    transition: 0.2s;
+  }
+  .news-page .news-item .text-block {
+    width: calc(100% - 12px);
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 6px;
+  }
+  .news-page .news-item .text-block pre {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .news-page .news-item .info-block {
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: calc(100% - 12px);
+    margin: 0 6px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .news-page .news-item .info-block .date {
+    position: relative;
+    display: inline-block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    line-height: 25px;
+  }
+  .news-page .news-item .info-block .info {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .news-page .news-item .info-block .info span {
+    margin-left: 12px;
+  }
+  .news-page .news-item .info-block .more {
+    display: none;
+  }
+  .news-page .clear {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+  }
+  .news-page .clear svg {
+    width: 150px;
+    height: 150px;
+    margin: 0 25px;
+    fill: #ccc;
+  }
+  .news-page .clear span {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 12px 0;
+  }
+}
 .forum-page {
   width: calc(100% - 340px);
   min-height: calc(100vh - 376px);
@@ -884,7 +1212,80 @@ footer h3 {
 .forum-page .block-discussion .topic-block a:hover .topic {
   background: rgba(0, 116, 204, 0.7);
 }
+.forum-page .clear {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+.forum-page .clear svg {
+  width: 150px;
+  height: 150px;
+  margin: 0 25px;
+  fill: #ccc;
+}
+.forum-page .clear span {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 12px 0;
+}
 
+@media screen and (max-width: 960px) {
+  .forum-page {
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    margin: 20px 0;
+  }
+  .forum-page .filter-menu {
+    width: calc(100% - 12px);
+    margin: 6px;
+  }
+  .forum-page .filter-menu span {
+    font-size: 12px;
+  }
+  .forum-page .filter-menu a {
+    margin: 6px;
+    font-size: 14px;
+  }
+  .forum-page .block-discussion {
+    width: calc(100% - 12px);
+    margin: 6px;
+    padding: 0;
+  }
+  .forum-page .block-discussion .upper-block {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .forum-page .block-discussion .upper-block .info-block {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: auto;
+  }
+  .forum-page .block-discussion .upper-block .info-block .info {
+    justify-content: space-around;
+  }
+  .forum-page .block-discussion .upper-block .text-block {
+    width: 100%;
+    min-height: 75px;
+    text-align: left;
+    margin: 0;
+  }
+  .forum-page .block-discussion .upper-block .text-block pre {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .forum-page .block-discussion .upper-block .date {
+    width: 100%;
+    text-align: right;
+    margin: 6px;
+  }
+  .forum-page .block-discussion .topic-block a {
+    margin: 6px 0;
+  }
+}
 .topics-menu {
   position: -webkit-sticky;
   position: sticky;
@@ -953,9 +1354,30 @@ footer h3 {
   height: 32px;
 }
 
+@media screen and (max-width: 960px) {
+  .topics-menu {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    bottom: -60px;
+    width: 300px;
+    height: auto;
+    padding: 12px;
+    margin: 0;
+    margin-left: -300px;
+    border-radius: 0;
+    z-index: 1000;
+    transition: 0.2s;
+  }
+  .topics-menu.active {
+    margin-left: 0px;
+  }
+}
 .page-news-item {
   width: 50%;
   min-height: calc(100vh - 360px);
+  display: flex;
+  flex-direction: column;
   margin: 12px auto 12px auto;
   padding: 12px;
   border-radius: 5px;
@@ -1091,83 +1513,242 @@ footer h3 {
   text-align: left;
 }
 .page-news-item .comment-block {
+  position: relative;
   width: 100%;
-  margin: 12px 0 12px 0;
-  text-align: left;
+  margin-top: auto;
 }
-.page-news-item .comment-block hr {
-  border-color: rgba(217, 217, 217, 0.6);
-}
-.page-news-item .comment-block .write-comment {
+.page-news-item .comment-block .comments-user {
   width: 100%;
+}
+.page-news-item .comment-block .comments-user .clear {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+.page-news-item .comment-block .comments-user .clear svg {
+  width: 150px;
+  height: 150px;
+  margin: 0 25px;
+  fill: #ccc;
+}
+.page-news-item .comment-block .comments-user .clear span {
+  font-size: 22px;
+  font-weight: bold;
+}
+.page-news-item .comment-block .comments-user .answer-user {
+  position: relative;
+  margin: 12px 0;
+  width: 100%;
+}
+.page-news-item .comment-block .comments-user .answer-user .user {
+  width: 100%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
 }
-.page-news-item .comment-block .write-comment textarea {
-  width: calc(100% - 62px);
-  min-height: 50px;
-  padding: 12px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: 0;
+.page-news-item .comment-block .comments-user .answer-user .user span {
+  color: rgba(217, 217, 217, 0.6);
 }
-.page-news-item .comment-block .write-comment textarea::-webkit-scrollbar {
-  width: 0;
+.page-news-item .comment-block .comments-user .answer-user .user span svg {
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  fill: #ccc;
+  transform: rotate(90deg);
+  cursor: pointer;
+  transition: fill 0.2s;
 }
-.page-news-item .comment-block .write-comment button {
+.page-news-item .comment-block .comments-user .answer-user .user span svg:hover {
+  fill: rgba(217, 217, 217, 0.6);
+}
+.page-news-item .comment-block .comments-user .answer-user .user span.active svg {
+  fill: rgb(0, 116, 204);
+}
+.page-news-item .comment-block .comments-user .answer-user .user span.active svg:hover {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-news-item .comment-block .comments-user .answer-user .user .user-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50px;
+  display: flex;
+}
+.page-news-item .comment-block .comments-user .answer-user .user .user-link img {
   width: 50px;
   height: 50px;
-  padding: 10px;
-  margin: 12px 0;
 }
-.page-news-item .comment-block .write-comment button svg {
-  width: 30px;
-  height: 30px;
+.page-news-item .comment-block .comments-user .answer-user .user .user-link .user-date {
+  margin-left: 12px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.page-news-item .comment-block .comments-user .answer-user .user .user-link .user-date span {
+  color: rgba(217, 217, 217, 0.6);
+}
+.page-news-item .comment-block .comments-user .answer-user .user .user-link .user-date a {
+  font-weight: bold;
+  color: rgb(0, 116, 204);
+  transition: color 0.2s;
+}
+.page-news-item .comment-block .comments-user .answer-user .user .user-link .user-date a:hover {
+  color: rgba(0, 116, 204, 0.7);
+}
+.page-news-item .comment-block .comments-user .answer-user .answer {
+  margin-left: 62px;
+  width: calc(100% - 62px);
+  text-align: left;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer pre {
+  margin: 0;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions {
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions .one-reactions {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin-right: 12px;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions .one-reactions span {
+  margin-left: 6px;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions .one-reactions .svg {
+  margin: 0;
+  cursor: pointer;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions .one-reactions .svg svg {
+  width: 24px;
+  height: 24px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.page-news-item .comment-block .comments-user .answer-user .answer .reactions .one-reactions .svg:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu {
+  position: absolute;
+  z-index: 11;
+  opacity: 0;
+  pointer-events: none;
+  top: 50px;
+  right: 0;
+  width: 150px;
+  background: #161b22;
+  box-shadow: 0 0 10px #0d1117;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu .btn {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu .btn svg {
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  fill: #ccc;
+  transition: fill 0.2s;
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu .btn span {
+  font-size: 18px;
+  transition: color 0.2s;
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu .btn:hover svg {
+  fill: rgba(0, 116, 204, 0.7);
+}
+.page-news-item .comment-block .comments-user .answer-user .more-menu .btn:hover span {
+  color: rgba(0, 116, 204, 0.7);
+}
+.page-news-item .comment-block .send-comment {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 4px;
+  margin-top: auto;
+  background-color: #161b22;
+}
+.page-news-item .comment-block .send-comment form {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.page-news-item .comment-block .send-comment form textarea {
+  width: calc(100% - 50px);
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+}
+.page-news-item .comment-block .send-comment form button {
+  width: 50px;
+  height: 50px;
+  padding: 9px;
+}
+.page-news-item .comment-block .send-comment form button svg {
+  width: 32px;
+  height: 32px;
   fill: rgb(0, 116, 204);
   transition: fill 0.2s;
 }
-.page-news-item .comment-block .write-comment button:hover svg {
+.page-news-item .comment-block .send-comment form button:hover svg {
   fill: rgba(0, 116, 204, 0.7);
 }
-.page-news-item .comment-block .all-comments {
-  width: 100%;
-  margin-top: 20px;
-}
-.page-news-item .comment-block .all-comments .user-comment {
-  width: 100%;
-  min-height: 100px;
-  margin: 12px 0;
-}
-.page-news-item .comment-block .all-comments .user-comment .user {
-  width: 100%;
-  height: 50px;
-  display: flex;
-}
-.page-news-item .comment-block .all-comments .user-comment .user img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.page-news-item .comment-block .all-comments .user-comment .user a {
-  color: rgb(0, 116, 204);
-  margin-left: 12px;
-  font-weight: bold;
-}
-.page-news-item .comment-block .all-comments .user-comment .user a:hover {
-  color: rgba(0, 116, 204, 0.7);
-}
-.page-news-item .comment-block .all-comments .user-comment .user span {
-  margin-left: auto;
-  color: rgba(217, 217, 217, 0.6);
-}
-.page-news-item .comment-block .all-comments .user-comment .comment {
-  width: calc(100% - 50px);
-  margin-left: 62px;
-  margin-top: -6px;
-}
 
+@media screen and (max-width: 1240px) {
+  .page-news-item {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .page-news-item {
+    min-height: calc(100vh - 160px);
+  }
+}
+@media screen and (max-width: 680px) {
+  .page-news-item {
+    width: 100%;
+    margin: 12px 0;
+    padding: 6px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .page-news-item .header-news {
+    flex-direction: column;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .page-news-item .header-news .img-block {
+    margin: 0 auto;
+  }
+  .page-news-item .header-news .info-block {
+    width: calc(100% - 24px);
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 12px;
+  }
+  .page-news-item .header-news .info-block .stats {
+    justify-content: space-between;
+  }
+  .page-news-item .header-news .info-block .favorite-div {
+    display: none;
+  }
+}
 .page-forum-item {
   display: flex;
   flex-direction: column;
@@ -1302,21 +1883,22 @@ footer h3 {
   height: 158px;
   margin-top: 12px;
 }
-.page-forum-item .body-question-block .question-element .rating-block a {
+.page-forum-item .body-question-block .question-element .rating-block span {
   width: 50px;
   height: 50px;
   display: inline-block;
+  cursor: pointer;
 }
-.page-forum-item .body-question-block .question-element .rating-block a svg {
+.page-forum-item .body-question-block .question-element .rating-block span svg {
   width: 50px;
   height: 50px;
   fill: #ccc;
   transition: fill 0.2s;
 }
-.page-forum-item .body-question-block .question-element .rating-block a .down-arrow {
+.page-forum-item .body-question-block .question-element .rating-block span .down-arrow {
   transform: rotate(180deg);
 }
-.page-forum-item .body-question-block .question-element .rating-block a:hover svg {
+.page-forum-item .body-question-block .question-element .rating-block span:hover svg {
   fill: rgba(217, 217, 217, 0.6);
 }
 .page-forum-item .body-question-block .question-element .rating-block .rating-text {
@@ -1328,24 +1910,43 @@ footer h3 {
 .page-forum-item hr {
   border-color: rgba(217, 217, 217, 0.6);
 }
-.page-forum-item .comments-user {
+.page-forum-item .commet-block {
+  position: relative;
   width: 100%;
 }
-.page-forum-item .comments-user .answer-user {
+.page-forum-item .commet-block .comments-user {
+  width: 100%;
+}
+.page-forum-item .commet-block .comments-user .clear {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+.page-forum-item .commet-block .comments-user .clear svg {
+  width: 150px;
+  height: 150px;
+  margin: 0 25px;
+  fill: #ccc;
+}
+.page-forum-item .commet-block .comments-user .clear span {
+  font-size: 22px;
+  font-weight: bold;
+}
+.page-forum-item .commet-block .comments-user .answer-user {
   position: relative;
   margin: 12px 0;
   width: 100%;
 }
-.page-forum-item .comments-user .answer-user .user {
+.page-forum-item .commet-block .comments-user .answer-user .user {
   width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
 }
-.page-forum-item .comments-user .answer-user .user span {
+.page-forum-item .commet-block .comments-user .answer-user .user span {
   color: rgba(217, 217, 217, 0.6);
 }
-.page-forum-item .comments-user .answer-user .user span svg {
+.page-forum-item .commet-block .comments-user .answer-user .user span svg {
   width: 32px;
   height: 32px;
   margin: 9px;
@@ -1354,79 +1955,82 @@ footer h3 {
   cursor: pointer;
   transition: fill 0.2s;
 }
-.page-forum-item .comments-user .answer-user .user span svg:hover {
+.page-forum-item .commet-block .comments-user .answer-user .user span svg:hover {
   fill: rgba(217, 217, 217, 0.6);
 }
-.page-forum-item .comments-user .answer-user .user span.active svg {
+.page-forum-item .commet-block .comments-user .answer-user .user span.active svg {
   fill: rgb(0, 116, 204);
 }
-.page-forum-item .comments-user .answer-user .user span.active svg:hover {
+.page-forum-item .commet-block .comments-user .answer-user .user span.active svg:hover {
   fill: rgba(0, 116, 204, 0.7);
 }
-.page-forum-item .comments-user .answer-user .user .user-link {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: 50px;
   display: flex;
 }
-.page-forum-item .comments-user .answer-user .user .user-link img {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link img {
   width: 50px;
   height: 50px;
 }
-.page-forum-item .comments-user .answer-user .user .user-link .user-date {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link .user-date {
   margin-left: 12px;
   height: 50px;
   display: flex;
   flex-direction: column;
   text-align: left;
 }
-.page-forum-item .comments-user .answer-user .user .user-link .user-date span {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link .user-date span {
   color: rgba(217, 217, 217, 0.6);
 }
-.page-forum-item .comments-user .answer-user .user .user-link .user-date a {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link .user-date a {
   font-weight: bold;
   color: rgb(0, 116, 204);
   transition: color 0.2s;
 }
-.page-forum-item .comments-user .answer-user .user .user-link .user-date a:hover {
+.page-forum-item .commet-block .comments-user .answer-user .user .user-link .user-date a:hover {
   color: rgba(0, 116, 204, 0.7);
 }
-.page-forum-item .comments-user .answer-user .answer {
+.page-forum-item .commet-block .comments-user .answer-user .answer {
   margin-left: 62px;
   width: calc(100% - 62px);
   text-align: left;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions {
+.page-forum-item .commet-block .comments-user .answer-user .answer pre {
+  margin: 0;
+}
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions {
   width: 100%;
   margin-top: 12px;
   display: flex;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions {
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions .one-reactions {
   display: flex;
   align-items: center;
   height: 24px;
   margin-right: 12px;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions span {
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions .one-reactions span {
   margin-left: 6px;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg {
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions .one-reactions .svg {
   margin: 0;
   cursor: pointer;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg svg {
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions .one-reactions .svg svg {
   width: 24px;
   height: 24px;
   fill: #ccc;
   transition: fill 0.2s;
 }
-.page-forum-item .comments-user .answer-user .answer .reactions .one-reactions .svg:hover svg {
+.page-forum-item .commet-block .comments-user .answer-user .answer .reactions .one-reactions .svg:hover svg {
   fill: rgba(0, 116, 204, 0.7);
 }
-.page-forum-item .comments-user .answer-user .more-menu {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu {
   position: absolute;
-  z-index: 2;
+  z-index: 11;
   opacity: 0;
   pointer-events: none;
   top: 50px;
@@ -1437,66 +2041,77 @@ footer h3 {
   border-radius: 5px;
   transition: 0.2s;
 }
-.page-forum-item .comments-user .answer-user .more-menu.active {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu.active {
   opacity: 1;
   pointer-events: all;
 }
-.page-forum-item .comments-user .answer-user .more-menu .btn {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu .btn {
   width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.page-forum-item .comments-user .answer-user .more-menu .btn svg {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu .btn svg {
   width: 32px;
   height: 32px;
   margin: 9px;
   fill: #ccc;
   transition: fill 0.2s;
 }
-.page-forum-item .comments-user .answer-user .more-menu .btn span {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu .btn span {
   font-size: 18px;
   transition: color 0.2s;
 }
-.page-forum-item .comments-user .answer-user .more-menu .btn:hover svg {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu .btn:hover svg {
   fill: rgba(0, 116, 204, 0.7);
 }
-.page-forum-item .comments-user .answer-user .more-menu .btn:hover span {
+.page-forum-item .commet-block .comments-user .answer-user .more-menu .btn:hover span {
   color: rgba(0, 116, 204, 0.7);
 }
-.page-forum-item .send-comment {
+.page-forum-item .commet-block .send-comment {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
   width: 100%;
   padding-bottom: 4px;
   margin-top: auto;
+  background-color: #161b22;
 }
-.page-forum-item .send-comment form {
+.page-forum-item .commet-block .send-comment form {
   width: 100%;
   display: flex;
   align-items: flex-end;
 }
-.page-forum-item .send-comment form textarea {
+.page-forum-item .commet-block .send-comment form textarea {
   width: calc(100% - 50px);
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 12px;
 }
-.page-forum-item .send-comment form button {
+.page-forum-item .commet-block .send-comment form button {
   width: 50px;
   height: 50px;
   padding: 9px;
 }
-.page-forum-item .send-comment form button svg {
+.page-forum-item .commet-block .send-comment form button svg {
   width: 32px;
   height: 32px;
   fill: rgb(0, 116, 204);
   transition: fill 0.2s;
 }
-.page-forum-item .send-comment form button:hover svg {
+.page-forum-item .commet-block .send-comment form button:hover svg {
   fill: rgba(0, 116, 204, 0.7);
 }
 
+@media screen and (max-width: 960px) {
+  .page-forum-item {
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    padding: 6px;
+  }
+}
 .report-menu {
   position: absolute;
   display: flex;
@@ -1959,20 +2574,23 @@ footer h3 {
   font-size: 20px;
   color: rgba(217, 217, 217, 0.6);
 }
-.page-user .user-info .user-data .btn-change {
-  width: 100%;
-  height: 32px;
+.page-user .user-info .user-data .add {
+  display: inline-block;
+  width: 80%;
+  height: 50px;
+  margin: auto;
+  color: rgb(0, 116, 204);
   font-size: 20px;
-  line-height: 32px;
-  margin: 12px 0;
-  background: #161b22;
-  border: 1px solid rgba(217, 217, 217, 0.6);
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s;
+  line-height: 50px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: color 0.2s;
 }
-.page-user .user-info .user-data .btn-change:hover {
-  background: rgba(22, 27, 34, 0.7);
+.page-user .user-info .user-data .add:hover {
+  color: rgba(0, 116, 204, 0.7);
 }
 .page-user .user-info .user-activity {
   width: calc(100% - 200px);
@@ -2226,26 +2844,6 @@ footer h3 {
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion .topic-block a:hover .topic {
   background: rgba(0, 116, 204, 0.7);
-}
-.page-user .user-info .user-activity .activity-screen .add {
-  display: inline-block;
-  width: 80%;
-  height: 50px;
-  margin: auto auto 0 auto;
-  border: 1px solid rgba(217, 217, 217, 0.6);
-  border-radius: 10px;
-  color: rgb(0, 116, 204);
-  font-size: 20px;
-  line-height: 50px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  transition: color 0.2s;
-}
-.page-user .user-info .user-activity .activity-screen .add:hover {
-  color: rgba(0, 116, 204, 0.7);
 }
 .page-user .user-info .admin {
   flex-direction: row !important;

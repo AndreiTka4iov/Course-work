@@ -1,7 +1,7 @@
 <div class="page-forum-item">   
     <%for(var i=0; i<locals.reqForum.length; i++) {
         let categoryName = locals.category.find(item => item.id == locals.reqForum[i].subcategory);
-        let userName = locals.user.find(item => item.id == locals.reqForum[i].id_user);
+        let userName = locals.users.find(item => item.id == locals.reqForum[i].id_user);
     %>
     <div class="body-question-block">
         <div class="user-block">
@@ -20,19 +20,17 @@
         </div>
         <div class="question-element">
             <div class="rating-block">
-                <a href="?rating=+1">
+                <span id="+1" class="<%= locals.reqForum[i].id %>" onclick="ratingEdite(this)" >
                     <svg>
                         <use xlink:href="/main.svg#arrow-svg"></use>
                     </svg>
-                </a>
-                <div class="rating-text">
-                    <%= locals.reqForum[i].rating%>
-                </div>
-                <a href="">
+                </span>
+                <div class="rating-text"><%= locals.reqForum[i].rating%></div>
+                <span id="-1" class="<%= locals.reqForum[i].id %>" onclick="ratingEdite(this)">
                     <svg class="down-arrow">
                         <use xlink:href="/main.svg#arrow-svg"></use>
                     </svg>
-                </a>
+                </span>
             </div>
             <div class="question">
                 <h3><%= locals.reqForum[i].title%></h3><br>
@@ -74,135 +72,102 @@
             </div>
         </div>
     </div>
+    
+    <div class="commet-block">
+        <div class="comments-user">
+            <hr>
+            <%if (locals.comment.length == 0) {%>
+                <div class="clear">
+                    <svg>
+                        <use xlink:href="/main.svg#forum-svg"></use>
+                    </svg>
+                    <span>The list is empty</span>
+                </div>
+            <%} 
+            else 
+            {for(var inner=0; inner<locals.comment.length; inner++) {
+                let userName = locals.users.find(item => item.id == locals.comment[inner].id_user);
+            %>
+            <div class="answer-user">
+                <div class="user">
+                        <div class="user-link">
+                            <img src="/images/user.svg" alt="">
+                            <div class="user-date">
+                                <a href=""><%= userName.login%></a>
+                                <span><%= locals.comment[inner].date%></span>
+                            </div>
+                        </div>
+                        <span class="more" onclick="openMoreMenu(this)">
+                            <svg>
+                                <use xlink:href="/main.svg#more-svg"></use>
+                            </svg>
+                        </span>
+                </div>  
+                <div class="answer">
+                    <pre><%= locals.comment[inner].coment%></pre>
+                    <div class="reactions">
+                        <div class="one-reactions">
+                            <span class="svg">  
+                                <svg>
+                                    <use xlink:href="/main.svg#like-svg"></use>
+                                </svg>
+                            </span>
+                            <span><%= locals.comment[inner].like%></span>
+                        </div>
+                        <div class="one-reactions">
+                            <span class="svg">  
+                                <svg>
+                                    <use xlink:href="/main.svg#reply-svg"></use>
+                                </svg>
+                            </span>
+                            <span><%= locals.comment[inner].reply%></span>
+                        </div>
+                    </div>
+                </div>   
+                <div class="more-menu">
+                    <div class="btn">
+                        <svg>
+                            <use xlink:href="/main.svg#like-svg"></use>
+                        </svg>
+                        <span>Like</span>
+                    </div>
+                    <div class="btn">
+                        <svg>
+                            <use xlink:href="/main.svg#reply-svg"></use>
+                        </svg>
+                        <span>Share</span>
+                    </div>
+                    <div class="btn" onclick="reportMenu(this)">
+                        <svg>
+                            <use xlink:href="/main.svg#report-svg"></use>
+                        </svg>
+                        <span>Report</span>
+                    </div>
+                    <% if (locals.userWatch == locals.comment[inner].id_user) {%>
+                    <div class="btn" id="<%= locals.comment[inner].id%>" onclick="deleteThis(this)">
+                        <svg>
+                            <use xlink:href="/main.svg#delete-svg"></use>
+                        </svg>    
+                        <span>Delete</span>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <%}}%>
+        </div>
+        <div class="send-comment">
+            <hr>
+            <form action="/forum/item" method="POST">
+                <textarea type="text" name="comment" placeholder="Enter your comment..." required></textarea>
+                <button name="id_post" value="<%= locals.reqForum[i].id%>">
+                    <svg>
+                        <use xlink:href="/main.svg#send-svg"></use>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
     <%}%>
-    <div class="comments-user">
-        <hr>
-        <div class="answer-user">
-            <div class="user">
-                    <div class="user-link">
-                        <img src="/images/user.svg" alt="">
-                        <div class="user-date">
-                            <a href="">User</a>
-                            <span>20.11.2022</span>
-                        </div>
-                    </div>
-                    <span class="more" onclick="openMoreMenu(this)">
-                        <svg>
-                            <use xlink:href="/main.svg#more-svg"></use>
-                        </svg>
-                    </span>
-            </div>  
-            <div class="answer">
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque reiciendis perspiciatis itaque nostrum mollitia eaque nulla, provident eos atque ipsum! Libero impedit maiores delectus facere quaerat laudantium, eaque autem debitis!</span>
-                <div class="reactions">
-                    <div class="one-reactions">
-                        <span class="svg">  
-                            <svg>
-                                <use xlink:href="/main.svg#like-svg"></use>
-                            </svg>
-                        </span>
-                        <span>0</span>
-                    </div>
-                    <div class="one-reactions">
-                        <span class="svg">  
-                            <svg>
-                                <use xlink:href="/main.svg#reply-svg"></use>
-                            </svg>
-                        </span>
-                        <span>0</span>
-                    </div>
-                </div>
-            </div>   
-            <div class="more-menu">
-                <div class="btn">
-                    <svg>
-                        <use xlink:href="/main.svg#like-svg"></use>
-                    </svg>
-                    <span>Like</span>
-                </div>
-                <div class="btn">
-                    <svg>
-                        <use xlink:href="/main.svg#reply-svg"></use>
-                    </svg>
-                    <span>Share</span>
-                </div>
-                <div class="btn" onclick="reportMenu(this)">
-                    <svg>
-                        <use xlink:href="/main.svg#report-svg"></use>
-                    </svg>
-                    <span>Report</span>
-                </div>
-            </div>
-        </div>
-        <div class="answer-user">
-            <div class="user">
-                    <div class="user-link">
-                        <img src="/images/user.svg" alt="">
-                        <div class="user-date">
-                            <a href="">User</a>
-                            <span>20.11.2022</span>
-                        </div>
-                    </div>
-                    <span class="more" onclick="openMoreMenu(this)">
-                        <svg>
-                            <use xlink:href="/main.svg#more-svg"></use>
-                        </svg>
-                    </span>
-            </div>  
-            <div class="answer">
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque reiciendis perspiciatis itaque nostrum mollitia eaque nulla, provident eos atque ipsum! Libero impedit maiores delectus facere quaerat laudantium, eaque autem debitis!</span>
-                <div class="reactions">
-                    <div class="one-reactions">
-                        <span class="svg">  
-                            <svg>
-                                <use xlink:href="/main.svg#like-svg"></use>
-                            </svg>
-                        </span>
-                        <span>0</span>
-                    </div>
-                    <div class="one-reactions">
-                        <span class="svg">  
-                            <svg>
-                                <use xlink:href="/main.svg#reply-svg"></use>
-                            </svg>
-                        </span>
-                        <span>0</span>
-                    </div>
-                </div>
-            </div>   
-            <div class="more-menu">
-                <div class="btn">
-                    <svg>
-                        <use xlink:href="/main.svg#like-svg"></use>
-                    </svg>
-                    <span>Like</span>
-                </div>
-                <div class="btn">
-                    <svg>
-                        <use xlink:href="/main.svg#reply-svg"></use>
-                    </svg>
-                    <span>Share</span>
-                </div>
-                <div class="btn" onclick="reportMenu(this)">
-                    <svg>
-                        <use xlink:href="/main.svg#report-svg"></use>
-                    </svg>
-                    <span>Report</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="send-comment">
-        <hr>
-        <form action="">
-            <textarea type="text" name="" id="" placeholder="Enter your comment..."></textarea>
-            <button>
-                <svg>
-                    <use xlink:href="/main.svg#send-svg"></use>
-                </svg>
-            </button>
-        </form>
-    </div>
     <form action="" class="report-menu">
         <div class="close-line">
             <span onclick="closeReportMenu(this)">

@@ -50,11 +50,22 @@ app.use((req,res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.render('index', {title: 'Forum || Home', page: 'Home', homePage: 'home-header'})
+  res.render('index', {title: 'Forum || Home', page: 'Home', homePage: 'home-header', token: req.signedCookies.token_user})
+})
+
+app.get('/sign-out', (req, res) => {
+  res.clearCookie('id_user')
+  res.clearCookie('token_user')
+  res.clearCookie('level_user')
+  res.clearCookie('login_user')
+  return res.redirect('/')
 })
 
 
 //Routers for server
+
+const searchRouter = require('./routes/search')
+app.use('/search', searchRouter)
 
 const forumRouter = require('./routes/forum')
 app.use('/forum', forumRouter)

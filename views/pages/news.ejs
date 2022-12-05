@@ -1,18 +1,24 @@
 <div class="news-page">
+    <% let sortA = ''
+    if(typeof sort.category != 'undefined'){
+        sortA = '&category='+sort.category
+    } else if (typeof sort.topic != 'undefined'){
+        sortA = '&topic='+sort.topic
+    }%>
     <div class="filter-menu">
         <span>Sorted by:</span>
-        <a href="">Newest</a>
+        <a href="/news?by=newest<%= sortA%>">Newest</a>
         <hr width="1" size="28"  />
-        <a href="">Comments</a>
+        <a href="/news?by=comments<%= sortA%>">Comments</a>
         <hr width="1" size="28"  />
-        <a href="">Views</a>
+        <a href="/news?by=views<%= sortA%>">Views</a>
         <hr width="1" size="28"  />
-        <a href="">Favourites</a>
+        <a href="/news?by=favourites<%= sortA%>">Favourites</a>
     </div>
     <% if (locals.news.length == 0) {%>
         <div class="clear">
             <svg>
-                <use xlink:href="/main.svg#forum-svg"></use>
+                <use xlink:href="/main.svg#list-svg"></use>
             </svg>
             <span>The list is empty</span>
         </div>

@@ -1,16 +1,19 @@
 <div class="page-news-item">
+    <%for(var i=0; i<locals.reqNews.length; i++) {
+        let categoryName = locals.category.find(item => item.id == locals.reqNews[i].subcategory);
+    %>
     <div class="header-news">
         <div class="img-block">
             <div class="img-block">
-                <img src="/images/news/major.jpg" alt="">
+                <img src="/images/news/<%= locals.reqNews[i].img%>" alt="">
                 <div class="dark-img"></div>
-                <h1>CS:GO</h1>
-                <h3>IEM Rio Major 2022</h3>
+                <h1><%= categoryName.category%></h1>
+                <h3><%= locals.reqNews[i].event%></h3>
             </div>
         </div>
         <div class="info-block">
-            <h2>OUTSIDERS QUALIFY FOR BLAST PREMIER WORLD FINAL</h2>
-            <div class="date">17.11.2022</div>
+            <h2><%= locals.reqNews[i].title%></h2>
+            <div class="date"><%= locals.reqNews[i].date%></div>
             <div class="favorite-div">
                 <svg>
                     <use xlink:href="/main.svg#favorite-svg"></use>
@@ -21,80 +24,121 @@
                     <svg>
                         <use xlink:href="/main.svg#yey-svg"></use>
                     </svg>
-                    <span>0</span>
+                    <span><%= locals.reqNews[i].watching%></span>
                 </div>
                 <div class="info">
                     <svg>
                         <use xlink:href="/main.svg#forum-svg"></use>
                     </svg> 
-                    <span>1</span>
+                    <span><%= locals.reqNews[i].coments%></span>
                 </div>
                 <div class="info">
                     <svg class="favorite">
                         <use xlink:href="/main.svg#favorite-svg"></use>
                     </svg>
-                    <span>10</span>
+                    <span><%= locals.reqNews[i].favorite%></span>
                 </div>
             </div>            
         </div>
     </div>
     <div class="text-block">
-        <span>The newly crowned Major champions will head to Abu Dhabi in December. <br>
-
-            Following their underdog run all the way to the trophy at the IEM Rio Major, Outsiders have qualified for the $1,000,000, eight-team BLAST Premier World Final. They will head out to Abu Dhabi for the season-ending spectacle, which takes place December 14-18. <br><br>
-            
-            Outsiders join three teams who have already qualified for the event, Natus Vincere, FaZe and Vitality, who secured their spots by winning BLAST Premier Spring Final, the PGL Antwerp Major and ESL Pro League Season 15, and ESL Pro League Season 16 respectively. <br><br>
-            
-            Half of the spots are now decided for BLAST's final event of the year, with four more left to be filled. Those four be finalised after the upcoming BLAST Fall Final event in Copenhagen, which takes place November 23-27, with the winner of that tournament also securing a berth.<br><br>
-
-The rest of the teams are taken from the BLAST World Final Leaderboard, which grants teams points based on tournament finishes throughout the year, with teams like G2, OG and Heroic currently in pole position to secure qualification.<br><br>
-
-Ninjas in Pyjamas and Liquid are also in the running, and would need deep finishes in the BLAST Fall Final to garner the points required. ENCE can also still qualify, but would need the Fall Final standings to shake out precisely in their favour.<br><br>
-        </span>
+        <pre><%= locals.reqNews[i].news%>
+        </pre>
     </div>  
     <div class="comment-block">
-        <hr>
-        <form action="" class="write-comment">
-            <textarea name="" id="" cols="30" rows="1" placeholder="Enter a comment..."></textarea>
-            <button>
-                <svg>
-                    <use xlink:href="/main.svg#send-svg"></use>
-                </svg>
-            </button>
-        </form>
-        <hr>
-        <h3>Comments:</h3>
-        
-        <div class="all-comments">
-            <div class="user-comment">
-                <div class="user">
-                    <img src="/images/user.svg" alt="">
-                    <a href="">User</a>
-                    <span>16.11.2022</span>
+        <div class="comments-user">
+            <hr>
+            <%if (locals.comment.length == 0) {%>
+                <div class="clear">
+                    <svg>
+                        <use xlink:href="/main.svg#forum-svg"></use>
+                    </svg>
+                    <span>The list is empty</span>
                 </div>
-                <div class="comment">
-                    <span>Test comment for news!!!</span>
+            <%} 
+            else 
+            {for(var inner=0; inner<locals.comment.length; inner++) {
+                let userName = locals.users.find(item => item.id == locals.comment[inner].id_user);
+            %>
+            <div class="answer-user">
+                <div class="user">
+                        <div class="user-link">
+                            <img src="/images/user.svg" alt="">
+                            <div class="user-date">
+                                <a href=""><%= userName.login%></a>
+                                <span><%= locals.comment[inner].date%></span>
+                            </div>
+                        </div>
+                        <span class="more" onclick="openMoreMenu(this)">
+                            <svg>
+                                <use xlink:href="/main.svg#more-svg"></use>
+                            </svg>
+                        </span>
+                </div>  
+                <div class="answer">
+                    <pre><%= locals.comment[inner].coment%></pre>
+                    <div class="reactions">
+                        <div class="one-reactions">
+                            <span class="svg">  
+                                <svg>
+                                    <use xlink:href="/main.svg#like-svg"></use>
+                                </svg>
+                            </span>
+                            <span><%= locals.comment[inner].like%></span>
+                        </div>
+                        <div class="one-reactions">
+                            <span class="svg">  
+                                <svg>
+                                    <use xlink:href="/main.svg#reply-svg"></use>
+                                </svg>
+                            </span>
+                            <span><%= locals.comment[inner].reply%></span>
+                        </div>
+                    </div>
+                </div>   
+                <div class="more-menu">
+                    <div class="btn">
+                        <svg>
+                            <use xlink:href="/main.svg#like-svg"></use>
+                        </svg>
+                        <span>Like</span>
+                    </div>
+                    <div class="btn">
+                        <svg>
+                            <use xlink:href="/main.svg#reply-svg"></use>
+                        </svg>
+                        <span>Share</span>
+                    </div>
+                    <div class="btn" onclick="reportMenu(this)">
+                        <svg>
+                            <use xlink:href="/main.svg#report-svg"></use>
+                        </svg>
+                        <span>Report</span>
+                    </div>
+                    <% if (locals.userWatch == locals.comment[inner].id_user) {%>
+                    <div class="btn" id="<%= locals.comment[inner].id%>" onclick="deleteComent(this)">
+                        <svg>
+                            <use xlink:href="/main.svg#delete-svg"></use>
+                        </svg>    
+                        <span>Delete</span>
+                    </div>
+                    <%}%>
                 </div>
             </div>
-            <div class="user-comment">
-                <div class="user">
-                    <img src="/images/user.svg" alt="">
-                    <a href="">User</a>
-                    <span>16.11.2022</span>
-                </div>
-                <div class="comment">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quaerat alias, ad consectetur illo molestiae molestias, dolorem quis cumque odio veniam dolores quam exercitationem saepe amet enim nobis, obcaecati ea!
-                    Optio numquam eveniet explicabo impedit accusamus architecto facere fugiat tempora totam vitae! Nam omnis numquam aliquid voluptatum sint deserunt dolores illo natus quidem. Quis atque earum, voluptate voluptatem saepe dolor?
-                    Blanditiis officia assumenda quaerat odio nobis, voluptatem reprehenderit, recusandae laboriosam doloremque labore sapiente veniam tempora ducimus? Ipsam sit, eligendi saepe eaque cupiditate aliquid? Ipsum officiis unde assumenda similique? Voluptate, laborum!
-                    Et totam voluptatem, at explicabo quos facere tempore commodi dolores accusamus temporibus perspiciatis eveniet ut animi fuga. Veritatis placeat vel, cum quibusdam quidem est ea nesciunt eius. Quis, debitis repellat?
-                    Quaerat necessitatibus possimus repellat sunt molestias cupiditate illo maxime optio quisquam autem porro, architecto quas libero officia? Necessitatibus esse alias maiores facere quod quisquam nemo laborum accusamus eos? Doloremque, atque?
-                    Sed consequatur aliquid ullam quia laboriosam incidunt sapiente vitae hic repudiandae, eaque tempora explicabo maiores earum. Sunt facilis quo quis incidunt quas consectetur quasi, recusandae perferendis illum? Harum, distinctio tempora!
-                    Debitis hic aspernatur id quidem aliquam corrupti. Voluptatibus deleniti quae voluptatem hic in eaque nihil nesciunt soluta illum, natus unde quas esse doloremque magni explicabo expedita earum dignissimos aut voluptate.
-                    Neque a cupiditate quis voluptatum optio dignissimos veritatis architecto odit, inventore porro minus. Voluptates, vero! Optio illo exercitationem corporis expedita mollitia aut ipsam accusamus voluptates, ad laborum quam adipisci quis!
-                    Deleniti tempora aperiam doloribus illum quia quo alias provident iusto minus, ut repellat optio quaerat assumenda excepturi tempore quod nostrum unde voluptas reprehenderit ipsa animi facere asperiores. Similique, sunt ipsa?
-                    A obcaecati, sit blanditiis provident nesciunt inventore vero voluptate temporibus id natus repellat ipsa voluptatum modi ea, fugiat magni quos, minima quisquam dolorem! Delectus ab natus, cupiditate ipsam possimus iure.</span>
-                </div>
-            </div>
+            <%}}%>
+        </div>
+        <div class="send-comment">
+            <hr>
+            <form action="/news/item" method="POST">
+                <textarea type="text" name="comment" placeholder="Enter your comment..." required></textarea>
+                <button name="id_post" value="<%= locals.reqNews[i].id%>">
+                    <svg>
+                        <use xlink:href="/main.svg#send-svg"></use>
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
+    <%}%> 
+        
 </div>

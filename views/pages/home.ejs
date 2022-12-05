@@ -6,25 +6,28 @@
     <div class="home-screen">
         <div class="home-page-line">
             <h1>The World's #1 forum for MUIV</h1>
-            <form class="input-home-screen">
-                <input type="text" name="" id="" placeholder="Enter what you want...">
+            <div class="input-home-screen">
+                <input type="text" name="" id="" placeholder="Enter what you want..." oninput="homeSearch(this)" onfocusout="homeLeave(this)">
                 <select name="" id="">
                     <option value="" disabled>Select type</option>
-                    <option value="">News</option>
-                    <option value="">Forum</option>
+                    <option value="1">News</option>
+                    <option value="2">Forum</option>
                 </select>
                 <button>
                     <svg>
                         <use xlink:href="/main.svg#search-svg"></use>
                     </svg>
                 </button>
-            </form>
-            <div class="home-page-sign">
-                <span>To continue</span>
-                <span class="underline" onclick="openSignIn()">Sign in</span>
-                <span>or</span>
-                <span class="underline" onclick="openSignUp()">Sign up</span>
+                <div class="result-search-home "></div>
             </div>
+            <%if (typeof token == 'undefined'){%>
+                <div class="home-page-sign">
+                    <span>To continue</span>
+                    <span class="underline" onclick="openSignIn()">Sign in</span>
+                    <span>or</span>
+                    <span class="underline" onclick="openSignUp()">Sign up</span>
+                </div>
+            <%}%>
         </div>
     </div>
 </div>

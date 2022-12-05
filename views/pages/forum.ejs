@@ -1,17 +1,31 @@
 <div class="forum-page">
+    <% let sortA = ''
+    if(typeof sort.category != 'undefined'){
+        sortA = '&category='+sort.category
+    } else if (typeof sort.topic != 'undefined'){
+        sortA = '&topic='+sort.topic
+    }%>
     <div class="filter-menu">
         <span>Sorted by:</span>
-        <a href="">Newest</a>
+        <a href="/forum?by=newest<%= sortA%>">Newest</a>
         <hr width="1" size="28"  />
-        <a href="">Аnswers</a>
+        <a href="/forum?by=comments<%= sortA%>">Comments</a>
         <hr width="1" size="28"  />
-        <a href="">Views</a>
+        <a href="/forum?by=views<%= sortA%>">Views</a>
         <hr width="1" size="28"  />
-        <a href="">Favourites</a>
+        <a href="/forum?by=favourites<%= sortA%>">Favourites</a>
     </div>
-    <%for(var i=0; i<locals.forums.length; i++) {
-            let categoryName = locals.category.find(item => item.id == locals.forums[i].subcategory);
-            %>
+<% if (locals.forums.length == 0) {%>
+    <div class="clear">
+        <svg>
+            <use xlink:href="/main.svg#list-svg"></use>
+        </svg>
+        <span>The list is empty</span>
+    </div>
+    <%} else {
+        for(var i=0; i<locals.forums.length; i++) {
+        let categoryName = locals.category.find(item => item.id == locals.forums[i].subcategory);
+    %>
             <div class="block-discussion">
                 <div class="upper-block">
                     <div class="info-block">
@@ -46,6 +60,6 @@
                     </a>                                
                 </div>
             </div>
-    <%}%>
+    <%}}%>
     
 </div>

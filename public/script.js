@@ -5,6 +5,7 @@ let passValue = false
 let secondPassValue = false
 let nextAllowed = false
 
+var xhr = new XMLHttpRequest();
 var tx = document.getElementsByTagName('textarea');
 
 for (var i = 0; i < tx.length; i++) {
@@ -35,6 +36,7 @@ function openTopic(div){
 }
 
 function openMoreMenu(span){
+    blureMenuTransparency()
     span.classList.toggle('active')
     span.parentNode.parentNode.querySelector('.more-menu').classList.toggle('active')
 }
@@ -43,11 +45,14 @@ function blureMenu(){
     document.querySelector('.blure')?.classList.toggle('active')
     document.querySelector('.report-menu')?.classList.remove('active')
     document.querySelector('.confirmation-del')?.classList.remove('active')
+    document.querySelector('.topics-menu')?.classList.remove('active')
 }
 
 function blureMenuTransparency(){
     document.querySelector('.blure-transparency')?.classList.toggle('active')
     document.querySelector('.drop-down-menu.active')?.classList.remove('active')
+    document.querySelector('.more-menu.active')?.classList.remove('active')
+    document.querySelector('.more.active')?.classList.remove('active')
 }
 
 function reportMenu(report){
@@ -164,4 +169,91 @@ function backPageScroll(btn){
 function openDropDoownUser(dropDown){
     blureMenuTransparency()
     dropDown.parentNode.querySelector('.drop-down-menu')?.classList.toggle('active')
+}
+
+function deleteThis(btn) {
+    const body = 'idCom=' + btn.id
+    xhr.open("POST", '/forum/item/delete', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body);
+
+    btn.closest('.answer-user').remove()
+}
+
+function deleteComent(btn) {
+    const body = 'idCom=' + btn.id
+    xhr.open("POST", '/news/item/delete', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body);
+
+    btn.closest('.answer-user').remove()
+}
+
+function ratingEdite(btn) {
+    const body = 'value=' + btn.id +
+                '&idPost=' + btn.className
+    xhr.open("POST", '/forum/item/rating', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body);
+
+    if (btn.id == 1){
+       let rating = Number(btn.closest('.rating-block').querySelector('.rating-text').innerHTML)
+       rating += 1
+       btn.closest('.rating-block').querySelector('.rating-text').innerHTML = rating
+    } else if (btn.id == -1) {
+        let rating = Number(btn.closest('.rating-block').querySelector('.rating-text').innerHTML)
+        rating -= 1
+        btn.closest('.rating-block').querySelector('.rating-text').innerHTML = rating   
+    }
+}
+
+function openTopicMenu() {
+    document.querySelector('.topics-menu').classList.add('active')
+    document.querySelector('.blure').classList.add('active')
+}
+
+function homeSearch(inp){
+    inp.closest('.input-home-screen')?.querySelector('.result-search-home').classList.add('show')
+    const selectValue = inp.closest('.input-home-screen')?.querySelector('select').value
+    const inputValue = inp.value
+    const body = 'searchFrom=' + selectValue +'&input=' + inputValue
+
+    xhr.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200){
+            resultHomeSearch(this.responseText)
+        }
+    }
+    xhr.open("GET", '/search?'+body, true)
+    xhr.send()
+}
+
+function resultHomeSearch(data) {
+    const redultReq = JSON.parse(data)
+    const parentBlock = document.querySelector('.result-search-home')
+    const selectValue = document.querySelector('.input-home-screen')?.querySelector('select').value
+
+    while (parentBlock.firstChild) {
+        parentBlock.removeChild(parentBlock.lastChild);
+    }
+    
+    for (var i=0; i<redultReq.length; i++){
+
+        let a = document.createElement('a')
+
+        a.innerHTML = redultReq[i].title
+        if (selectValue == 1) {
+            a.href = '/news/item?id_post=' + redultReq[i].id + '&id_user=' + redultReq[i].id_user
+        } else if (selectValue == 2){
+            a.href = '/forum/item?id=' + redultReq[i].id + '&id_user=' + redultReq[i].id_user
+        }
+        
+        parentBlock.appendChild(a)
+    }
+}
+
+function homeLeave(inp){
+    const parentBlock = document.querySelector('.result-search-home')
+    setTimeout(() => 
+    inp.closest('.input-home-screen')?.querySelector('.result-search-home').classList.remove('show')
+    , 100);         
 }
