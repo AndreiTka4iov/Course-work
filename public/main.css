@@ -151,7 +151,9 @@ button {
 }
 
 header {
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 60px;
   background: #161b22;
@@ -203,13 +205,13 @@ header .flex-main-header .menu-btn:hover svg {
   fill: rgba(217, 217, 217, 0.6);
 }
 header .flex-main-header .search {
+  position: relative;
   width: 500px;
   height: 32px;
   padding: 2px 2px 2px 5px;
   margin: 0 auto 0 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
   display: flex;
   transition: 0.2s;
 }
@@ -242,6 +244,41 @@ header .flex-main-header .search button:hover svg {
 }
 header .flex-main-header .search:hover {
   border-color: rgba(217, 217, 217, 0.6);
+}
+header .flex-main-header .search .result-search {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background-color: #161b22;
+  border-radius: 5px;
+  border: 1px solid rgba(217, 217, 217, 0.6);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+header .flex-main-header .search .result-search::-webkit-scrollbar {
+  width: 0;
+}
+header .flex-main-header .search .result-search.show {
+  display: block;
+  pointer-events: all;
+}
+header .flex-main-header .search .result-search a {
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  text-align: left;
+  overflow: hidden;
+  line-height: 32px;
+  padding: 0 12px;
+  color: white;
+  transition: 0.2s;
+}
+header .flex-main-header .search .result-search a:hover {
+  background-color: rgba(0, 116, 204, 0.7);
 }
 header .flex-main-header .btn-profile {
   position: relative;
@@ -1289,7 +1326,7 @@ footer h3 {
 .topics-menu {
   position: -webkit-sticky;
   position: sticky;
-  top: 20px;
+  top: 80px;
   left: 0;
   width: 300px;
   height: calc(100vh - 376px);
@@ -1577,6 +1614,7 @@ footer h3 {
 .page-news-item .comment-block .comments-user .answer-user .user .user-link img {
   width: 50px;
   height: 50px;
+  border-radius: 50%;
 }
 .page-news-item .comment-block .comments-user .answer-user .user .user-link .user-date {
   margin-left: 12px;
@@ -1780,6 +1818,7 @@ footer h3 {
   width: 50px;
   height: 50px;
   margin-right: 12px;
+  border-radius: 50%;
 }
 .page-forum-item .body-question-block .user-block .user-link a {
   font-weight: bold;
@@ -1913,6 +1952,7 @@ footer h3 {
 .page-forum-item .commet-block {
   position: relative;
   width: 100%;
+  margin-top: auto;
 }
 .page-forum-item .commet-block .comments-user {
   width: 100%;
@@ -1974,6 +2014,7 @@ footer h3 {
 .page-forum-item .commet-block .comments-user .answer-user .user .user-link img {
   width: 50px;
   height: 50px;
+  border-radius: 50%;
 }
 .page-forum-item .commet-block .comments-user .answer-user .user .user-link .user-date {
   margin-left: 12px;
@@ -2560,6 +2601,7 @@ footer h3 {
   border: 1px solid #ccc;
   background-color: #161b22;
   cursor: pointer;
+  overflow: hidden;
   transition: border-color 0.2s;
 }
 .page-user .user-info .user-data .avatar img {
@@ -2717,9 +2759,8 @@ footer h3 {
   height: 250px;
 }
 .page-user .user-info .user-activity .activity-screen .news-item .info-block .date {
-  position: absolute;
-  top: 0;
   width: 100%;
+  margin-bottom: auto;
   color: rgba(217, 217, 217, 0.6);
   text-align: right;
 }
@@ -2742,19 +2783,23 @@ footer h3 {
 .page-user .user-info .user-activity .activity-screen .news-item .info-block .info span {
   color: rgba(217, 217, 217, 0.6);
 }
-.page-user .user-info .user-activity .activity-screen .news-item .info-block a {
-  position: absolute;
-  bottom: 0;
+.page-user .user-info .user-activity .activity-screen .news-item .info-block .del {
   display: inline-block;
-  text-align: center;
-  width: 100%;
-  height: 25px;
-  border-radius: 5px;
-  background: rgba(201, 24, 24, 0.6);
-  transition: 0.2s;
+  width: 50px;
+  height: 50px;
+  margin-top: auto;
+  margin-left: auto;
+  cursor: pointer;
 }
-.page-user .user-info .user-activity .activity-screen .news-item .info-block a:hover {
-  background: rgba(201, 24, 24, 0.4);
+.page-user .user-info .user-activity .activity-screen .news-item .info-block .del svg {
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  fill: rgba(201, 24, 24, 0.6);
+  transition: fill 0.2s;
+}
+.page-user .user-info .user-activity .activity-screen .news-item .info-block .del:hover svg {
+  fill: rgba(201, 24, 24, 0.4);
 }
 .page-user .user-info .user-activity .activity-screen .block-discussion {
   width: 80%;
@@ -2881,6 +2926,79 @@ footer h3 {
 }
 .page-user .user-info .admin .nav-bar .btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+.page-user .new-avatar {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 195px);
+  width: 390px;
+  height: 300px;
+  background-color: #161b22;
+  border-radius: 5px;
+  z-index: 11;
+  transition: opacity 0.2s;
+}
+.page-user .new-avatar.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.page-user .new-avatar .close-line {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+}
+.page-user .new-avatar .close-line span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+.page-user .new-avatar .close-line span svg {
+  stroke: #ccc;
+  width: 32px;
+  height: 32px;
+  margin: 9px;
+  transition: stroke 0.2s;
+}
+.page-user .new-avatar .close-line span:hover svg {
+  stroke: rgba(217, 217, 217, 0.6);
+}
+.page-user .new-avatar .img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin: auto;
+  padding: 1px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.page-user .new-avatar .img img {
+  width: 146px;
+  height: 146px;
+}
+.page-user .new-avatar .img:hover {
+  border-color: rgba(217, 217, 217, 0.6);
+  filter: blur(1px);
+}
+.page-user .new-avatar input {
+  display: none;
+}
+.page-user .new-avatar button {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  margin-top: 50px;
+  color: rgb(0, 116, 204);
+  font-size: 22px;
+  border-top: 1px solid rgba(217, 217, 217, 0.6);
+  transition: color 0.2s;
+}
+.page-user .new-avatar button:hover {
+  color: rgba(0, 116, 204, 0.7);
 }
 
 .confirmation-del {

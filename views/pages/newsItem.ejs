@@ -63,7 +63,11 @@
             <div class="answer-user">
                 <div class="user">
                         <div class="user-link">
-                            <img src="/images/user.svg" alt="">
+                            <% if(userName.img !== 'def'){%>
+                                <img src="/images/users/<%=userName.id%>.<%=userName.img%>" alt="">
+                            <%}else{%>
+                                <img src="/images/users/user.svg" alt="">
+                            <%}%>
                             <div class="user-date">
                                 <a href=""><%= userName.login%></a>
                                 <span><%= locals.comment[inner].date%></span>

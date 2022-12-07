@@ -103,7 +103,7 @@ router.get('/item', async (req, res) => {
     const sqlReq3 = "SELECT * FROM category"
     const queryDb3 = await db_all(sqlReq3)
 
-    const sqlReq4 = "SELECT id, login FROM users"
+    const sqlReq4 = "SELECT id, login, img FROM users"
     const queryDb4 = await db_all(sqlReq4)
 
     const sqlReq5 = "SELECT * FROM coments_forum WHERE id_forum = " + queryDb2[0].id + " ORDER BY id DESC"

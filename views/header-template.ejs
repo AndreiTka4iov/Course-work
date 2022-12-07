@@ -37,17 +37,18 @@
                 <a href="/forum">Forum</a>
             </div>
             <div class="search">
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search..." oninput="headerSearch(this)" onfocusout="headerLeave(this)">
                 <select name="" id="">
                     <option value="" disabled>Select type</option>
-                    <option value="">News</option>
-                    <option value="">Forum</option>
+                    <option value="1">News</option>
+                    <option value="2">Forum</option>
                 </select>
                 <button>
                     <svg>
                         <use xlink:href="/main.svg#search-svg"></use>
                     </svg>
                 </button>
+                <div class="result-search"></div>
             </div> 
             <div class="btn-profile">
                 <% if (locals.token != 0 && typeof locals.token != 'undefined'){%>
@@ -57,7 +58,11 @@
                         </svg>
                     </a>
                     <div class="profile" onclick="openDropDoownUser(this)">
-                        <img src="/images/user.svg" alt="">
+                        <%if(locals.imgUser[0].img !== 'def'){%>
+                            <img src="/images/users/<%=locals.id%>.<%=locals.imgUser[0].img%>" alt="">
+                        <%}else{%>
+                            <img src="/images/users/user.svg" alt="">
+                        <%}%>
                     </div>
                     <div class="drop-down-menu">
                         <a href="/profile/news">

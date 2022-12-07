@@ -46,6 +46,7 @@ function blureMenu(){
     document.querySelector('.report-menu')?.classList.remove('active')
     document.querySelector('.confirmation-del')?.classList.remove('active')
     document.querySelector('.topics-menu')?.classList.remove('active')
+    document.querySelector('.new-avatar')?.classList.remove('show')
 }
 
 function blureMenuTransparency(){
@@ -255,5 +256,51 @@ function homeLeave(inp){
     const parentBlock = document.querySelector('.result-search-home')
     setTimeout(() => 
     inp.closest('.input-home-screen')?.querySelector('.result-search-home').classList.remove('show')
+    , 100);         
+}
+
+function headerSearch(inp){
+    inp.closest('.search')?.querySelector('.result-search').classList.add('show')
+    const selectValue = inp.closest('.search')?.querySelector('select').value
+    const inputValue = inp.value
+    const body = 'searchFrom=' + selectValue +'&input=' + inputValue
+
+    xhr.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200){
+            resultSearch(this.responseText)
+        }
+    }
+    xhr.open("GET", '/search?'+body, true)
+    xhr.send()
+}
+
+function resultSearch(data) {
+    const redultReq = JSON.parse(data)
+    const parentBlock = document.querySelector('.result-search')
+    const selectValue = document.querySelector('.search')?.querySelector('select').value
+
+    while (parentBlock.firstChild) {
+        parentBlock.removeChild(parentBlock.lastChild);
+    }
+    
+    for (var i=0; i<redultReq.length; i++){
+
+        let a = document.createElement('a')
+
+        a.innerHTML = redultReq[i].title
+        if (selectValue == 1) {
+            a.href = '/news/item?id_post=' + redultReq[i].id + '&id_user=' + redultReq[i].id_user
+        } else if (selectValue == 2){
+            a.href = '/forum/item?id=' + redultReq[i].id + '&id_user=' + redultReq[i].id_user
+        }
+        
+        parentBlock.appendChild(a)
+    }
+}
+
+function headerLeave(inp){
+    const parentBlock = document.querySelector('.search')
+    setTimeout(() => 
+    inp.closest('.search')?.querySelector('.result-search').classList.remove('show')
     , 100);         
 }

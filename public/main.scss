@@ -170,7 +170,8 @@ button{
 //header css
 
 header{
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 100%;
     height: 60px;
     background: $color-header-bg;
@@ -234,13 +235,13 @@ header{
         }
 
         .search{
+            position: relative;
             width: 500px;
             height: 32px;
             padding: 2px 2px 2px 5px;
             margin: 0 auto 0 20px;
             border: 1px solid $color-text;
             border-radius: 5px;
-            overflow: hidden;
             display: flex;
             transition: .2s;
 
@@ -282,6 +283,46 @@ header{
            &:hover{
             border-color: $color-text-hover;
            }
+
+           .result-search{
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background-color: $color-header-bg;
+            border-radius: 5px;
+            border: 1px solid $color-text-hover;
+            overflow: hidden;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+
+            &.show{
+                display: block;
+                pointer-events: all;
+            }
+
+            a{
+                display: inline-block;
+                width: 100%;
+                height: 32px;
+                text-align: left;
+                overflow: hidden;
+                line-height: 32px;
+                padding: 0 12px;
+                color: white;
+                transition: .2s;
+
+                &:hover{
+                    background-color: $a-color-hover;
+                }
+            }
+        }
         }
 
         .btn-profile{
@@ -1535,7 +1576,7 @@ footer {
 
 .topics-menu{
     position: sticky;
-    top: 20px;
+    top: 80px;
     left: 0;
     width: 300px;
     height: calc(100vh - 376px);
@@ -1876,6 +1917,7 @@ footer {
                         img{
                             width: 50px;
                             height: 50px;
+                            border-radius: 50%;
                         }
     
                         .user-date{
@@ -2125,6 +2167,7 @@ footer {
                     width: 50px;
                     height: 50px;
                     margin-right: 12px;
+                    border-radius: 50%;
                 }
 
                 a{
@@ -2297,6 +2340,7 @@ footer {
     .commet-block{
         position: relative;
         width: 100%;
+        margin-top: auto;
 
         .comments-user{
             width: 100%;
@@ -2366,6 +2410,7 @@ footer {
                         img{
                             width: 50px;
                             height: 50px;
+                            border-radius: 50%;
                         }
     
                         .user-date{
@@ -3090,6 +3135,7 @@ footer {
                 border: 1px solid $color-text;
                 background-color: $color-header-bg;
                 cursor: pointer;
+                overflow: hidden;
                 transition: border-color .2s;
 
                 img{
@@ -3271,13 +3317,13 @@ footer {
                         display: flex;
                         justify-content: center;
                         flex-direction: column;
+                        
                         width: 100px;
                         height: 250px;
             
                         .date{
-                            position: absolute;
-                            top: 0;
                             width: 100%;
+                            margin-bottom: auto;
                             color: $color-text-hover;
                             text-align: right;
                         }
@@ -3305,19 +3351,26 @@ footer {
                             }
                         }  
                         
-                        a{
-                            position: absolute;
-                            bottom: 0;
+                        .del{
                             display: inline-block;
-                            text-align: center;
-                            width: 100%;
-                            height: 25px;
-                            border-radius: 5px;
-                            background: $color-red;
-                            transition: .2s;
-            
+                            width: 50px;
+                            height: 50px;
+                            margin-top: auto;
+                            margin-left: auto;
+                            cursor: pointer;
+
+                            svg{
+                                width: 32px;
+                                height: 32px;
+                                margin: 9px;
+                                fill: $color-red;
+                                transition: fill .2s;
+                            }
+
                             &:hover{
-                                background: $color-red-hover;
+                                svg{
+                                    fill: $color-red-hover;
+                                }
                             }
                         }
                     }
@@ -3477,6 +3530,93 @@ footer {
                         background-color: $btn-hover;
                     }
                 }
+            }
+        }
+    }
+
+    .new-avatar{
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: calc(50% - 150px);
+        left: calc(50% - 195px);
+        width: 390px;
+        height: 300px;
+        background-color: $color-header-bg;
+        border-radius: 5px;
+        z-index: 11;
+        transition: opacity .2s;
+
+        &.show{
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .close-line{
+            width: 100%;
+            height: 50px;
+            text-align: right;
+
+            span{
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+
+                svg{
+                    stroke: $color-text;
+                    width: 32px;
+                    height: 32px;
+                    margin: 9px;
+                    transition: stroke .2s;
+                }
+
+                &:hover{
+                    svg{
+                        stroke: $color-text-hover;
+                    }
+                }
+            }
+        }
+
+        .img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 1px solid $color-text;
+            margin: auto;
+            padding: 1px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: .2s;
+
+            img{
+                width: 146px;
+                height: 146px;
+            }
+
+            &:hover{
+                border-color: $color-text-hover;
+                filter: blur(1px);
+            }
+        }
+
+        input{
+            display: none;
+        }
+
+        button{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            margin-top: 50px;
+            color: $a-color;
+            font-size: 22px;
+            border-top: 1px solid $color-text-hover;
+            transition: color .2s;
+
+            &:hover{
+                color: $a-color-hover;
             }
         }
     }

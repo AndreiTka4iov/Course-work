@@ -31,8 +31,12 @@
             </div>
         </div>
         <div class="user-data">
-            <div class="avatar">
-                <img src="/images/user.svg" alt="">
+            <div class="avatar" onclick="openImg()">
+                <%if(locals.imgUser[0].img !== 'def'){%>
+                    <img src="/images/users/<%=locals.id%>.<%=locals.imgUser[0].img%>" alt="">
+                <%}else{%>
+                    <img src="/images/users/user.svg" alt="">
+                <%}%>
             </div>
             <span><%= locals.login %></span>
             <a href="/create" class="add">Add content</a>
@@ -82,7 +86,11 @@
                                 </svg>
                                 <span><%= locals.userPosts[i].favorite%></span>
                             </div>
-                            <a href="/news/item?">Delete</a>
+                            <span class="del" id="<%= locals.userPosts[i].id%>" onclick="deleteNews(this)">
+                                <svg>
+                                    <use xlink:href="/main.svg#delete-svg"></use>
+                                </svg>
+                            </span>
                         </div>
                     </div>
                     <%}}%>
@@ -164,7 +172,26 @@
             <%}%>
         </div>
     </div>
+    <form action="/profile/confirmation" method="POST" class="new-avatar" enctype="multipart/form-data">
+        <div class="close-line">
+            <span onclick="blureMenu()">
+                <svg>
+                        <use xlink:href="/main.svg#close-svg"></use>
+                    </svg>
+            </span> 
+        </div>
+        <div class="img" onclick="uploadAvatar(this)">
+            <%if(locals.imgUser[0].img !== 'def'){%>
+                <img src="/images/users/<%=locals.id%>.<%=locals.imgUser[0].img%>" alt="">
+            <%}else{%>
+                <img src="/images/users/user.svg" alt="">
+            <%}%>  
+        </div>
+        <input type="file" accept="image/*" id="changeInput" name="imgUpload" onchange="changeimg(this)">
+        <button>Accept</button>
+    </form>
 </div>
+
 <script>
     if (document.querySelector('.news')) {
         document.querySelector('.news-a').classList.add('active')
@@ -174,5 +201,29 @@
         document.querySelector('.settings-a').classList.add('active')
     } else if (document.querySelector('.admin')){
         document.querySelector('.admin-a').classList.add('active')
+    }
+</script>
+
+<script>
+    function uploadAvatar(inp){
+        console.log(inp.closest('.new-avatar').querySelector('input').click())
+    }   
+    
+    document.getElementById('changeInput').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+        
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.querySelector('.new-avatar').querySelector('img').src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+    }
+
+    function openImg(){
+        document.querySelector('.new-avatar').classList.add('show')
+        document.querySelector('.blure').classList.add('active')
     }
 </script>

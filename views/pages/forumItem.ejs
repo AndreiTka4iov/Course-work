@@ -6,7 +6,11 @@
     <div class="body-question-block">
         <div class="user-block">
             <div class="user-link">
-                <img src="/images/user.svg" alt="">
+                <%if(userName.img !== 'def'){%>
+                    <img src="/images/users/<%=userName.id%>.<%=userName.img%>" alt="">
+                <%}else{%>
+                    <img src="/images/users/user.svg" alt="">
+                <%}%>
                 <a href=""><%= userName.login%></a>
             </div>
             <div class="date-favorite">
@@ -84,16 +88,20 @@
                     <span>The list is empty</span>
                 </div>
             <%} 
-            else 
-            {for(var inner=0; inner<locals.comment.length; inner++) {
-                let userName = locals.users.find(item => item.id == locals.comment[inner].id_user);
+            else {
+                for(var inner=0; inner<locals.comment.length; inner++) {
+                let userNameCom = locals.users.find(item => item.id == locals.comment[inner].id_user);
             %>
             <div class="answer-user">
                 <div class="user">
                         <div class="user-link">
-                            <img src="/images/user.svg" alt="">
+                            <% if(userNameCom.img !== 'def'){%>
+                                <img src="/images/users/<%=userNameCom.id%>.<%=userNameCom.img%>" alt="">
+                            <%}else{%>
+                                <img src="/images/users/user.svg" alt="">
+                            <%}%>
                             <div class="user-date">
-                                <a href=""><%= userName.login%></a>
+                                <a href=""><%= userNameCom.login%></a>
                                 <span><%= locals.comment[inner].date%></span>
                             </div>
                         </div>
