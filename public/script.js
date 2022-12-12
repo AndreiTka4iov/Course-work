@@ -4,6 +4,7 @@ let emailValue = false
 let passValue = false
 let secondPassValue = false
 let nextAllowed = false
+let loginValue = false
 
 var xhr = new XMLHttpRequest();
 var tx = document.getElementsByTagName('textarea');
@@ -83,6 +84,23 @@ function fucusOut(input){
         input.style = ""
     }
 
+    if (input.name == 'login'){
+        const body = 'value='+input.value
+        xhr.open("POST", '/sign-up/check' , true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (input.value.length > 4 && this.readyState == 4 && this.status == 200 && JSON.parse(this.responseText) == 0){
+                input.style = ""
+                loginValue = true
+            } else {
+                input.style = "border-color: #a81e1e;"
+                loginValue = false
+            }
+            acceptSugnUp()
+        }
+        xhr.send(body)
+    }
+
     if (input.name == 'firstName'){
         if (input.value.length != 0){
             firstNameValue = true
@@ -110,16 +128,18 @@ function fucusOut(input){
     }
 
     if ((input.name == 'email')){
-        if (input.value.length != 0){
-            if (input.value.indexOf('@') > -1){
-                input.style = ""
-                emailValue = true
-            } else{
-                input.style = "border-color: #a81e1e;"
-                emailValue = false
-            }
+        if (input.value.length != 0 && input.value.indexOf('@') > -1){
+            input.style = ""
+            emailValue = true
+        } else {
+            input.style = "border-color: #a81e1e;"
+            emailValue = false
         }
+    
     }
+      
+    
+    
 
     btnToNextPage()
     acceptSugnUp()
@@ -153,8 +173,9 @@ function nextPageScroll(next){
     }
 }
 
-function acceptSugnUp(){
-    if (nextAllowed && passValue && secondPassValue){
+function acceptSugnUp(){    
+    if (nextAllowed && passValue && secondPassValue && loginValue){
+        
         document.querySelector('.accept').disabled = false;
         document.querySelector('.accept').style = ""
     } else {

@@ -6,8 +6,18 @@ const md5 = require('md5')
 const db = new sqlite3.Database('./database/main.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) return console.error(err.message)
 })
+const db2 = new sqlite3.Database('./database/main.db')
 
 router.use(express.urlencoded({ extended: false}))
+
+async function db_all(query){
+    return new Promise(function(resolve,reject){
+        db2.all(query, function(err,rows){
+           if(err){return reject(err);}
+           resolve(rows);
+         });
+    });
+}
 
 router.post('/', (req, res) =>{
     const {password, login, email, firstName, lastName} = req.body,
@@ -17,22 +27,18 @@ router.post('/', (req, res) =>{
     db.run(sqlReq, [login, email, passwordMd5, firstName, lastName, md5(login)], (err) => 
     { if (err) return console.error(err.message) })
 
-    res.cookie('login_user', login, {
-        httpOnly: true,
-        signed: true
-    })
-    
-    res.cookie('token_user', md5(login), {
-    httpOnly: true,
-    signed: true
-    })
-    
-    res.cookie('level_user', 0, {
-    httpOnly: true,
-    signed: true
-    })
+    res.redirect('/sign-in')
+})
 
-    res.redirect('/')
+router.post('/check', async (req, res) =>{
+    const value = req.body.value
+    sqlReq = "SELECT id FROM users WHERE login='"+ value +"' OR email='"+ value +"'"
+    const reqSql = await db_all(sqlReq)
+    if (reqSql.length == 0){
+        return res.end(JSON.stringify(0))
+    }else{
+        return res.end(JSON.stringify(1))
+    }
 })
 
 
