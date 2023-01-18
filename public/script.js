@@ -27,7 +27,7 @@ this.style.height = (this.scrollHeight) + 'px';//////console.log(this.scrollHeig
 
 function openTopic(div){
     const secondBlock =div.parentNode.querySelector('.second-block'),
-        countBtn = 32 * secondBlock?.querySelectorAll('.btn-click').length +'px;'
+        countBtn = 16 + 32 * secondBlock?.querySelectorAll('.btn-click').length +'px;'
     div.classList.toggle('active')
     if (secondBlock.style.cssText != ''){
         secondBlock.style.cssText = ''

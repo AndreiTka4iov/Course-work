@@ -1388,7 +1388,7 @@ footer h3 {
   width: 100%;
 }
 .topics-menu .toopic-block .topic-btn .second-block .btn-click {
-  height: 32px;
+  min-height: 32px;
 }
 
 @media screen and (max-width: 960px) {
@@ -2926,6 +2926,9 @@ footer h3 {
 }
 .page-user .user-info .admin .nav-bar .btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+.page-user .user-info .admin .category-add {
+  width: calc(100% - 150px);
 }
 .page-user .new-avatar {
   opacity: 0;
