@@ -14,5 +14,8 @@
   },
   "scripts": {
     "test": "node server.js"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
